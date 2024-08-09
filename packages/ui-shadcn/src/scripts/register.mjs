@@ -9,12 +9,17 @@ const __filename = fileURLToPath(import.meta.url);
 // 현재 파일의 디렉터리 경로를 구합니다.
 const __dirname = dirname(__filename);
 
-const files = fs.readdirSync(path.join(__dirname, '..', 'components', 'ui'));
+const files = fs
+  .readdirSync(path.join(__dirname, '..', 'components', 'ui'), {
+    recursive: true,
+  })
+  .filter((file) => file.endsWith('.tsx'))
+  .map((file) => file.replaceAll(path.sep, '/').replace('.tsx', ''));
 
 const data = `// 이 파일은 자동 생성됩니다. 직접 수정하지 마세요.
 import '../styles.css';
 
-${files.map((file) => `export * from './components/ui/${file.replace('.tsx', '')}'`).join('\n')}
+${files.map((file) => `export * from './components/ui/${file}'`).join('\n')}
 `;
 
 fs.writeFileSync(path.join(__dirname, '..', 'index.tsx'), data);
