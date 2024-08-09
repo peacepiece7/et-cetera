@@ -34,24 +34,24 @@ export const Default: Story = {
     docs: {
       source: {
         code: `
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="outline">Show Dialog</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your account and remove your data from our
-            servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>`,
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="outline">Show Dialog</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your account and remove your data from our
+        servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>`,
       },
     },
   },
@@ -63,31 +63,34 @@ export const CustomizesOverlayOrPortal: Story = {
     docs: {
       source: {
         code: `
-const [container, setContainer] = React.useState(null);
+export default () => {
+  const [container, setContainer] = React.useState(null);
 
-return () => (
-  <AlertDialog>
-    <AlertDialogTrigger>
-      <Button variant="outline">Show Dialog</Button>
-    </AlertDialogTrigger>
-    <AlertDialogPortal container={container} > // => 포탈이 어디에 붙을지 설정할 수 있습니다. Default: document.body
-      <AlertDialogOverlay className="bg-rose-300/55" /> // => 이 부분에서 Overlay를 커스텀할 수 있습니다.
-      <AlertDialogContentOnly> // AlertDialogContent 대신 AlertDialogContentOnly를 사용하면 Overlay를 커스텀할 수 있습니다.
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your account and remove your data from our
-            servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContentOnly>
-    </AlertDialogPortal>
-  </AlertDialog>
-  <div ref={setContainer} />)`,
+  return () => (
+    <AlertDialog>
+      <AlertDialogTrigger>
+        <Button variant="outline">Show Dialog</Button>
+      </AlertDialogTrigger>
+      <AlertDialogPortal container={container} > // => 포탈이 어디에 붙을지 설정할 수 있습니다. Default: document.body
+        <AlertDialogOverlay className="bg-rose-300/55" /> // => 이 부분에서 Overlay를 커스텀할 수 있습니다.
+        <AlertDialogContentOnly> // AlertDialogContent 대신 AlertDialogContentOnly를 사용하면 Overlay를 커스텀할 수 있습니다.
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your account and remove your data from our
+              servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContentOnly>
+      </AlertDialogPortal>
+    </AlertDialog>
+    <div ref={setContainer} />
+  )
+}`,
       },
     },
   },

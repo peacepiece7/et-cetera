@@ -24,11 +24,27 @@ const meta = {
         options: ['default', 'sm', 'lg'],
       },
     },
-    variant: {
+    label: {
       control: {
-        type: 'select',
-        options: ['default'],
+        type: 'text',
       },
+    },
+  },
+} satisfies Meta<typeof ButtonLoading>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    size: 'default',
+    variant: 'default',
+    label: '로딩중입니다',
+  },
+  argTypes: {
+    size: {
+      control: { type: 'select' },
+      options: ['default', 'sm', 'lg'],
     },
     label: {
       control: {
@@ -36,12 +52,4 @@ const meta = {
       },
     },
   },
-  render: (args) => {
-    return <ButtonLoading {...args} />;
-  },
-} satisfies Meta<typeof ButtonLoading>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {};
+};
