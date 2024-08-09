@@ -1,0 +1,26 @@
+{
+  "name": "@app/docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo --port 3001",
+    "build": "next build",
+    "types:check": "tsc --noEmit",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "test.cmd"
+  },
+  "dependencies": {
+    "@repo/ui": "*",
+    "react": "19.0.0-rc-f994737d14-20240522",
+    "react-dom": "19.0.0-rc-f994737d14-20240522",
+    "next": "15.0.0-rc.0"
+  },
+  "devDependencies": {
+    "@repo/config-eslint": "*",
+    "@repo/config-ts": "*",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "eslint-config-next": "15.0.0-rc.0"
+  }
+}

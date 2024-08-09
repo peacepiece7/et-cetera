@@ -1,0 +1,41 @@
+name: link
+on:
+  push:
+    branches:
+      - main
+jobs:
+  syncpack:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [20.12.1]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Enable Corepack and set up pnpm
+        run: |
+          corepack enable
+          npm install -g pnpm
+
+      - name: Install Syncpack
+        run: npm install -g syncpack
+
+      - name: Check depnedenices
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run lint:packages:mismatches
+
+      - name: Run type check
+        run: pnpm run types:check
+
+      - name: Run format check
+        run: pnpm run lint:format
+
+      - name: Run lint check
+        run: pnpm run lint

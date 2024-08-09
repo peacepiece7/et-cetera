@@ -1,0 +1,10 @@
+{
+  "extends": "@repo/config-ts/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}

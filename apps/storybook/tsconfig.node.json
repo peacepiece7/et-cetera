@@ -1,0 +1,9 @@
+{
+  "extends": "@repo/config-ts/node.json",
+  "compilerOptions": {
+    // incremental : false(증분 생성)이기 때문에 해당 옵션은 제거합니다.
+    // "composite": true,
+    // "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo"
+  },
+  "include": ["vite.config.ts"]
+}
