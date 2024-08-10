@@ -4,9 +4,11 @@ import { Title, Subtitle, Description, Primary, Controls, Stories } from '@story
 export default function CustomDocument({
   referenceURL,
   documentsURL,
+  children,
 }: {
   referenceURL?: string;
   documentsURL?: string;
+  children?: React.ReactNode;
 }) {
   return (
     <>
@@ -28,6 +30,7 @@ export default function CustomDocument({
         )}
       </div>
       <Subtitle />
+      {children}
       <Description />
       <Primary />
       <Controls />

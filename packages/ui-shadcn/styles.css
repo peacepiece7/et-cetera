@@ -58,14 +58,14 @@
     --chart-5: 340 75% 55%;
   }
 }
-/* 
-@layer base {
- @todo 이거 어다 쓰려고 있는지 체크
-  {
-    @apply border-border;
-  } 
-  body {
-    @apply bg-background text-foreground;
-  }
-}
+
+/**
+* @see Calendar CaptionLayout property is not working {@link https://github.com/shadcn-ui/ui/issues/509}
 */
+.rdp [aria-hidden='true'] {
+  @apply hidden;
+}
+
+.rdp-vhidden {
+  @apply hidden;
+}

@@ -67,8 +67,8 @@ export const Default: Story = {
   },
   argTypes: {
     type: {
-      options: ['single', 'multiple'],
       control: { type: 'select' },
+      options: ['single', 'multiple'],
     },
     collapsible: {
       control: { type: 'boolean' },
@@ -76,8 +76,8 @@ export const Default: Story = {
       if: { arg: 'type', neq: 'multiple' },
     },
     asChild: {
-      description: 'true시 AccordionContent가 첫번째 자식 태그로 랜더링됩니다. (\\<Slot />)',
       control: { type: 'boolean' },
+      description: 'true시 AccordionContent가 첫번째 자식 태그로 랜더링됩니다. (\\<Slot />)',
     },
   },
   mount: (ctx) => {
