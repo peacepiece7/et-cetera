@@ -61,8 +61,14 @@ const meta = {
           documentsURL="https://ui.shadcn.com/docs/components/calendar"
           referenceURL="https://daypicker.dev/"
         >
-          라벨 수정: https://daypicker.dev/docs/translation#example-italian-labels v9 업데이트 : fromDate, toDate 대신
-          startMonth, endMonth 사용 https://daypicker.dev/upgrading#4-remove-use-of-fromdate-todate
+          <p>
+            <a href="https://daypicker.dev/docs/translation#example-italian-labels">라벨 수정</a>
+          </p>
+          <p>
+            <a href="https://daypicker.dev/upgrading#4-remove-use-of-fromdate-todate">
+              v9 업데이트 : fromDate, toDate 대신startMonth, endMonth 사용
+            </a>
+          </p>
         </CustomDocument>
       ),
     },
@@ -94,6 +100,21 @@ export const Default: Story = {
       />
     );
   },
+  parameters: {
+    docs: {
+      source: {
+        code: `
+const [selectedDate, setSelectedDate] = React.useState<Date>();
+return (
+  <Calendar
+    selected={selectedDate}
+    onSelect={setSelectedDate}
+    footer={\`date : \${selectedDate ? selectedDate?.toDateString() : ''}\`}
+  />
+        `,
+      },
+    },
+  },
 };
 
 export const Single: Story = {
@@ -120,11 +141,37 @@ export const Single: Story = {
       />
     );
   },
+  parameters: {
+    docs: {
+      source: {
+        code: `
+const [selectedDate, setSelectedDate] = React.useState<Date>();
+return (
+  <Calendar
+    mode="single"
+    selected={selectedDate}
+    onSelect={setSelectedDate}
+    footer={\`date : \${selectedDate ? selectedDate?.toDateString() : ''}\`}
+  />
+        `,
+      },
+    },
+  },
 };
 
 export const Multiple: Story = {
   args: {
     mode: 'multiple',
+  },
+  argTypes: {
+    max: {
+      control: { type: 'number' },
+      description: '선택 가능한 최대 날짜 수',
+    },
+    min: {
+      control: { type: 'number' },
+      description: '선택 가능한 최소 날짜 수',
+    },
   },
   decorators: [
     (Story) => (
@@ -134,16 +181,34 @@ export const Multiple: Story = {
     ),
   ],
   render: (args) => {
-    const [selectedDate, setSelectedDate] = React.useState<Date[]>();
+    const [multipleSelectedDates, setMultipleSelectedDates] = React.useState<Date[]>();
     return (
       <Calendar
+        max={3}
+        min={1}
         {...args}
         mode="multiple"
-        selected={selectedDate}
-        onSelect={setSelectedDate}
-        footer={`selected ${selectedDate ? selectedDate.length : '0'} dates`}
+        selected={multipleSelectedDates}
+        onSelect={setMultipleSelectedDates}
+        footer={`selected ${multipleSelectedDates ? multipleSelectedDates.length : '0'} dates`}
       />
     );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `
+const [multipleSelectedDates, setMultipleSelectedDates] = React.useState<Date[]>();
+return (
+  <Calendar
+    mode="multiple"
+    selected={multipleSelectedDates}
+    onSelect={setMultipleSelectedDates}
+    footer={\`date : \${multipleSelectedDates ? multipleSelectedDates?.toDateString() : ''}\`}
+  />
+        `,
+      },
+    },
   },
 };
 
@@ -173,5 +238,24 @@ export const Range: Story = {
         onSelect={setSelectedDateRange}
       />
     );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `
+type DateRange = {
+  from: Date | undefined;
+  to?: Date | undefined;
+};
+const [selectedDateRange, setSelectedDateRange] = React.useState<DateRange>();
+return (
+  <Calendar
+     mode="range"
+    selected={selectedDateRange}
+    onSelect={setSelectedDateRange}
+  />
+        `,
+      },
+    },
   },
 };

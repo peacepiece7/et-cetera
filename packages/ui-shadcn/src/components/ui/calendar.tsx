@@ -17,18 +17,15 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-4',
-        // caption: 'flex justify-center pt-1 relative items-center',
-        // caption_label: 'text-sm font-medium',
-        caption: 'flex justify-between pt-1 relative items-center gap-2 px-2',
-        caption_label: 'text-sm font-medium capitalize',
-        caption_dropdowns: 'flex justify-center gap-2',
+        caption: 'flex justify-center pt-1 relative items-center',
+        caption_label: 'text-sm font-medium',
         nav: 'space-x-1 flex items-center',
         nav_button: cn(
           buttonVariants({ variant: 'outline' }),
           'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100',
         ),
-        // nav_button_previous: 'absolute left-1',
-        // nav_button_next: 'absolute right-1',
+        nav_button_previous: 'absolute left-1',
+        nav_button_next: 'absolute right-1',
         table: 'w-full border-collapse space-y-1',
         head_row: 'flex',
         head_cell: 'text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]',
@@ -53,8 +50,8 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4" />,
-        IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4" />,
+        IconLeft: () => <ChevronLeftIcon className="h-4 w-4" />,
+        IconRight: () => <ChevronRightIcon className="h-4 w-4" />,
       }}
       {...props}
     />

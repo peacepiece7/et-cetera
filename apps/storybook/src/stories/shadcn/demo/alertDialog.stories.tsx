@@ -17,7 +17,11 @@ const meta = {
         <CustomDocument
           documentsURL="https://ui.shadcn.com/docs/components/alert-dialog"
           referenceURL="https://www.radix-ui.com/primitives/docs/components/alert-dialog#api-reference"
-        />
+        >
+          <p>
+            <a href="https://ui.shadcn.com/charts">shadcn 차트 예제 (종류가 엄청 다양함)</a>
+          </p>
+        </CustomDocument>
       ),
     },
   },
