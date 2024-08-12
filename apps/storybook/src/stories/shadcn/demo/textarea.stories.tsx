@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import CustomDocument from '../../../components/CustomDocument';
 import { Button, Label, Textarea } from '@repo/ui-shadcn';
+import { TextareaFormDemo } from '../../../components/TextareaDemo';
 
 const meta = {
   title: 'shadcn/demo/textarea',
@@ -56,7 +57,7 @@ export const WithText: Story = {
   },
 };
 
-export const withButton: Story = {
+export const WithButton: Story = {
   render: (args) => {
     return (
       <div className="grid w-full gap-2">
@@ -65,4 +66,8 @@ export const withButton: Story = {
       </div>
     );
   },
+};
+
+export const Form: Story = {
+  render: () => <TextareaFormDemo />,
 };

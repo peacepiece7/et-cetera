@@ -1,13 +1,20 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  Button,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Textarea,
+  toast,
+} from '@repo/ui-shadcn';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
-import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/components/ui/use-toast';
 
 const FormSchema = z.object({
   bio: z
@@ -20,7 +27,7 @@ const FormSchema = z.object({
     }),
 });
 
-export function TextareaForm() {
+export function TextareaFormDemo() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
