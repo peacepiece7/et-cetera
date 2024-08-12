@@ -1,8 +1,4 @@
-'use client';
-
-import { Button } from './button';
-import { ToastAction } from './toast';
-import { useToast } from '../../hooks/useToast';
+import { Button, ToastAction, useToast } from '@repo/ui-shadcn';
 
 export function ToastDemo() {
   const { toast } = useToast();

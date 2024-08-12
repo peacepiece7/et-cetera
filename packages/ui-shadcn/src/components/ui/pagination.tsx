@@ -31,6 +31,10 @@ type PaginationLinkProps = {
 } & Pick<ButtonProps, 'size'> &
   React.ComponentProps<'a'>;
 
+/**
+ * @note Next.js를 사용중이라면 Link 태그로 변경합니다.
+ * @see {@link https://ui.shadcn.com/docs/components/pagination#}
+ */
 const PaginationLink = ({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) => (
   <a
     aria-current={isActive ? 'page' : undefined}

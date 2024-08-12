@@ -101,6 +101,25 @@ const FormControl = React.forwardRef<React.ElementRef<typeof Slot>, React.Compon
 );
 FormControl.displayName = 'FormControl';
 
+// const FormControlItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+//   ({ className, ...props }, ref) => {
+//     const id = React.useId();
+//     const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
+
+//     return (
+//       <FormItemContext.Provider value={{ id }}>
+//         <div ref={ref} className={cn('space-y-2', className)} {...props}>
+//           <Slot
+//             id={formItemId}
+//             aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`}
+//             aria-invalid={!!error}
+//           />
+//         </div>
+//       </FormItemContext.Provider>
+//     );
+//   },
+// );
+
 const FormDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => {
     const { formDescriptionId } = useFormField();

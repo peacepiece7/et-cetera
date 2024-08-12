@@ -23,14 +23,9 @@
       "cache": false,
       "persistent": true
     },
-    "dev:storybook": {
-      "cache": false,
-      "persistent": true
-    },
     "storybook": {
       "cache": false,
-      "persistent": true,
-      "dependsOn": []
+      "persistent": true
     },
     "lint": { "dependsOn": [] },
     "format": { "dependsOn": [] },
