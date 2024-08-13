@@ -25,7 +25,11 @@ const meta = {
         <CustomDocument
           documentsURL="https://ui.shadcn.com/docs/components/chart"
           referenceURL="https://recharts.org/en-US/"
-        />
+        >
+          <p>
+            <a href="https://ui.shadcn.com/charts">shadcn 차트 예제 (종류가 엄청 다양함)</a>
+          </p>
+        </CustomDocument>
       ),
     },
   },
@@ -37,21 +41,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  parameters: {
-    docs: {
-      source: {
-        code: `
-const [selectedDate, setSelectedDate] = React.useState<Date>();
-return (
-  <Calendar
-    selected={selectedDate}
-    onSelect={setSelectedDate}
-    footer={\`date : \${selectedDate ? selectedDate?.toDateString() : ''}\`}
-  />
-        `,
-      },
-    },
-  },
+  parameters: {},
 };
 
 export const Grid: Story = {
