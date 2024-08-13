@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin');
 module.exports = {
   content: [
     'src/**/*.{js,ts,jsx,tsx}',
@@ -26,7 +26,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     plugin(function ({ addUtilities, addBase, config }) {
-      addUtilities(UTILITY_STYLES)
+      addUtilities(UTILITY_STYLES);
       // base styles
       // https://v1.tailwindcss.com/docs/plugins#adding-base-styles
       // addBase({ h1: config("theme.fontSize.4xl") })
@@ -38,7 +38,7 @@ module.exports = {
       // https://v1.tailwindcss.com/docs/plugins#css-in-js-syntax
     }),
   ],
-}
+};
 
 const UTILITY_STYLES = {
   '.global-layout': {
@@ -51,8 +51,7 @@ const UTILITY_STYLES = {
     padding: '3rem',
     height: '100%',
   },
-  // intellisense 때문에 ./default.css에서 오버라이드 (css 파일에 작성하면 intellisense 동작이 안됨)
   '.link': {},
   '.btn-common': {},
   '.text-clickable': {},
-}
+};

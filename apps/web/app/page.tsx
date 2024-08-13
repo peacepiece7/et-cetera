@@ -2,7 +2,6 @@ import { Button } from '@repo/ui-shadcn';
 import Image from 'next/image';
 
 export default function Home() {
-  const r = '';
   return (
     <div>
       <h1>WEB (APPLICATION)</h1>

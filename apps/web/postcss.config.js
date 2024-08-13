@@ -1,1 +1,1 @@
-module.exports = require('@repo/ui-shadcn/postcss')
+module.exports = require('@repo/ui-shadcn/postcss');
