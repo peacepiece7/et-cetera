@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "exports": {
-    ".": "./src/index.tsx",
+    ".": "./src/__registry.tsx",
     "./styles": "./styles.css",
     "./tailwindcss": "./tailwind.config.js",
     "./postcss": "./postcss.config.js"

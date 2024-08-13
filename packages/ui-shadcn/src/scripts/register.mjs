@@ -42,4 +42,4 @@ const libFiles = fs
 
 data += `\n${libFiles.map((file) => `export * from './lib/${file}'`).join('\n')}`;
 
-fs.writeFileSync(path.join(__dirname, '..', 'index.tsx'), data);
+fs.writeFileSync(path.join(__dirname, '..', '__registry.tsx'), data);
