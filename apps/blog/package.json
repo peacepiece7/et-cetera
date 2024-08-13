@@ -14,7 +14,6 @@
     "build:css": "tailwindcss build src/app/global.css -o src/app/styles.css"
   },
   "dependencies": {
-    "next": "^14.2.4",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^14.2.4",
@@ -25,7 +24,10 @@
     "highlight.js": "^11.9.0",
     "keyboardjs": "^2.7.0",
     "mermaid": "^10.9.1",
+    "next": "^14.2.4",
+    "react": "^18.3.1",
     "react-autosuggest": "^10.1.0",
+    "react-dom": "^18.3.1",
     "react-use": "^17.5.1",
     "rehype-stringify": "^10.0.0",
     "remark-frontmatter": "^5.0.0",
@@ -39,9 +41,12 @@
     "@repo/config-ts": "*",
     "@repo/ui-shadcn": "*",
     "@types/keyboardjs": "^2",
+    "@types/react": "^18.3.3",
     "@types/react-autosuggest": "^10",
+    "@types/react-dom": "^18.3.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint-config-next": "15.0.0-rc.0",
     "react-icons": "^5.2.1"
   }
 }
