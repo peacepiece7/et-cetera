@@ -17,7 +17,7 @@ npm install -g pnpm
 pnpm -v
 ```
 
-package.json에 있는 packageManager 버전을 쓰면 된다.  
+package.json에 있는 packageManager 버전을 쓰면 된다.
 packageManager 속성이 있으면 설치된 버전에 [상관없이 명시되어있는 버전으로 변경된다.](https://nodejs.org/docs/latest/api/corepack.html#how-does-corepack-interact-with-npm)
 
 ```json
@@ -176,7 +176,7 @@ window 환경은 건강에 좋지 않다.
 
 cz-customizable을 사용해서 구성할 계획이면 다음 링크를 참고
 
-[commitlint/issues/2684](https://github.com/conventional-changelog/commitlint/issues/2684)  
+[commitlint/issues/2684](https://github.com/conventional-changelog/commitlint/issues/2684)
 [blog cz-customizable](https://velog.io/@restarea/cz-customizable)
 
 [pre-commit을 Inquirer로 hooking](https://github.com/SBoudrias/Inquirer.js?tab=readme-ov-file#using-as-pre-commitgit-hooks-or-scripts)하여 대화형으로 구성하는 방법도 있다.
@@ -189,7 +189,7 @@ cz-customizable을 사용해서 구성할 계획이면 다음 링크를 참고
 // script.js
 const GIT_COMMIT_TEMPLATE = `
 
-# NOTE: 
+# NOTE:
 # 다음 형태로 커밋 메시지를 작성해주세요.
 # <타입>[적용 범위(선택 사항)]: <설명>
 #
@@ -203,7 +203,7 @@ const GIT_COMMIT_TEMPLATE = `
 #
 # 저녁 매뉴 추천 받습니다.
 # 주말엔 놀고 싶어요.
-# 
+#
 # - nodejs 버전이 올라가면서 사용하지 않는 라이브러리를 제거
 # - newLibararyName으로 통합
 # - libraryName를 사용중인 경우 newLibararyName으로 변경 필요
@@ -223,7 +223,7 @@ ${Object.keys(GIT_COMMIT_CONFIGURATION['type-enum-kor'])
     return `# ${key} : ${GIT_COMMIT_CONFIGURATION['type-enum-kor'][key].description}`;
   })
   .join('\n')}
-  
+
 # REMEMBER_ME:
 # HEADER TYPE은 영어로 작성해주세요.
 # 한글을 지향합니다.
@@ -252,10 +252,18 @@ https://github.com/arevalolance/design-system-template
 
 https://github.com/anthonyhastings/turborepo-design-system
 
+cmd
+
+```
+for /d /r %%d in (node_modules) do @if exist "%d" rd /s /q "%d"
+for /d /r %d in (node_modules) do @if exist "%d\turbo.exe" (echo Skipping "%d" because it contains turbo.exe) else (rd /s /q "%d")
 ```
 
 ```
-
-```
-
+# turbo.exe 권한 문제 생기면
+chmod -R 755 /your-project/node_modules
+#
+find ./ -path "*/node_modules" -type d -prune -exec rm -rf '{}' +
+#
+chmod +x scripts/clean.sh
 ```

@@ -12,8 +12,8 @@
     "types:check": "turbo run types:check",
     "test": "turbo test",
     "clean": "turbo run clean",
-    "clean:unix": "turbo run clean && rm -rf node_modules",
-    "clean:win": "turbo run clean && rmdir /s /q node_modules",
+    "clean:bash": "turbo run clean && find ./ -path \"*/node_modules\" -type d -prune -exec rm -rf '{}' +",
+    "clean:cmd": "turbo run clean && for /d /r %d in (node_modules) do @if exist \"%d\" rd /s /q \"%d\"",
     "prepare": "husky & node ./scripts/git_commit_convention.mjs & git config commit.template ./scripts/git_commit_template",
     "format": "prettier --write \"**/*/app/**/*.{ts,tsx,md}\"",
     "lint:format": "prettier --check \"**/*.{js,ts,tsx,md,mdx,json}\""
