@@ -9,7 +9,7 @@ export async function middleware(req: NextRequest) {
   const match = req.url.match(urlPathRegExp)
   const path = match ? match[1] : "/"
 
-  req.headers.set(X_CUSTOM_URL, path)
+  req.headers.set(X_CUSTOM_URL, path || "")
 
   return NextResponse.next({
     request: {
