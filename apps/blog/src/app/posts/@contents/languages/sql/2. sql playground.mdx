@@ -1,0 +1,171 @@
+-- 스키마 생성하고, 테이블 준비
+create table if not exists test (col1 varchar(1));
+insert into test values ('B');
+select \* from test;
+create schema if not exists firstSchema;
+
+-- select
+select \* from band b
+
+-- 산술 연산자
+select 10+5, 10-5, 10\*5, 10/5 from band_member;
+
+-- 합성 연산자
+select 'S' || 'Q' || 'L' from band_member;
+
+-- 함수
+
+-- 1. chr(ascii), lower, upper
+select chr(65), lower('John Doe'), upper('John Doe')from band_member;
+
+-- 2. trim
+select ltrim(' foo '), rtrim(' foo '), trim(' foo ') as name from band_member;
+
+---- db에 따라서 문법이 조금씩 다름
+---- mssql
+select trim(leading 'foo' from trim(' foo bar ')) from band_member;
+---- oracle
+select ltrim('foo', 'foo bar') from band_member;
+
+-- 3. substr(substring), replace, lpad, rpad
+select
+substring('블랭핑크제니', 3, 2),
+replace('블랭핑크제니', '제니', '지수'),
+length('블랭핑크제니'),
+lpad('제니', 10, 'v'),
+rpad('제니', 10, 'v')
+from band_member;
+
+-- 4. abs, sign
+select
+abs(-10), -- 10
+sign(-10), -- -1
+sign(11) -- 1
+from band_member;
+
+-- 5. round
+
+-- round (반올림)
+-- trunc (버림)
+
+-- cell (올림, 정수 반환)
+-- floor (내림, 정수 반환)
+-- mod (나머지)
+select
+round(16.46, 1),
+round(16.44, 2),
+trunc(16.44, 1),
+trunc(16.44, -1),
+ceil (16.44),
+floor(16.44),
+mod(15,6),
+mod(15,-7)
+-- mod(15, 0), mssql은 에러, oracle은 15 반환
+from band_member bm
+
+-- 6. 날짜
+
+-- current_timestmape, new, current_date, oracle은 sysdate
+select current_timestamp, now(), current_date from band_member;
+
+-- mssql은 datepart
+select
+extract(year from now()) as year,
+extract(month from now()) as monthr,
+extract(day from now()) as day
+from band_member;
+
+select
+-- oracle
+---- add_months(now(), 3),
+-- mssql
+(to_date('2024-10-10', 'YYYY-MM-DD')::date + interval '3 month')::date
+from band_member;
+
+-- 올해의 마지막일 계산
+date_trunc('year', now() + interval '1 year' - interval '1 day');
+-- DATE_TRUNC('year', NOW()): 현재 연도의 시작 날짜(1월 1일)를 반환한다.
+-- + INTERVAL '1 year': 1년을 더하여 다음 연도의 1월 1일로 이동한다.
+-- - INTERVAL '1 day': 하루를 빼서 현재 연도의 마지막 날(12월 31일)을 계산한다.
+
+-- 7. 변환 함수
+
+-- to number
+select '125.45'::numeric, cast('125.45' as numeric) from band_member;
+
+-- oracle
+-- select TO_NUMBER('1255.45') from band_member;
+
+-- to string
+select
+to_char(now(), 'YYYY-MM-DD'),
+to_char(1234.5678, '9999.9999') -- 소수 부분은 trunc됨, 9나0외의 숫자 넣으면 그걸로 고정됨
+from band_member;
+
+-- oracle, 뒤에 포멧은 옵션
+-- select to_char(now()) from band_member;
+
+-- to date
+-- 가능하면 쓰지말자..
+select
+to_date(to_char(now(), 'YYYY.MM.DD'), 'YYYY-MM-DD')::date
+from band_member
+
+-- 8. null 관련 함수
+-- nvl(인수1이 null일 경우 인수2 출력, oracle)
+-- nvl2(인수1,2,3을 받고 다음 인수 받환)
+-- coalesce(...인수 null일 경우 다음 인수 반환)
+-- nullif(인수1,2가 같으면 null 반환)
+select coalesce(bm.band_code, 'is null'), nullif(bm.band_code, 'BC002') from band_member bm;
+
+-- case
+select
+band_code,
+case
+when bm.band_code is null then 'is null'
+else (select b.band_name from band b where b.band_code = bm.band_code)
+end as band_code_str
+from band_member bm;
+
+-- decode는 oracle에서 지원
+-- select decode(bm.band_code, 'BC001', 'FOO', 'BC002', 'BAR', 'ELSE DATA') from band_member bm;
+
+-- where
+
+-- `=`, `<`, `<=`, `>`, `>=`
+-- `!=`, `^=`, `<>`, `not <colum_name>` = (같지 않음 4종)
+
+-- between A and B (ex where col between 1 and 10)
+-- like '비교 문자열' (ex where col like '방*소%'), (ex2 where rate like '100/%%' escape /)
+-- + escape는 %, *를 검색 조건으로 넣고 싶을 떄 사용, deafult \임
+-- in (list), is null
+-- and, or, not
+select id, name, age from band_member bm where bm.name in ('John Doe', 'Jane Smith');
+select name, age from band_member bm where (bm.name = 'John Doe' or bm.name = 'Jane Smith');
+select name, age from band_member bm where not (bm.name = 'John Doe' or bm.name = 'Jane Smith');
+select name, age from band_member bm where not (bm.name in ('John Doe', 'Jane Smith')); -- db에 따라서 이중 괄호 필요한 경우도 있음
+
+-- 집계 함수
+-- count, count(distnct column), sum, avg, min, max
+select count(bm.name) from band_member bm;
+select count(distinct bm.name) from band_member bm;
+
+-- select문 논리 수정 순서
+-- select - 5
+-- from - 1
+-- where - 2
+-- group by - 3
+-- having - 4
+-- order by - 6
+-- fwghso
+-- from weight so...
+-- select alias를 group by, having에서 쓰면 에러가 난다.
+
+-- group으로 묶음, having은 group의 조건문
+-- group by는 많은 비용이 드는 작업이기 때문에 where로 데이터를 줄여놔야한다.
+select \* from band_member bm
+group by id
+having name like '%Jane%'
+
+-- order by 정렬 순서 default asc
+select \* from band_member bm order by id, name, age desc
