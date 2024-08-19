@@ -17,10 +17,10 @@ export const useResizeSidebar = (initWidth: number = 300) => {
       startWidthRef.current = sideBarWidth
       setIsDragging(true)
     },
-    [sideBarWidth]
+    [sideBarWidth],
   )
 
-  const mouseUp = useCallback((e: MouseEvent) => {
+  const mouseUp = useCallback((_e: MouseEvent) => {
     document.body.style.userSelect = "auto"
     startXRef.current = null
     startWidthRef.current = null
@@ -29,11 +29,7 @@ export const useResizeSidebar = (initWidth: number = 300) => {
 
   const mouseMove = useCallback(
     (e: MouseEvent) => {
-      if (
-        isDragging &&
-        startXRef.current !== null &&
-        startWidthRef.current !== null
-      ) {
+      if (isDragging && startXRef.current !== null && startWidthRef.current !== null) {
         const deltaX = e.clientX - startXRef.current
         const newWidth = startWidthRef.current + deltaX
         if (newWidth > initWidth) {
@@ -43,7 +39,7 @@ export const useResizeSidebar = (initWidth: number = 300) => {
         }
       }
     },
-    [isDragging, initWidth]
+    [isDragging, initWidth],
   )
 
   useEffect(() => {

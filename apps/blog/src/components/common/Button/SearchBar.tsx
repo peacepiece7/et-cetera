@@ -26,10 +26,7 @@ export const SearchBar = () => {
     }
   }, [])
 
-  const renderSuggestion = (
-    suggestion: SearchItem,
-    params: RenderSuggestionParams
-  ) => {
+  const renderSuggestion = (suggestion: SearchItem, params: RenderSuggestionParams) => {
     if (!suggestion) return null
     const delimiter = params.query.toLocaleLowerCase()
     const regex = new RegExp(`(?<=${delimiter})|(?=${delimiter})`)
@@ -53,11 +50,7 @@ export const SearchBar = () => {
           return (
             <span
               key={index + part}
-              className={`${
-                isMatched(part, delimiter)
-                  ? "font-bold text-rose-300"
-                  : "font-normal"
-              }`}
+              className={`${isMatched(part, delimiter) ? "font-bold text-rose-300" : "font-normal"}`}
             >
               {part}
             </span>
@@ -70,10 +63,7 @@ export const SearchBar = () => {
   const fetchSuggestions = (rqs: SuggestionsFetchRequestedParams) => {
     const text = rqs.value.toLowerCase()
     const filteredList = searchList.filter((item) => {
-      return (
-        choseongIncludes(item.text, text) ||
-        item.text.toLowerCase().includes(text)
-      )
+      return choseongIncludes(item.text, text) || item.text.toLowerCase().includes(text)
     })
     setList(filteredList)
     return filteredList
@@ -82,16 +72,11 @@ export const SearchBar = () => {
   type TSuggesion = SearchItem
   const inputProps: InputProps<TSuggesion> = {
     onChange: (e) => {
-      setInputValue(
-        (e.target as HTMLInputElement)?.value ||
-          (e.target as HTMLDivElement).textContent ||
-          ""
-      )
+      setInputValue((e.target as HTMLInputElement)?.value || (e.target as HTMLDivElement).textContent || "")
     },
     placeholder: "Search...",
     value: inputValue,
-    className:
-      "btn-common w-full border-0 focus:ring-2 bg-transparent py-4 pl-4",
+    className: "btn-common w-full border-0 focus:ring-2 bg-transparent py-4 pl-4",
     ref: inputRef,
   }
   const containerProps: ContainerProps = {
@@ -113,7 +98,7 @@ export const SearchBar = () => {
           inputProps={inputProps}
           containerProps={containerProps}
           onSuggestionsFetchRequested={fetchSuggestions}
-          onSuggestionSelected={(ev, props) => {
+          onSuggestionSelected={(_ev, props) => {
             setIsLoading(true)
             router.push(props.suggestion.link)
           }}

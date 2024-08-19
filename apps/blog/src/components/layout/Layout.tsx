@@ -35,7 +35,7 @@ export function PostPageLayout({ children }: { children: React.ReactNode }) {
    * @todo history에 따라서 다르게 보여줘야해서 아직 미구현
    * 나중에 쓸 떄 Button -> Link로 바꿔서 prefetch로 미리 데이터를 가져오게 하자.
    */
-  const [fadeOut, setFadeOut] = useState(false)
+  const [fadeOut, _setFadeOut] = useState(false)
 
   return (
     <>

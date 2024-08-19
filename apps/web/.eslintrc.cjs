@@ -11,11 +11,11 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ['.*.js', '.*.cjs', '*.config.js', 'node_modules/'],
   parser: '@typescript-eslint/parser',
   overrides: [{ files: ['*.js?(x)', '*.ts?(x)'] }],
   parserOptions: {
     project: './tsconfig.json', // Ensure this path is correct
     tsconfigRootDir: __dirname,
   },
+  ignorePatterns: ['.*.js', '.*.cjs', '*.config.js', 'node_modules/'],
 };

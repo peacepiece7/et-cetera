@@ -1,4 +1,4 @@
-import { Inter, Hi_Melody, Roboto_Mono } from "next/font/google"
+import { Inter, Roboto_Mono } from "next/font/google"
 import localFont from "next/font/local"
 
 /**

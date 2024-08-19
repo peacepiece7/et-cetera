@@ -13,7 +13,7 @@ import type { RootContentMap } from "mdast"
 export const fetcher = async <T>(path: string, options?: RequestInit) => {
   const headerList = headers()
   const host = headerList.get("host")
-  // const sheme = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+  // const scheme = process.env.NODE_ENV === 'development' ? 'http' : 'https'
   const url = `http://${host}${path}`
   return fetch(url, options)
     .then((res) => res.json() as T)
@@ -31,7 +31,7 @@ export const fetcher = async <T>(path: string, options?: RequestInit) => {
  *
  * @note try - catch 구문이 포함되어 있습니다.
  */
-export const getFileNamesSafely = (path: string, format: string) => {
+export const getFileNamesSafely = (path: string, _format: string) => {
   try {
     const fileNames = readdirSync(path, {
       recursive: false,
@@ -53,16 +53,11 @@ export const getFileNamesSafely = (path: string, format: string) => {
  *
  * @note try - catch 구문이 포함되어 있습니다.
  */
-export const getASTTreeSafely = <T extends keyof RootContentMap>(
-  path: string,
-  nodeType: T
-): RootContentMap[T][] => {
+export const getASTTreeSafely = <T extends keyof RootContentMap>(path: string, nodeType: T): RootContentMap[T][] => {
   try {
     const buffer = readFileSync(path)
     const mdAst = unified().use(markdown).parse(buffer.toString())
-    const headingNodes = mdAst.children.filter(
-      (n): n is RootContentMap[T] => n.type === nodeType
-    )
+    const headingNodes = mdAst.children.filter((n): n is RootContentMap[T] => n.type === nodeType)
     return headingNodes
   } catch (error) {
     console.trace(error)
@@ -83,7 +78,7 @@ export const getPostFullPath = (...paths: string[]) => {
  */
 export const convertMDXFileNameToReadableText = (text: string) => {
   const li = text.split(" ")[0]
-  if (isNaN(parseInt(li))) {
+  if (isNaN(parseInt(li || ""))) {
     return text.replace(/\.mdx?$/, "")
   } else {
     return text

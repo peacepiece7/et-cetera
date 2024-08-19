@@ -19,7 +19,7 @@ export const SearchArea = () => {
         setIsOpen(true)
       }
     },
-    [isPressed, event]
+    [isPressed, event],
   )
 
   return (

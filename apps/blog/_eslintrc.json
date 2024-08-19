@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "next/core-web-vitals"
-  ],
+  "extends": ["plugin:import/errors", "plugin:import/warnings", "next/core-web-vitals"],
   "rules": {
     "no-console": "off", // console 사용시 warning이 나타납니다. 배포할 떄 지워줘야하니까 warn합니다. +> transform-remove-console로 대체합니다.
     "linebreak-style": "off", // 맥, 윈도우로 개발하기때문에 개행문자가 Carrage return/Line feed인지 Line Feed인지 관여하지 않습니다.

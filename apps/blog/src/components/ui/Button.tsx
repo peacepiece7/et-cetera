@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react"
-import NavigationLink from "./NavigationLink"
+import { Button as UiButton } from "@repo/ui-shadcn"
 
 export function Button({
   children,
@@ -14,14 +14,9 @@ export function Button({
     [key in keyof HTMLAttributes<HTMLButtonElement>]?: HTMLAttributes<HTMLButtonElement>[key]
   }
 }) {
-  NavigationLink
   return (
-    <button
-      className={`btn-common  ${className}`}
-      onClick={onClick}
-      {...options}
-    >
+    <UiButton onClick={onClick} className={className} {...options}>
       {children}
-    </button>
+    </UiButton>
   )
 }

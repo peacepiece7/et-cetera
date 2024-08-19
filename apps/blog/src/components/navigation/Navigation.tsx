@@ -30,43 +30,33 @@ export default function Navigation({
       <div className="flex justify-around">
         <Button
           onClick={() => setActiveIdx(0)}
-          className={`
-               ${
-                 activeIdx === 0
-                   ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
-                   : ""
-               }`}
+          // className={`
+          //      ${
+          //        activeIdx === 0
+          //          ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
+          //          : ""
+          //      }`}
         >
           목록
         </Button>
         {isPostPage && (
           <Button
             onClick={() => setActiveIdx(1)}
-            className={`
-                ${
-                  activeIdx === 1
-                    ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
-                    : ""
-                }`}
+            // className={`
+            //     ${
+            //       activeIdx === 1
+            //         ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
+            //         : ""
+            //     }`}
           >
             목차
           </Button>
         )}
       </div>
-      <nav
-        ref={navRef}
-        className="relative h-full overflow-y-scroll z-10 pt-4"
-        style={{ width: `${sideBarWidth}px` }}
-      >
+      <nav ref={navRef} className="relative h-full overflow-y-scroll z-10 pt-4" style={{ width: `${sideBarWidth}px` }}>
         <div className="pt-10 text-sm">
-          <div className={`${activeIdx === 0 ? "visible" : "hidden"}`}>
-            {navTree}
-          </div>
-          {isPostPage && (
-            <div className={`${activeIdx === 1 ? "visible" : "hidden"}`}>
-              {tocChildren}
-            </div>
-          )}
+          <div className={`${activeIdx === 0 ? "visible" : "hidden"}`}>{navTree}</div>
+          {isPostPage && <div className={`${activeIdx === 1 ? "visible" : "hidden"}`}>{tocChildren}</div>}
         </div>
       </nav>
       <div

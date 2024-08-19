@@ -1,7 +1,5 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
+import { DetailedHTMLProps, HTMLAttributes } from "react"
 
-export const Preview = (
-  props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
-) => {
+export const Preview = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {
   return <pre {...props} />
 }

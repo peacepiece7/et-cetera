@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react"
 import hljs from "highlight.js"
-import { codeFont, subFont } from "@/utils/shared"
+import { codeFont } from "@/utils/shared"
 
 const LANGUAGES_MAP: Record<string, string> = {
   "language-js": "javascript",
