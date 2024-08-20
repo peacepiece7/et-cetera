@@ -1,0 +1,16 @@
+{
+  "extends": "@repo/config-ts/nextjs.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "next.config.mjs", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.cts"],
+  "exclude": ["node_modules"],
+  "mdx": {
+    "checkMdx": true
+  }
+}
