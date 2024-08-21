@@ -1,0 +1,219 @@
+# Playground 입니다!
+
+## dml, tcl, ddl Playground
+
+### DML
+
+```sql
+create table if not exists sample (
+	col1 varchar(255),
+	col2 int not null,
+	col3 varchar(255)
+);
+
+create table if not exists sample2 (
+	col1 varchar(255),
+	col2 int not null,
+	col3 varchar(255)
+)
+
+insert into sample (col1, col2, col3) values
+('foo', 1, 'bar'), ('foo', 2,'bar'), ('foo', 3, 'bar');
+
+insert into sample2 (col1, col2, col3) values
+('foo', 1, 'bar'), ('foo',2, 'bar');
+
+delete from sample;
+delete from sample2;
+```
+
+#### insert
+
+```sql
+insert into sample (col1, col2, col3) values ('foo', 1, 'bar');
+select * from sample;
+```
+
+#### update
+
+where 없으면 전체 업데이트
+
+```sql
+update sample set col1 = 'foo2' where col3 = 'bar';
+select * from sample;
+```
+
+#### delete
+
+where 없으면 전체 업데이트
+
+```sql
+delete from sample where col1 = 'foo2';
+
+delete from sample a where not exists (
+	select 1
+	from sample2 b
+	where a.col2 = b.col2)
+
+select * from sample;
+select * from sample2;
+```
+
+#### merge
+
+```sql
+-- 백업 데이블에 쓴다.
+merge
+	into 타켓_테이블
+	using 비교_테이블
+	on 조건
+when matched then
+	update
+		set 컬럼명 = 새로운_데이터
+when not matched then
+	insert [(col1, col2...)]
+	values (data1, data2...);
+-- oracle
+merge
+	into departments_backup db
+	using departments d
+	on (db.department_id = d.department_id)
+when matched then
+	update
+		set db.department_name = d.department_name,
+			db.manager_id = d.manager_id,
+			db.location_id = d.location_id
+when not matched then
+	insert (db.department_id, db.department_name, db.manager_id, db.location_id)
+	values (d.department_id, d.department_name, d.manager_id, d.location_id);
+
+delete from departments_backup;
+
+-- postgresql
+WITH update_departments_when_matched AS ( -- when matched
+  UPDATE departments_backup
+  SET
+      department_name = d.department_name,
+      manager_id = d.manager_id,
+      location_id = d.location_id
+  FROM departments d
+  WHERE departments_backup.department_id = d.department_id
+  RETURNING departments_backup.department_id -- with에서 영향을 받은 데이터를 반환
+)
+
+INSERT INTO departments_backup (department_id, department_name, manager_id, location_id) -- when not matched
+SELECT department_id, department_name, manager_id, location_id
+FROM departments d
+WHERE department_id NOT IN (SELECT department_id FROM update_departments_when_matched);
+```
+
+#### 자동 백업 구현하려면 trigger
+
+```sql
+-- orcale
+CREATE TRIGGER insert_into_backup
+AFTER INSERT ON departments
+FOR EACH ROW
+BEGIN
+    INSERT INTO departments_backup (department_id, department_name, manager_id, location_id)
+    VALUES (NEW.department_id, NEW.department_name, NEW.manager_id, NEW.location_id);
+END;
+
+-- postgresql
+CREATE OR REPLACE FUNCTION insert_into_backup()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO departments_backup (department_id, department_name, manager_id, location_id)
+    VALUES (NEW.department_id, NEW.department_name, NEW.manager_id, NEW.location_id);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER after_insert_departments
+AFTER INSERT ON departments
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_backup();
+```
+
+### TCL (transaction control language)
+
+원자성, 일관성, 고립성, 지속성을 보장한다.
+
+- commit: dml로 변경된 내용을 확정헌다.
+- rollback: 변경된 내용을 취소한다.
+- savepoint: rollback시 일부만 되돌리고 싶을 때 사용한다.
+
+```sql
+-- 하나씩 실행해보자
+delete from sample;
+insert into sample values('a1', 1, 'c1'),('a2', 2, 'c2'),('a2', 3, 'c3');
+
+begin;
+insert into sample values('a4', 4, 'c4');
+savepoint A;
+update sample set col1 = 'updated!' where col2 in (1,2);
+savepoint B;
+delete from sample where col3 = 'c2';
+rollback to A;
+rollback; -- 첫 지점으로 되돌아가기
+end;
+select * from sample;
+```
+
+트렉젝션을 처리하는 코드가 있다면 이런 느낌
+
+```js
+try {
+ await client.connect();
+ await client.query("begin");
+ await client.query("insert ...")
+} catch (err) {
+ await client.query('rollback')
+}f inally {
+ await client.query('end')
+}
+```
+
+### DDL (Data Definition Language)
+
+char, varchar, clob, text, number, tiny, boolean, date등 벤더마자 조금씩 다르고 엄청 다양하다.
+
+#### create
+
+스키마, 테이블을 생성할 떄 사용한다.
+
+#### alter
+
+테이블의 변경이 불가피할 때 사용한다.
+
+```sql
+alter table teachar add birthday varchar2(8);
+alter table teachar drop column address;
+alter table teachar modify (birthday varchar2(8) default '99999999' not null);
+alter table teachar rename column birthday to brth;
+alter table teachar add constraint teacher_fk foreign key (subject_id) references subject(subject_id);
+
+rename table teachar to teacher;
+truncate table teacher;
+drop table teacher;
+```
+
+### DCL (Data Control Language)
+
+```sql
+-- account
+create user foo identified by p@assw0rd;
+alter user foo identified by P@ssw0rd;
+drop user foo;
+
+-- privilege
+grant create session to foo;
+grant create user to foo;
+grant create table to foo;
+revoke table to foo;
+
+-- role
+create role role_a;
+grant create, session, create user, create table to role_a;
+grant role_a to foo;
+```

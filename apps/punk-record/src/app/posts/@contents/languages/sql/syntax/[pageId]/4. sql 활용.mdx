@@ -1,0 +1,696 @@
+# Playground 입니다!
+
+## sql 활용
+
+### 서브 쿼리
+
+select, from, where, having 절 쓸 수 있어야함
+
+#### scalar sub query
+
+컬럼이 올 수 있는 곳에 사용한다.
+
+하나의 값만 출력 가능 select, update 문의 set절, order by 절에 사용가능
+
+```sql
+select a.nickname, (
+	select b.band_name
+	from band as b join store as s
+	on b.band_code = s.band_code
+	where s.ticket_id = a.ticket_id
+)
+from audience a
+```
+
+#### inline view
+
+from 절 등 테이블명이 올 수 있는 위치에 사용 가능
+
+```sql
+select a.nickname,
+bs.band_name,
+bs.performance_date
+from audience a, (
+	select band.band_name, store.performance_date
+	from band join store
+	on band.band_code = store.band_code
+) as bs;
+```
+
+#### nested subquery
+
+where, having 절에 사용한다.
+
+메인 쿼리와의 관계에 따라서 비/연관 서브쿼리로 나눈다.
+
+###### 비연관 서브쿼리
+
+```sql
+select a.nickname
+from audience a
+where a.ticket_id = ( -- 서브쿼리 내 메인쿼리의 컬럼 없음
+	select ticket_id
+	from store
+	where store.performance_name like '%Tour%'
+	order by store.performance_date
+	limit 1
+)
+```
+
+###### 연관 서브쿼리
+
+```sql
+select a.nickname
+from audience a
+where a.ticket_id = ( -- 서브쿼리 내 메인쿼리의 컬럼이 존재함
+	select ticket_id
+	from store
+	where store.ticket_id = a.ticket_id
+)
+```
+
+#### 중첩 서브쿼리 반환 형태에 따른 분류
+
+###### 단일 행
+
+`=, <, >, <=, >=, <>` 등 비교 연산자 사용
+
+###### 다중 행 (SOME, IN, ALL, ANY, EXISTS)
+
+```sql
+-- 가장많이 공연하는 벤드 5개
+select band_name,
+(
+ select count(*) from store
+ where band.band_code = store.band_code
+)
+from band
+where band_code in ( -- 다중 행
+	select store.band_code
+	from store
+	group by store.band_code
+	order by count(*) desc
+	limit 5
+)
+```
+
+###### 다중 컬럼
+
+서브쿼리가 여러 컬럼 데이터 반환
+
+-- 밴드 리스트 중 보컬리스트
+
+```sql
+select *
+from band_member bm
+where (bm.band_code , bm.member_role_code) in (
+	select b.band_code, br.code
+	from band_role br join band b
+	on bm.band_code = b.band_code
+	where br.code = 'VOC'
+	)
+```
+
+### view
+
+재사용 가능한 select절로 인라인 뷰가 들어가는 위치에 이름을 기술하는 형태로 사용한다.
+
+```sql
+create or replace view band_performance as
+	select band.band_name, store.performance_date
+	from band join store
+	on band.band_code = store.band_code;
+
+drop view band_performance;
+
+select a.nickname,
+	bp.band_name,
+	bp.performance_date
+from audience a, band_performance as bp
+
+
+create view vocal_role as
+	select *
+	from band_role br
+	where lower(br.role_name) = 'vocalist';
+
+select * from vocal_role;
+
+drop view vocal_role;
+```
+
+### 집합 연산자
+
+집합과 관련된 연산자로 union, union all, intersect, minus, except가 있다.
+
+tip: 두 테이블의 컬럼명이 같아야 집합으로 관계를 정의할 수 있다.
+
+```sql
+-- 테이블 준비
+drop view actors;
+create or replace view actors as
+	select p.name as person_name, j.job_name
+	from person p join job j
+	on p.job_code = j.job_code
+	where lower(j.job_name) = 'actor'
+
+
+drop view signers;
+create or replace view signers as
+	select p.name as person_name, j.job_name
+	from person p join job j
+	on p.job_code = j.job_code
+	where lower(j.job_name) = 'singer'
+
+drop view professionals;
+create or replace view professionals as
+	select p.name as person_name, j.job_name
+	from person p join job j
+	on p.job_code = j.job_code
+
+-- UNION ALL: 합칩합, 중복 출력
+select * from actors
+union all
+select * from signers
+order by person_name;
+
+
+-- UNION: 합집합, 중복 제거
+select * from actors
+union
+select * from signers
+order by person_name;
+
+-- INTERSECT: 교집합, 중복 제거
+select * from actors
+intersect
+select * from professionals;
+
+-- MINUS/EXCEPT 차집합, 중복 제거
+select * from professionals
+except
+select * from actors;
+```
+
+#### 그룹 함수
+
+```sql
+select p.job_code, count(*)
+from person p
+group by rollup(p.job_code);
+select p.job_code, p.gender, count(*)
+from person p
+group by rollup(p.job_code, p.gender);
+```
+
+###### rollup
+
+소그룹 간의 소계 및 총계를 계산하는데 사용한다.
+
+(A, B, C)일 경우 (A,B,C), (A,B), (A), 총합계가 된다.
+
+((A,B,C), D, E) 라면 (A,B,C,D,E), (A,B,C,D), (A,B,C), (D,E), (D), 총합계 가 된다.
+
+```sql
+select p.job_code, p.gender, p.name, count(*)
+from person p
+group by rollup((p.job_code, p.gender), p.name);
+
+--  rollup을 쓰면 소계, 총계가 추가 됨 -----
+-- 1
+select so.order_dt , count(*)
+from starbucks_order so
+group by so.order_dt;
+-- 2
+select so.order_dt, count(*)
+from starbucks_order so
+group by rollup (so.order_dt);
+```
+
+###### 총계, 소계를 구해보자
+
+```sql
+-- 1
+select so.order*dt, so.order_item, count(*)
+from starbucks*order so
+group by rollup(so.order_dt, so.order_item)
+order by so.order_dt;
+-- 2 rollup을 안쓰면?
+select so.order_dt, so.order_item, count(*)
+from starbucks_order so
+group by so.order_no , so.order_item
+order by so.order_dt;
+-- 3
+select so.order_dt, so.order_item, so.reg_name, count(*)
+from starbucks_order so
+group by rollup((so.order_dt , so.order_item), so.reg_name)
+order by so.order_dt;
+```
+
+###### cube
+
+rollup은 일방향, cube는 모든 그룹에 대한 소계를 집계한다. 사용방법은 rollup과 동일하다.
+
+(A, B, C)일 경우 (A,B,C), (A,B), (A,C), (B,C), (A), (B), (C)
+
+###### grouping sets
+
+특정 항목에 대한 소계를 계산한다. rollup, cube를 인자로도 받는다.
+
+```sql
+select order_dt, order_item, count(*)
+from starbucks_order so
+group by grouping sets (so.order_dt, order_item);
+
+select order_dt, order_item, count(*)
+from starbucks_order so
+group by grouping sets (so.order_dt, order_item, ()); -- 총계 추가 (rollup을 써도 된다.)
+
+--(직업+성별), (직업+이름)이 중복되는 합계를 출력한다.
+select p.job_code, p.gender, p.name, count(*)
+from person p
+group by grouping sets((p.job_code, p.gender), (p.job_code, p.name));
+```
+
+###### grouping
+
+총합에 이름 붙이는데 쓴다.
+
+```sql
+SELECT
+CASE GROUPING(so.order_dt)
+WHEN 1 THEN 'total'
+ELSE to_char(so.order_dt, 'YYYY-MM-DD HH24:MI:SS')
+END AS order_dt,
+COUNT(*)
+FROM starbucks_order so
+GROUP BY ROLLUP(so.order_dt)
+order by order_dt;
+
+-- all date, all item
+select
+case grouping(so.order_dt)
+when 1 then 'all dates'
+else to_char(so.order_dt, 'YYYY-MM-DD HH24:MI:SS')
+end as order_dt,
+case grouping(so.order_item)
+when 1 then 'all items' else so.order_item
+end as order_item,
+count(*)
+from starbucks_order so
+group by rollup(so.order_dt, so.order_item)
+order by so.order_dt;
+```
+
+### 윈도우 함수
+
+over 키워드와 함께 사용된다. over안에는 order by로 순서를 정해준다.
+
+partition by: over안에서 쓰는 group by이다. 집계 함수를 쓸 때 group by가 없다면 이걸로 묶어줘야함
+
+윈도우 함수는 다음과 같이 나눌 수 있다.
+
+- 순위함수: rank, dense_rank, row_number
+- 집계 함수: sum, max, min, avg, count
+- 행 순서 함수: first_value, last_value, lag, lead
+- 비율 함수: cume_dist, percent_rank, ntle, ratio_to_report
+
+하나씩 알아보자
+
+#### 순위 함수
+
+요론 느낌으로 순위를 매겨줌
+
+- rank: 1, 2, 2, 4
+- dense_rank: 1, 2, 2, 3,
+- row_number: 1, 2, 3, 4
+
+```sql
+-- normal
+select to_char(so.order_dt, 'YYYY-MM-DD'), count(*)
+from starbucks_order so
+group by so.order_dt
+order by so.order_dt;
+
+-- rank
+select
+  to_char(so.order_dt, 'YYYY-MM-DD'),
+  count(*),
+  rank() over(order by count(*) desc) as rank
+from starbucks_order so
+group by so.order_dt;
+
+-- dense_rank/
+select
+  to_char(so.order_dt, 'YYYY-MM-DD'),
+  count(*),
+  dense_rank() over(order by count(*) desc) as rank
+from starbucks_order so
+group by so.order_dt;
+
+-- row_number
+select
+  to_char(so.order_dt, 'YYYY-MM-DD') as order_dt,
+  count(*),
+  row_number() over(order by count(*) desc) as rank
+from starbucks_order so
+group by so.order_dt
+```
+
+### 집계 함수
+
+- sum, max, min, avg, count
+
+```sql
+
+-- 개인별 총 점수
+select s.student_name,
+  s.subject ,
+  s.score,
+  sum(s.score) over (partition by student_name) as total_score
+from sqld s;
+
+-- 개인별 총 점수 누적 값 1 (range unbounded preceding)
+select s.student_name,
+  s.subject ,
+  s.score,
+  sum(s.score) over (
+    partition by student_name
+  order by s.subject desc
+  range unbounded preceding
+  ) as total_score
+from sqld s;
+
+-- 개인별 총 점수 누적 값 2 (order by)
+select
+  s.student_name,
+  s.subject,
+  s.score,
+  sum(s.score) over(order by s.score)
+from sqld s
+
+-- 60점 이상인 학생
+select
+  student_name,
+  subject,
+  score,
+  total_score,
+case
+  when total_score >= 60 then 'pass'
+  else 'faulure'
+end as result
+from (
+  select
+    student_name,
+    subject,
+    score,
+    sum(s.score) over(partition by student_name) as total_score
+  from sqld s
+)
+
+-- 과목별 최대 점수
+select
+  student_name,
+  subject,
+  score
+from (
+  select
+    student_name,
+    subject,
+    score,
+    max(s.score) over (partition by subject) as max_score
+  from sqld s
+)
+where score = max_score;
+
+-- 과목별 최소 점수
+select
+  ms.student_name,
+  ms.subject,
+  ms.score
+from (
+  select min(s.score) over (partition by s.subject) as min_score,
+  s.student_name,
+  s.subject,
+  s.score
+  from sqld s
+) as ms
+where ms.min_score = ms.score
+
+-- 학생별 평균 점수
+select
+  distinct s.student_name,
+  avg(s.score) over(partition by s.student_name)
+from sqld s;
+
+-- 과목별 평균 점수 이상
+select
+  student_name,
+  subject,
+  score,
+  avg_score
+from (
+  select student_name,
+    subject,
+    score,
+    round(avg(score) over(partition by subject)) as avg_score
+  from sqld
+)
+where score >= avg_score;
+```
+
+### windowing
+
+이건 내용이 좀 많음 [요기 블로그 참고](https://velog.io/@yewon-july/Window-Function)
+
+```sql
+---종목별 가장 높은 등수
+select
+  student_name,
+  subject,
+  score,
+  count(*) over(
+    partition by subject
+    order by score desc
+    range unbounded preceding
+  ) as higher_count
+from sqld;
+
+-- 과목별 5점 이하 차이나거나 같은 경우
+select
+  s.student_name,
+  s.subject,
+  score,
+  count(*) over(
+    partition by subject
+    order by score desc
+    range between 5 preceding and 5 following
+  )
+from sqld s;
+```
+
+### 행 순서 함수
+
+first_value, last_value, lag, lead가 있음
+
+- first_value: 파티션 별 가장 선두에 위치한 데이터
+- last_value: 파티션 별 가장 뒤에 위치한 데이터
+- lag: 파티션 별로 특정 수 만큼 앞에 있는 데이터
+- lead: 파티션 별로 특정 수만큼 뒤에 있는 데이터
+
+```sql
+select
+  s.student_name,
+  s.subject,
+  s.score,
+  first_value (s.score) over (partition by subject order by s.score)
+from sqld s
+order by subject;
+
+select
+  s.student_name,
+  s.subject,
+  s.score,
+  last_value (s.score) over (
+    partition by s.subject
+    order by s.score desc
+    range between unbounded preceding
+    and unbounded following)
+from sqld s
+order by subject;
+
+select
+  s.student_name,
+  s.subject,
+  s.score,
+  lag(s.score, 3) over (order by score)
+from sqld s
+order by subject;
+
+-- 파티션 별로 앞선 데이터를 구함
+select
+  s.student_name,
+  s.subject,
+  s.score,
+  lag(s.score) over (partition by s.subject order by s.score) -- default: 1
+from sqld s;
+
+select
+  s.student_name,
+  s.subject,
+  s.score,
+  lead(score) over(order by score) as lead
+from sqld s;
+```
+
+### 비율 함수
+
+cume_dist, percent_rank, ntle, ratio_to_report가 있음
+
+```sql
+-- ratio_to_report
+select
+  s.student_name,
+  s.subject,
+  s.score,
+  sum(s.score) over() as sum,
+  s.score::numeric / sum(s.score) over() as "score/sum",
+  round(s.score::numeric / sum(s.score) over(partition by subject), 2) as ratio
+  -- ration_to_report(score) over(partition by s.subject) as ration_to_report
+from sqld s
+order by s.subject;
+
+-- percent*rank --
+select
+  s.student_name,
+  s.subject,
+  s.score,
+  rank() over(order by s.score),
+  count(*) over(partition by s.subject order by s.score),
+	(rank() over(order by s.score::numeric)-1) / (count(*) over() -1)::numeric as "(rank)-1)/count",
+  percent_rank() over(order by s.score)
+from sqld s;
+```
+
+### Top-N 쿼리
+
+멜론 TOP 100 같은거 만들 때 씀
+
+```sql
+select row_number() over() as rank, 이름, 국어, 영어, 수학
+from (
+  select 이름, 국어, 영어, 수학
+  from exam_score es
+  order by 국어 desc, 영어 desc, 수학 desc -- order by가 제일 마지막이라 인라인 뷰에서 미리 정렬해야함
+);
+-- 위와 동일
+select *
+from (
+  select
+    row_number() over(order by 국어 desc, 영어 desc, 수학 desc) as rank,
+    rank() over(order by 국어 desc, 영어 desc, 수학 desc),
+    dense_rank () over(order by 국어 desc, 영어 desc, 수학 desc),
+    이름, 국어, 영어, 수학
+  from exam_score es
+)
+```
+
+### 셀프 조인(self join)
+
+카테고리 같은 거 한 테이블에 있으면 이렇게 쓴다
+
+```sql
+-- 하나씩 찍어보면서 의식을 흐름을 따라가보자
+select * from category a;
+
+-- 부모 이름으로 셀프 조인해본다.
+select *
+from category a, category b
+where a.category_name = b.parent_category;
+
+-- 부모는 "대"로 조건 추가
+select *
+from category a, category b
+where a.category_name = b.parent_category
+  and a.category_type = '대';
+
+-- 안쓰는 컬럼 제거
+select
+  a.category_type,
+  a.category_name,
+  b.category_type,
+  b.category_name
+from category a, category b
+where a.category_name = b.parent_category
+  and a.category_type = '대'
+
+-- 대, 중, 소분류를 해본다.
+select
+  a.category_type,
+  a.category_name,
+  b.category_type,
+  b.category_name,
+  c.category_type,
+  c.category_name
+from category a, category b, category c
+where a.category_name = b.parent_category
+  and a.category_type = '대'
+  and b.category_type = '중'
+  and c.category_type = '소'
+
+-- 하드코딩은 별로니까, 처음에 했던 부모 이름으로 셀프 조인한다.
+select
+  a.category_type,
+  a.category_name,
+  b.category_type,
+  b.category_name,
+  c.category_type,
+  c.category_name
+from category a, category b, category c
+where a.category_name = b.parent_category
+  and a.category_name = b.parent_category
+  and b.category_name = c.parent_category
+```
+
+### 계층 쿼리
+
+```sql
+-- oracle
+select
+  level,
+  sys_connect_by_path('['||category_type||']'||category_name, '-') as path
+from category a
+start with parent_category is null
+connect by prior category_name = parent_category;
+
+-- postgresql
+WITH RECURSIVE category_hierarchy AS (
+-- 초기 레벨 설정 (parent_category가 NULL인 루트 노드)
+SELECT
+  1 AS level,
+  category_type,
+  category_name,
+  category_name::text AS path -- path를 명시적으로 text로 캐스팅
+FROM category
+WHERE parent_category IS NULL
+    UNION ALL
+    -- 재귀적으로 하위 레벨을 탐색
+    SELECT
+        ch.level + 1 AS level,
+        c.category_type,
+        c.category_name,
+        (ch.path || '-' || '[' || c.category_type || ']' || c.category_name)::text AS path
+    FROM
+        category c
+    INNER JOIN
+        category_hierarchy ch
+    ON
+        c.parent_category = ch.category_name
+)
+SELECT
+  level,
+  path
+FROM
+category_hierarchy
+ORDER BY path;
+```
