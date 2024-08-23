@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/Button"
 import SearchIcon from "@/components/ui/Icons/SearchIcon"
+import { Button } from "@repo/ui-shadcn"
 
 export const SearchBarDecoration = ({ onClick }: { onClick?: () => void }) => {
   return (
@@ -8,7 +8,7 @@ export const SearchBarDecoration = ({ onClick }: { onClick?: () => void }) => {
         <SearchIcon className="mr-4" />
         <div className="flex justify-between w-full">
           <p>검색하기</p>
-          <kbd className="">CTRL K</kbd>
+          <kbd>CTRL K</kbd>
         </div>
       </div>
     </Button>

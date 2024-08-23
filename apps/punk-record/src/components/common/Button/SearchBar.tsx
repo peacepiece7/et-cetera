@@ -26,6 +26,9 @@ export const SearchBar = () => {
     }
   }, [])
 
+  /**
+   * 검색 결과를 렌더링합니다.
+   */
   const renderSuggestion = (suggestion: SearchItem, params: RenderSuggestionParams) => {
     if (!suggestion) return null
     const delimiter = params.query.toLocaleLowerCase()
@@ -37,6 +40,7 @@ export const SearchBar = () => {
       if (choseongIncludes(part, delimiter)) return true
       return false
     }
+
     return (
       <div className="p-4">
         {parts.map((part, index) => {
@@ -60,7 +64,10 @@ export const SearchBar = () => {
     )
   }
 
-  const fetchSuggestions = (rqs: SuggestionsFetchRequestedParams) => {
+  /**
+   * 검색 제안을 패치 요청할 떄 호출
+   */
+  const handleOnSuggestionsFetchRequested = (rqs: SuggestionsFetchRequestedParams) => {
     const text = rqs.value.toLowerCase()
     const filteredList = searchList.filter((item) => {
       return choseongIncludes(item.text, text) || item.text.toLowerCase().includes(text)
@@ -69,8 +76,8 @@ export const SearchBar = () => {
     return filteredList
   }
 
-  type TSuggesion = SearchItem
-  const inputProps: InputProps<TSuggesion> = {
+  type TSuggestion = SearchItem
+  const inputProps: InputProps<TSuggestion> = {
     onChange: (e) => {
       setInputValue((e.target as HTMLInputElement)?.value || (e.target as HTMLDivElement).textContent || "")
     },
@@ -97,7 +104,7 @@ export const SearchBar = () => {
           suggestions={list}
           inputProps={inputProps}
           containerProps={containerProps}
-          onSuggestionsFetchRequested={fetchSuggestions}
+          onSuggestionsFetchRequested={handleOnSuggestionsFetchRequested}
           onSuggestionSelected={(_ev, props) => {
             setIsLoading(true)
             router.push(props.suggestion.link)
