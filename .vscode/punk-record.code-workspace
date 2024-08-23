@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "../apps/punk-record",
+    },
+    {
+      "path": "..",
+    },
+    {
+      "path": "../apps/storybook",
+    },
+  ],
+}

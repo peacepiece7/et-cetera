@@ -1,0 +1,104 @@
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+
+# vscode 미세 팁
+
+## 심볼 검색
+
+ctrl(cmd) + p => @ 로 현재 폴더에서 symbol 검색 가능
+
+<MDXFlex>
+  <MDXImage src="/images/vscode_tip_1.png" width={450} className="m-2" />
+  <MDXImage src="/images/vscode_tip_2.png" width={450} className="m-2" />
+</MDXFlex>
+
+## 모노레포 특정 폴더 내에서 검색 하기
+
+검색 범위를 줄일 수 있고 추가로 폴더 탐색 시 구조를 이해하기 쉬워짐
+
+다음 두 과정을 거쳐야함
+
+1. [workspace 분리](https://code.visualstudio.com/docs/editor/workspaces)
+2. 특정 workspace에서만 검색 되도록 .setting.json 수정
+
+### workspace 분리
+
+먼저 [workspace 분리](https://code.visualstudio.com/docs/editor/workspaces)
+
+File -> Add Folder to Workspace를 클릭해서 폴더 탐색기을 열고, 원하는 폴더를 workspace로 추가해줌
+
+<MDXImage src="/images/vscode_tip_3.png" width={450} className="m-2" />
+
+나는 형태의 저장소인데 asterisk(\*)로 표시한 부분을 `Add Folder to Workspace`로 추가했음
+
+```txt
+customized-design-system *
+├── .vscode
+│   └── settings.json
+├── apps
+│   ├── punk-record *
+│   ├── storybook *
+│   └── etc
+└── packages
+    └── etc
+```
+
+<MDXImage src="/images/vscode_tip_4.png" width={450} className="m-2" />
+
+폴더 탐색기의 가독성이 좋아진 것이 느껴 질 것임
+
+검색을 해보면 workspace를 기준으로 나눠져서 검색되는것도 볼 수 있음
+
+만약 딱 특정 workspace내에서만 검색하려면 그것만 workspace에 넣으면 됨
+
+### workspace 저장
+
+`File -> save workspace as...`로 workspace를 저장해주면 됨
+
+<MDXImage src="/images/vscode_tip_3.png" width={450} className="m-2" />
+
+프로젝트 root에 .vscode/\<name\>.code-workspace 파일이 생성된걸 볼 수 있다.
+
+```json
+{
+  "folders": [
+    {
+      "path": "../apps/punk-record"
+    },
+    {
+      "path": ".."
+    },
+    {
+      "path": "../apps/storybook"
+    }
+  ]
+}
+```
+
+### workspace 열기
+
+```sh
+cd repo
+code .
+```
+
+File -> Open Workspace from file...로 .code-workspace 파일을 열어주면 됨
+
+<MDXImage src="/images/vscode_tip_3.png" width={450} className="m-2" />
+
+매번 두 번 열기 귀찮으면 이렇게 해도 됨
+
+```sh
+cd repo
+code .vscode/\<name\>.code-workspace
+```
+
+이런식으로 alias를 만들어두면 편함
+
+```sh
+# .bashrc
+alias code-punk='code .vscode/\<name\>.code-workspace'
+
+# cmd
+doskey code-punk=code .vscode/\<name\>.code-workspace
+```

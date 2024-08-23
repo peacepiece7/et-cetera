@@ -2,7 +2,9 @@
 
 ## dml, tcl, ddl Playground
 
-### DML
+### DML (Data Manipulation Language)
+
+insert, update, delete, merge
 
 ```sql
 create table if not exists sample (
@@ -164,17 +166,19 @@ select * from sample;
 
 ```js
 try {
- await client.connect();
- await client.query("begin");
- await client.query("insert ...")
+  await client.connect()
+  await client.query("begin")
+  await client.query("insert ...")
 } catch (err) {
- await client.query('rollback')
-}f inally {
- await client.query('end')
+  await client.query("rollback")
+} finally {
+  await client.query("end")
 }
 ```
 
 ### DDL (Data Definition Language)
+
+Create, Alter, Drop, Truncate, Rename 등이 있음
 
 char, varchar, clob, text, number, tiny, boolean, date등 벤더마자 조금씩 다르고 엄청 다양하다.
 
@@ -199,6 +203,12 @@ drop table teacher;
 ```
 
 ### DCL (Data Control Language)
+
+create table, schema -> DDL
+
+create user -> DCL
+
+create user, alter user, drop user, alter, grant, revoke, role 등 사용자 권한을 관리할 때 사용한다.
 
 ```sql
 -- account

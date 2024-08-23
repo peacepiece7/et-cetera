@@ -5,20 +5,20 @@
 ```sql
 create table if not exists test (col1 varchar(1));
 insert into test values ('B');
-select \* from test;
+select * from test;
 create schema if not exists firstSchema;
 ```
 
 ## select
 
 ```sql
-select \* from band b
+select * from band b
 ```
 
 ## 산술 연산자
 
 ```sql
-select 10+5, 10-5, 10\*5, 10/5 from band_member;
+select 10+5, 10-5, 10*5, 10/5 from band_member;
 ```
 
 ## 합성 연산자
@@ -150,10 +150,11 @@ from band_member
 
 ### null 관련 함수
 
-- nv: 인수1이 null일 경우 인수2 출력, oracle
-- nvl2: 인수1,2,3을 받고 다음 인수 받환
-- coalesce: ...인수 null일 경우 다음 인수 반환
-- nullif: 인수1,2가 같으면 null 반환
+- nvl: nvl(arg1, arg2), arg1 is not null ? arg1 : arg2
+- nvl2: nvl(arg1, arg2, arg3), arg1 is not null ? arg2 : arg3
+- coalesce: coalesce(arg1, arg2, ...argN) arg1 || arg2 || ... || argN
+- nullif: nullif(arg1, arg2) arg1 == arg2 ? null : arg1
+- ifnull : ifnull(arg1, arg2) arg1 is not null ? arg1 : arg2
 
 ```sql
 select coalesce(bm.band_code, 'is null'), nullif(bm.band_code, 'BC002') from band_member bm;
