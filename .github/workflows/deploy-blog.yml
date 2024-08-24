@@ -19,7 +19,7 @@ jobs:
         with:
           filters: |
             file:
-              - 'apps/blog/**'
+              - 'apps/punk-record/**'
               - 'apps/web/**'
               - 'apps/docs/**'
               - 'packages/**'
@@ -50,7 +50,6 @@ jobs:
       #     yarn set version stable
 
       - name: Install dependencies.
-        working-directory: ./apps/blog
         run: |
           pwd
           touch .env
@@ -60,16 +59,14 @@ jobs:
           cat .env
 
       - name: Install packages.
-        working-directory: ./apps/blog
         run: pnpm install
 
       - name: Build the project.
-        working-directory: ./apps/blog
         run: pnpm build --filter @app/blog
 
       - name: Compress the built code.
-        working-directory: ./apps/blog
         run: zip -r build.zip ./.next ./package.json ./yarn.lock ./public
+        run: zio -r build.zip ./package.json ./pnpm ./app/punk-record/.next 
 
       - name: Install sshpass
         run: |
