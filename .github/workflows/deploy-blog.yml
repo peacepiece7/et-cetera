@@ -65,8 +65,7 @@ jobs:
         run: pnpm build --filter @app/blog
 
       - name: Compress the built code.
-        run: zip -r build.zip ./.next ./package.json ./yarn.lock ./public
-        run: zio -r build.zip ./package.json ./pnpm ./app/punk-record/.next 
+        run: zio -r build.zip ./package.json ./*.yaml ./app/punk-record/.next ./app/punk-record/*lock 
 
       - name: Install sshpass
         run: |
