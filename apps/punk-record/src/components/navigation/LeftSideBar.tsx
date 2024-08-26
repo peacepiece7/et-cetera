@@ -10,6 +10,7 @@ import { SearchItem } from "@/app/api/search/route"
 import { SearchListProvider } from "@/contexts/useSearchListContext"
 
 export async function LeftSideBar() {
+  // 변경 사항 추가
   const headerList = headers()
   const url = headerList.get(X_CUSTOM_URL) || ""
 
