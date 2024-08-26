@@ -3,8 +3,6 @@ name: ci
 on:
   push:
     branches: [main]
-    paths:
-      - 'apps/punk-record/**'
 
 env:
   NODE_VERSION: '20.12.1'
@@ -73,7 +71,7 @@ jobs:
         run: pnpm run build --filter @app/punk-record
 
       - name: Compress the built code.
-        run: zio -r build.zip ./*.json ./*.yaml ./apps/punk-record/.next ./apps/punk-record/public ./apps/punk-record/*.json ./apps/punk-record/*.yaml
+        run: zip -r build.zip ./*.json ./*.yaml ./apps/punk-record/.next ./apps/punk-record/public ./apps/punk-record/*.json ./apps/punk-record/*.yaml
 
       - name: Install sshpass
         run: |
