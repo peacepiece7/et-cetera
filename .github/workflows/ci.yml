@@ -45,10 +45,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
+      - name: Show current branch
+        run: git branch -a
+
+      - name: Show recent commit history
+        run: git log --oneline -5
+
       - name: Check for changes in 'apps/punk-record'
-        id: changes_detected
         run: |
-          if git diff --name-only HEAD~1 HEAD | grep -q '^apps/punk-record/'; then
+          if git diff --name-only origin/main HEAD | grep -q '^apps/punk-record/'; then
             echo "changes=true" >> $GITHUB_ENV
           else
             echo "No changes in 'apps/punk-record'"
