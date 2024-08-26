@@ -52,6 +52,6 @@
 
 ### 특정 디렉터리에 변경 사항이 있는지 체크
 
-`git diff --name-only HEAD^ HEAD | grep -q <directory>`
+`git diff --name-only HEAD~1 HEAD | grep -q <directory>`
 
 `echo $?` => exit code : 0 이면 변경사항 있음, 1 이면 변경사항 없음
