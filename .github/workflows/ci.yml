@@ -3,6 +3,8 @@ name: ci
 on:
   push:
     branches: [main]
+    tags:
+      - 'build-*'
 
 env:
   NODE_VERSION: '20.12.1'
@@ -86,6 +88,6 @@ jobs:
           unzip -o build.zip
           echo "Unzip completed"
           echo "Restarting application"
-          pm2 restart ${{ secrets.PM2_APP_NAME }}
+          npx pm2 start ./apps/punk-record/ecosystem.config.js
           echo "Deployment completed"
           ENDSSH
