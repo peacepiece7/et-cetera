@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
 import { mainFont, subFont } from "@/utils/shared"
 import "@repo/ui-shadcn/styles"
-import "@repo/config-tailwind/blogGlobal.css"
-// import "./global.css"
+import "./global.css"
 
 export const metadata: Metadata = {
   title: "블로그",

@@ -9,8 +9,6 @@
     }
   },
   "include": ["next-env.d.ts", "next.config.mjs", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.cts"],
-  "exclude": ["node_modules"],
-  "mdx": {
-    "checkMdx": true
-  }
+  "exclude": ["node_modules", "./*.js", "./*.ts", "./*.tsx", "./*.d.ts"],
+  "mdx": { "checkMdx": true }
 }
