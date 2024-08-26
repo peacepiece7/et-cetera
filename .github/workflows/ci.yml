@@ -71,7 +71,7 @@ jobs:
         run: pnpm run build --filter @app/punk-record
 
       - name: Compress the built code.
-        run: zip -r build.zip ./*.json ./*.yaml ./apps/punk-record/.next ./apps/punk-record/public ./apps/punk-record/*.json ./apps/punk-record/*.yaml
+        run: zip -r build.zip ./*.json ./*.yaml ./.nvmrc ./apps/punk-record/.next ./apps/punk-record/public ./apps/punk-record/*.json ./apps/punk-record/*.yaml ./apps/punk-record/ecosystem.config.js
 
       - name: Install sshpass
         run: |
@@ -97,6 +97,7 @@ jobs:
           unzip -o build.zip
           echo "Unzip completed"
           echo "Restarting application"
-          npx pm2 start ./apps/punk-record/ecosystem.config.js
+          nvm use
+          pm2 start ./apps/punk-record/ecosystem.config.js
           echo "Deployment completed"
           ENDSSH
