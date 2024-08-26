@@ -51,6 +51,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies.
+        run: |
+          pwd
+          touch .env
+          echo BACK_SERVER_BASE_URL=${{ secrets.BACK_SERVER_BASE_URL }} >> .env
+          echo FRONT_SERVER_BASE_URL=${{ secrets.FRONT_SERVER_BASE_URL }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
+          cat .env
 
       - name: Install PNPM
         run: npm install -g pnpm@${{ env.PNPM_VERSION }}

@@ -15,11 +15,7 @@ import NavigationDirButton from "@/components/ui/NavigationParagraph"
  * @param deepth
  * @returns
  */
-export const createNavElements = (
-  tree: TreeNode[],
-  list: number[],
-  deepth: number
-): React.JSX.Element[] => {
+export const createNavElements = (tree: TreeNode[], list: number[], deepth: number): React.JSX.Element[] => {
   return tree.map((node, idx) => {
     const dataPath = [...list, idx]
     if (node.leafNode && node.link) {
@@ -42,9 +38,7 @@ export const createNavElements = (
           <NavigationLink href={node.link}>
             <div className="flex items-center hover:bg-gray-400 hover:bg-opacity-10 mr-4">
               <DocumentIcon options={{ tabIndex: -1 }} />
-              <p className="truncate">
-                {convertMDXFileNameToReadableText(node.text)}
-              </p>
+              <p className="truncate">{convertMDXFileNameToReadableText(node.text)}</p>
             </div>
           </NavigationLink>
         ) : (
@@ -76,42 +70,33 @@ export const createNavElements = (
  * @param headings
  * @returns
  */
-export const createTOCElements = (
-  headings: RootContentMap["heading"][]
-): React.ReactElement => {
+export const createTOCElements = (headings: RootContentMap["heading"][]): React.ReactElement => {
   const rootUl = React.createElement("ul", { key: "root" })
-  const stack = [
-    { element: rootUl, depth: 0, children: [] as React.ReactElement[] },
-  ]
+  const stack = [{ element: rootUl, depth: 0, children: [] as React.ReactElement[] }]
 
   headings.forEach((heading, index) => {
     const { depth } = heading
-    const text = heading.children
-      .flatMap((node) => ("value" in node ? node.value : ""))
-      .join("")
+    const text = heading.children.flatMap((node) => ("value" in node ? node.value : "")).join("")
     const hashTag = text.replace(/\s+/g, "_").toLowerCase()
     const li = React.createElement(
       "li",
       {
         key: `li-${index}`,
-        className:
-          "flex items-center ml-4 overflow-hidden mr-4 hover:bg-gray-400 hover:bg-opacity-10",
+        className: "flex items-center ml-4 overflow-hidden mr-4 hover:bg-gray-400 hover:bg-opacity-10",
         "data-deepth": depth,
       },
       <a href={`#${hashTag}`} className="link">
         {"# " + text}
-      </a>
+      </a>,
     )
-    while (stack.length > 0 && stack[stack.length - 1].depth >= depth) {
+    while ((stack.length > 0 && stack[stack.length - 1]?.depth) || 0 >= depth) {
       const { element, children } = stack.pop()!
       if (children.length > 0) {
-        stack[stack.length - 1].children.push(
-          React.cloneElement(element, {}, children)
-        )
+        stack[stack.length - 1]?.children.push(React.cloneElement(element, {}, children))
       }
     }
 
-    stack[stack.length - 1].children.push(li)
+    stack[stack.length - 1]?.children.push(li)
 
     const newUl = React.createElement("ul", {
       key: `ul-${index}`,
@@ -122,9 +107,7 @@ export const createTOCElements = (
 
   while (stack.length > 1) {
     const { element, children } = stack.pop()!
-    stack[stack.length - 1].children.push(
-      React.cloneElement(element, {}, children)
-    )
+    stack[stack.length - 1]?.children.push(React.cloneElement(element, {}, children))
   }
 
   const { element, children } = stack.pop()!

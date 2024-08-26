@@ -2,11 +2,11 @@
 const plugin = require('tailwindcss/plugin');
 module.exports = {
   content: [
-    './src/**/*.{ts,tsx,js,jsx}',
-    './apps/**/*.{ts,tsx,js,jsx}',
-    './app/**/*.{ts,tsx,js,jsx}',
-    './packages/**/*.{ts,tsx,js,jsx}',
-    './pages/**/*.{ts,tsx,js,jsx}',
+    'src/**/*.{js,ts,jsx,tsx}',
+    'apps/**/*.{js,ts,jsx,tsx}',
+    'packages/**/*.{js,ts,jsx,tsx}',
+    'app/**/*.{js,ts,jsx,tsx}',
+    'pages/**/*.{js,ts,jsx,tsx}',
     './index.html',
   ],
   theme: {

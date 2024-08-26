@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import {
-  getASTTreeSafely,
-  getFileNamesSafely,
-  getPostFullPath,
-} from "@/utils/server"
+import { getASTTreeSafely, getFileNamesSafely, getPostFullPath } from "@/utils/server"
 
 export const dynamic = "force-dynamic"
 
@@ -12,10 +8,7 @@ export async function GET(request: NextRequest) {
     const fileNames = getFileNamesSafely(path, ".mdx")
 
     if (fileNames.length === 0) return ""
-    const headingNodes = getASTTreeSafely<"heading">(
-      `${path}/${fileNames[index]?.name}`,
-      "heading"
-    )
+    const headingNodes = getASTTreeSafely<"heading">(`${path}/${fileNames[index]?.name}`, "heading")
     return headingNodes
   }
 
@@ -30,10 +23,7 @@ export async function GET(request: NextRequest) {
     rest.pop()
     rest.push("[pageId]")
 
-    const tocTree = await createTableOfContents(
-      getPostFullPath(...rest),
-      parseInt(index) - 1
-    )
+    const tocTree = await createTableOfContents(getPostFullPath(...rest), parseInt(index!) - 1)
 
     return NextResponse.json({
       tocTree: tocTree,

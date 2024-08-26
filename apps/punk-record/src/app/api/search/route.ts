@@ -64,7 +64,7 @@ function buildSearchList(dirs: string[], baseDir: string): any {
     dir = dir.replaceAll(path.sep, "/").replaceAll("\\", "/")
 
     const left = dir.split("@contents/")[1]
-    const key = left.split("/[pageId]")[0]
+    const key = left!.split("/[pageId]")[0]
     if (key) {
       if (group[key]) {
         group[key].push(dir)
@@ -75,7 +75,7 @@ function buildSearchList(dirs: string[], baseDir: string): any {
   })
 
   Object.keys(group).forEach((key) => {
-    group[key].forEach((filePath, idx) => {
+    group[key]!.forEach((filePath, idx) => {
       const relativePath = path.relative(baseDir, filePath)
       const parts = relativePath.split(path.sep)
       const fileName = parts.pop()
