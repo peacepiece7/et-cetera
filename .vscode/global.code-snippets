@@ -1,0 +1,15 @@
+{
+  "Create MDX": {
+    "prefix": "create-mdx",
+    "body": [
+      "export const METADATA = {",
+      "  title: \"\",",
+      "  description: \"\",",
+      "  date: \"\",",
+      "  tags: [],",
+      "}",
+      "import { Detail } from \"@/components/mdx/detail\"",
+      "import { MDXImage, MDXFlex } from \"@/components/mdx/image\"",
+    ],
+  },
+}
