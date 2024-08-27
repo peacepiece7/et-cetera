@@ -2,7 +2,7 @@
 
 ## join 관련 기능 알아보기
 
-### equi join
+### equal join
 
 가장 흔한 조인으로 where Equal(=) 조건으로 테이블을 조인함
 
@@ -11,7 +11,7 @@ select a.nickname, ar.review from audience a, audience_review ar
 where a.id = ar.audience_id;
 ```
 
-### non equi join
+### non equal join
 
 where Equal(=) 외의 다른 조건으로 조인하는 방식
 
@@ -38,7 +38,7 @@ and a.id = ar.id;
 
 조건에 만족하지 않는 행들도 출력한다.
 
-oracle에서는 (+)로 ourter 조인임을 명시할 수 있다.
+oracle에서는 (+)로 outer 조인임을 명시할 수 있다.
 
 ```sql
 select a.nickname, s.performance_name, to_char(s.performance_date, 'YYYY-MM-DD') from audience a, store s
@@ -52,7 +52,7 @@ and s.performance_date between now() and date_trunc('year', now() + interval '1 
 
 #### inner join
 
-equi join과 흡사하나 테이블을 합친다는 점을 명시적으로 표기하기에 inner join이 더 선호됨
+equal join과 흡사하나 테이블을 합친다는 점을 명시적으로 표기하기에 inner join이 더 선호됨
 
 ```sql
 select a.nickname, ar.review from audience a
