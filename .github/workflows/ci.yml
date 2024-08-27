@@ -91,8 +91,6 @@ jobs:
           sshpass -e ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} <<'ENDSSH'
           echo "START DEPLOY"
           cd ${{ secrets.DEPLOY_PATH }}
-          echo "Current directory:"
-          pwd
           echo "Unzipping build.zip"
           unzip -o build.zip
           echo "Unzip completed"
