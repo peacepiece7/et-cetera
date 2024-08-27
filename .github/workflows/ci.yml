@@ -96,8 +96,13 @@ jobs:
           echo "Unzipping build.zip"
           unzip -o build.zip
           echo "Unzip completed"
+          echo "Fetch latest changes from git"
+          git checkout main
+          git pull origin main
           echo "Restarting application"
           nvm use
+          echo "Update dependencies"
+          pnpm install --frozen-lockfile
           pm2 start ./apps/punk-record/ecosystem.config.js
           echo "Deployment completed"
           ENDSSH
