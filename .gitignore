@@ -43,3 +43,5 @@ scripts/git_commit_template
 
 # local files
 __*
+
+storybook-static

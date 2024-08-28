@@ -15,6 +15,9 @@ import {
   SelectValue,
   toast,
 } from '@repo/ui-shadcn';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Form, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 export function SelectDemo() {
   return (
@@ -89,10 +92,6 @@ export function SelectScrollable() {
     </Select>
   );
 }
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 const FormSchema = z.object({
   email: z
