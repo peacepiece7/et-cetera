@@ -1,8 +1,8 @@
 "use client"
 import { useCallback, useEffect, useState } from "react"
-import { Button } from "@/components/ui/Button"
 import CloseIcon from "@/components/ui/Icons/CloseIcon"
 import { createPortal } from "react-dom"
+import { Button, WithIcon } from "@repo/ui-shadcn"
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false)
@@ -31,7 +31,7 @@ const ModalLayout = ({
     (ev: KeyboardEvent) => {
       if (ev.key === "Escape") onClose()
     },
-    [onClose]
+    [onClose],
   )
 
   useEffect(() => {
@@ -46,21 +46,16 @@ const ModalLayout = ({
     <section
       className={`fixed top-0 left-0 flex flex-col justify-center items-center w-full h-full z-50 bg-neutral-900/70
         transition-opacity duration-300
-      ${
-        open
-          ? "visible opacity-100 pointer-events-auto"
-          : "invisible opacity-0 pointer-events-none"
-      }
+      ${open ? "visible opacity-100 pointer-events-auto" : "invisible opacity-0 pointer-events-none"}
         `}
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <Button
-        className="fixed top-0 right-0 p-8 text-white"
-        onClick={() => onClose()}
-      >
-        <CloseIcon />
+      <Button variant="ghost" className="fixed top-0 right-0 p-8 text-white" onClick={() => onClose()}>
+        <WithIcon>
+          <CloseIcon />
+        </WithIcon>
       </Button>
       <div className="bg-white w-4/5 h-3/5 max-w-7xl">{children}</div>
     </section>

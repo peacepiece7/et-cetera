@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "turbo dev",
+    "dev:blog": "turbo dev --filter @app/punk-record",
     "storybook": "turbo run storybook",
     "build": "turbo build",
     "lint": "turbo lint",

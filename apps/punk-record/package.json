@@ -37,7 +37,6 @@
   },
   "devDependencies": {
     "@repo/config-eslint": "*",
-    "@repo/config-tailwind": "*",
     "@repo/config-ts": "*",
     "@repo/ui-shadcn": "*",
     "@types/keyboardjs": "^2",
@@ -47,6 +46,8 @@
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint-config-next": "15.0.0-rc.0",
+    "geist": "^1.3.1",
+    "lodash": "^4.17.21",
     "react-icons": "^5.2.1"
   }
 }

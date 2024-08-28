@@ -11,16 +11,16 @@ import type { RootContentMap } from "mdast"
  * @param path /api/...?query=... 형태로 입력한다.
  */
 export const fetcher = async <T>(path: string, options?: RequestInit) => {
-  const headerList = headers()
-  const host = headerList.get("host")
-  // const scheme = process.env.NODE_ENV === 'development' ? 'http' : 'https'
-  const url = `http://${host}${path}`
-  return fetch(url, options)
-    .then((res) => res.json() as T)
-    .catch((error) => {
-      console.error(error)
-      throw new Error("FETCHER ERROR : " + error)
-    })
+  try {
+    const headerList = headers()
+    const host = headerList.get("host")
+    // const scheme = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+    const url = `http://${host}${path}`
+    return await fetch(url, options).then((res) => res.json() as T)
+  } catch (error) {
+    console.error(error)
+    throw new Error("FETCHER ERROR : " + error)
+  }
 }
 
 /**

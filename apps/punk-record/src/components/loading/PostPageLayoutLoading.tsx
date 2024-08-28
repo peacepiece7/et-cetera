@@ -1,11 +1,8 @@
 "use client"
-import { Button } from "@/components/ui/Button"
 
-export function PostPageLayoutLoading({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+import { Button } from "@repo/ui-shadcn"
+
+export function PostPageLayoutLoading({ children }: { children: React.ReactNode }) {
   return (
     <main className="global-layout">
       <div
@@ -13,8 +10,8 @@ export function PostPageLayoutLoading({
         transition-all duration-500 ease-out
     `}
       >
-        <div className="text-end mb-4">
-          <Button className="border-2 m-2 py-1 px-4 transition-colors hover:bg-slate-200">
+        <div className="text-end py-4">
+          <Button className="m-2" size="lg">
             Close
           </Button>
         </div>

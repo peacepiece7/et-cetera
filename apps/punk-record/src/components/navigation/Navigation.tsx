@@ -5,7 +5,6 @@ import { SearchArea } from "./SearchArea"
 import { useNavAnimation } from "@/hooks/useNavAnimation"
 import { useResizeSidebar } from "@/hooks/useResizeSidebar"
 import { Button } from "@repo/ui-shadcn"
-// import { Button } from "@/components/ui/Button"
 
 export default function Navigation({
   navChildren,
@@ -28,9 +27,15 @@ export default function Navigation({
   return (
     <div className="flex flex-col relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 group z-30 bg-white">
       <SearchArea />
-      <div className="flex justify-around">
-        <Button onClick={() => setActiveIdx(0)}>목록</Button>
-        {isPostPage && <Button onClick={() => setActiveIdx(1)}>목차</Button>}
+      <div className="flex justify-around mt-4">
+        <Button size="lg" onClick={() => setActiveIdx(0)}>
+          목록
+        </Button>
+        {isPostPage && (
+          <Button size="lg" onClick={() => setActiveIdx(1)}>
+            목차
+          </Button>
+        )}
       </div>
       <nav ref={navRef} className="relative h-full overflow-y-scroll z-10 pt-4" style={{ width: `${sideBarWidth}px` }}>
         <div className="pt-10 text-sm">

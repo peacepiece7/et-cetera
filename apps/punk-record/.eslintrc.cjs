@@ -40,5 +40,5 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ["*.html", ".*.js", ".*.cjs", "*.config.js", "node_modules/"],
+  ignorePatterns: ["*.html", ".*.js", ".*.cjs", "*.config.js", "*.config.cjs", "node_modules/"],
 }

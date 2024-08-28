@@ -1,9 +1,18 @@
 "use client"
 import { usePathname, useRouter } from "next/navigation"
-import { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { ContentsLoading } from "@/components/loading/ContentsLoading"
-import { Button } from "@/components/ui/Button"
 import { usePostAreaSlideAnimation } from "@/hooks/useSlidePostContentArea"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+  Button,
+} from "@repo/ui-shadcn"
+import { POST_PAGE_LAYOUT_ID } from "@/constants/client"
+import { useDynamicBreadcrumb } from "@/hooks/useDynamicBreadcrumb"
 
 export function ContentsLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -33,30 +42,47 @@ export function PostPageLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   /**
    * @todo history에 따라서 다르게 보여줘야해서 아직 미구현
-   * 나중에 쓸 떄 Button -> Link로 바꿔서 prefetch로 미리 데이터를 가져오게 하자.
+   * nextjs prefetch, stack flow, view transition api 등 고려해보자
    */
   const [fadeOut, _setFadeOut] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { breadcrumb } = useDynamicBreadcrumb({
+    container: containerRef,
+  })
+
+  useEffect(() => {
+    console.log("breadcrumb : ", breadcrumb)
+  }, [breadcrumb])
 
   return (
     <>
       <div
+        id={POST_PAGE_LAYOUT_ID}
         className={`flex flex-col h-full grow shrink rounded-xl shadow-md bg-white
         transition-all duration-500 ease-out
-        ${fadeOut ? "-translate-x-3/4 opacity-0 invisible" : ""}
-    `}
+        ${fadeOut ? "-translate-x-3/4 opacity-0 invisible" : ""}`}
       >
-        <div className="text-end mb-4">
-          <Button
-            className="border-2 m-2 py-1 px-4 transition-colors hover:bg-slate-200"
-            onClick={() => {
-              router.back()
-            }}
-          >
+        <div className="flex justify-between text-end m-4">
+          <Breadcrumb>
+            <BreadcrumbList>
+              {breadcrumb.map((item, idx) => (
+                <React.Fragment key={item.id}>
+                  <BreadcrumbItem className="inline-block">
+                    <BreadcrumbLink href={`#${item.id}`}>{item.textContent}</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  {idx !== breadcrumb.length - 1 && <BreadcrumbSeparator className="text-lg" />}
+                </React.Fragment>
+              ))}
+            </BreadcrumbList>
+          </Breadcrumb>
+          <Button size="lg" onClick={router.back}>
             Close
           </Button>
         </div>
-        <div className="overflow-hidden h-full ">
-          <div className="overflow-y-scroll h-full p-4">{children}</div>
+        <div className="overflow-hidden h-full">
+          <div ref={containerRef} className="overflow-y-scroll scroll-smooth h-full p-4">
+            {children}
+          </div>
         </div>
       </div>
     </>

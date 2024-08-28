@@ -66,6 +66,7 @@ html {
 }
 
 body {
+  scroll-behavior: smooth;
 }
 
 .children-svg-translate-x-2 svg {

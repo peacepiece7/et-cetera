@@ -13,15 +13,19 @@ import { SearchListProvider } from "@/contexts/useSearchListContext"
 export default async function PostContentsContainer(
   props: Readonly<{
     children: React.ReactNode
-  }>
+  }>,
 ) {
   const headerList = headers()
   const url = headerList.get(X_CUSTOM_URL) || ""
-  const tocRes = await fetcher<{ tocTree: Heading[] }>(
-    `/api/table-of-contents?url=${url}`
-  )
-  const navRes = await fetcher<{ navTree: TreeNode[] }>(`/api/navigation`, {})
-  const searchRes = await fetcher<{ list: SearchItem[] }>(`/api/search`, {})
+  const tocRes = await fetcher<{ tocTree: Heading[] }>(`/api/table-of-contents?url=${url}`, {
+    cache: "force-cache",
+  })
+  const navRes = await fetcher<{ navTree: TreeNode[] }>(`/api/navigation`, {
+    cache: "force-cache",
+  })
+  const searchRes = await fetcher<{ list: SearchItem[] }>(`/api/search`, {
+    cache: "force-cache",
+  })
 
   return (
     <PostAreaSlideProvider>
