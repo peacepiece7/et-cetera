@@ -1,6 +1,5 @@
 import { CalendarIcon, EnvelopeClosedIcon, FaceIcon, GearIcon, PersonIcon, RocketIcon } from '@radix-ui/react-icons';
 import {
-  Button,
   Command,
   CommandDialog,
   CommandEmpty,
@@ -10,7 +9,8 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/command';
+import { Button } from '@repo/ui-shadcn/button';
 import React from 'react';
 
 export function CommandDemo() {

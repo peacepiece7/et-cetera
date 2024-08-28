@@ -2,7 +2,8 @@
 import { useCallback, useEffect, useState } from "react"
 import CloseIcon from "@/components/ui/Icons/CloseIcon"
 import { createPortal } from "react-dom"
-import { Button, WithIcon } from "@repo/ui-shadcn"
+import { Button } from "@repo/ui-shadcn"
+import { WithIcon } from "@repo/ui-shadcn"
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false)
@@ -53,9 +54,9 @@ const ModalLayout = ({
       }}
     >
       <Button variant="ghost" className="fixed top-0 right-0 p-8 text-white" onClick={() => onClose()}>
-        <WithIcon>
+        {/* <WithIcon>
           <CloseIcon />
-        </WithIcon>
+        </WithIcon> */}
       </Button>
       <div className="bg-white w-4/5 h-3/5 max-w-7xl">{children}</div>
     </section>

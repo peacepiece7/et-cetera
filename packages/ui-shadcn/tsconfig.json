@@ -1,7 +1,16 @@
 {
   "extends": "@repo/config-ts/react-library.json",
   "compilerOptions": {
+    // "target": "ES6",
+    // "module": "ESNext",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "declaration": true,
+    "declarationDir": "types",
     "outDir": "dist",
+    "esModuleInterop": true,
+    // "moduleResolution": "NodeNext",
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

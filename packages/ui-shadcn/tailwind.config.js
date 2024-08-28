@@ -1,5 +1,7 @@
+// 실제로 프로젝트를 돌리는 곳에 있는 tailwind.config.js 파일만 사용됩니다.
+
 module.exports = {
-  content: [`../../apps/**/*.{ts,tsx,html,stories.tsx}`, '../../packages/**/*.{ts,tsx,html,stories.tsx}'],
+  content: ['./src/**/*.{ts,tsx}'],
   darkMode: ['class'],
   theme: {
     screens: {

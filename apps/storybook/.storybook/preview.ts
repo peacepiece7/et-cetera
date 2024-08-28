@@ -1,6 +1,5 @@
 import type { Preview } from '@storybook/react';
 
-// import '@repo/ui-shadcn/styles';
 import './global.css';
 
 // https://storybook.js.org/docs/essentials/actions#action-event-handlers

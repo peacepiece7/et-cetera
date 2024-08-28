@@ -29,7 +29,7 @@ export default function Navigation({
       <SearchArea />
       <div className="flex justify-around mt-4">
         <Button size="lg" onClick={() => setActiveIdx(0)}>
-          목록목록목록
+          목록
         </Button>
         {isPostPage && (
           <Button size="lg" onClick={() => setActiveIdx(1)}>
