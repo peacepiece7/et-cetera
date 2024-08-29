@@ -1,19 +1,22 @@
 {
   "extends": "@repo/config-ts/react-library.json",
   "compilerOptions": {
-    // "target": "ES6",
+    "target": "ES6",
     // "module": "ESNext",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "declaration": true,
-    "declarationDir": "types",
-    "outDir": "dist",
     "esModuleInterop": true,
-    // "moduleResolution": "NodeNext",
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    // "declaration": true, // @rollup/plugin-typescript 쓸거임
+    // "declarationDir": "dist",
+    // "outDir": "dist",
+    // "moduleResolution": "NodeNext",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
 }
