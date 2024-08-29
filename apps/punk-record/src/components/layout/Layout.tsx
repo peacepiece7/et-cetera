@@ -3,8 +3,14 @@ import { usePathname, useRouter } from "next/navigation"
 import React, { useEffect, useRef, useState } from "react"
 import { ContentsLoading } from "@/components/loading/ContentsLoading"
 import { usePostAreaSlideAnimation } from "@/hooks/useSlidePostContentArea"
-import { Button } from "@repo/ui-shadcn"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@repo/ui-shadcn"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+  Button,
+} from "@repo/ui-shadcn"
 import { POST_PAGE_LAYOUT_ID } from "@/constants/client"
 import { useDynamicBreadcrumb } from "@/hooks/useDynamicBreadcrumb"
 
@@ -64,7 +70,7 @@ export function PostPageLayout({ children }: { children: React.ReactNode }) {
                   <BreadcrumbItem className="inline-block">
                     <BreadcrumbLink href={`#${item.id}`}>{item.textContent}</BreadcrumbLink>
                   </BreadcrumbItem>
-                  {/* {idx !== breadcrumb.length - 1 && <BreadcrumbSeparator className="text-lg" />} */}
+                  {idx !== breadcrumb.length - 1 && <BreadcrumbSeparator className="text-lg" />}
                 </React.Fragment>
               ))}
             </BreadcrumbList>

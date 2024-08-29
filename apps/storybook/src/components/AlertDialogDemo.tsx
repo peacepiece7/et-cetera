@@ -11,8 +11,8 @@ import {
   AlertDialogPortal,
   AlertDialogTitle,
   AlertDialogTrigger,
+  Button,
 } from '@repo/ui-shadcn';
-import { Button } from '@repo/ui-shadcn';
 
 export function AlertDialogDemo() {
   return (

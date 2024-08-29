@@ -2,10 +2,9 @@
   "name": "@repo/ui-shadcn",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "exports": {
     ".": "./dist/__registry.js",
-    "./ui/*": "./dist/components/ui/*",
+    "./*": "./dist/components/ui/*",
     "./ui-no-barrel/*": "./dist/components/ui-no-barrel/*",
     "./hooks": "./dist/src/hooks",
     "./lib": "./dist/src/lib",
@@ -20,7 +19,6 @@
     "test": "echo \"UI : no test specified\"",
     "types:check": "tsc --noEmit"
   },
-  "module": "dist/esm/index.js",
   "files": [
     "dist"
   ],

@@ -3,11 +3,26 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@repo/ui-shadcn/table';
-import { useToast } from '@repo/ui-shadcn/hooks/use-toast';
-import { Checkbox } from '@repo/ui-shadcn/checkbox';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@repo/ui-shadcn/form';
-import { Button } from 'react-day-picker';
+import {
+  Table,
+  TableCaption,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+  useToast,
+  Checkbox,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Button,
+} from '@repo/ui-shadcn';
+import {} from 'react-day-picker';
 
 export function CheckboxDemo() {
   return (

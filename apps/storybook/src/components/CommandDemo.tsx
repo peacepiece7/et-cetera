@@ -9,8 +9,8 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from '@repo/ui-shadcn/command';
-import { Button } from '@repo/ui-shadcn/button';
+  Button,
+} from '@repo/ui-shadcn';
 import React from 'react';
 
 export function CommandDemo() {

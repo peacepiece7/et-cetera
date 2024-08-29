@@ -1,5 +1,6 @@
 import { SearchArea } from "@/components/navigation/SearchArea"
-import { Button } from "@/components/ui/Button"
+import { Button } from "@repo/ui-shadcn"
+// import { Button } from "@/components/ui/Button"
 
 export const NavigationLoading = () => {
   return (

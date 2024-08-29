@@ -2,7 +2,7 @@
   "extends": "@repo/config-ts/react-library.json",
   "compilerOptions": {
     "target": "ES6",
-    // "module": "ESNext",
+    "module": "Preserve",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "esModuleInterop": true,
@@ -11,7 +11,7 @@
     // "declaration": true, // @rollup/plugin-typescript 쓸거임
     // "declarationDir": "dist",
     // "outDir": "dist",
-    // "moduleResolution": "NodeNext",
+    "moduleResolution": "Bundler",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
