@@ -1,4 +1,4 @@
-import { Separator } from '@repo/ui-shadcn';
+import { Separator } from '@repo/ui-shadcn/ui/separator';
 
 export function SeparatorDemo() {
   return (

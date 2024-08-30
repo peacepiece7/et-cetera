@@ -1,5 +1,4 @@
 import {
-  Button,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -15,7 +14,10 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/dropdown-menu';
+import * as React from 'react';
+import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
+import { Button } from '@repo/ui-shadcn/ui/button';
 
 export function DropdownMenuDemo() {
   return (
@@ -76,9 +78,6 @@ export function DropdownMenuDemo() {
     </DropdownMenu>
   );
 }
-
-import * as React from 'react';
-import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
 
 type Checked = DropdownMenuCheckboxItemProps['checked'];
 

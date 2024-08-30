@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import { SearchArea } from "./SearchArea"
 import { useNavAnimation } from "@/hooks/useNavAnimation"
 import { useResizeSidebar } from "@/hooks/useResizeSidebar"
-import { Button } from "@repo/ui-shadcn"
+import { Button } from "@repo/ui-shadcn/ui/button"
 
 export default function Navigation({
   navChildren,
@@ -25,11 +25,11 @@ export default function Navigation({
   const isPostPage = pathname.includes("posts")
 
   return (
-    <div className="flex flex-col relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 group z-30 bg-white">
+    <div className="flex flex-col relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 group z-30 bg-white ">
       <SearchArea />
       <div className="flex justify-around mt-4">
         <Button size="lg" onClick={() => setActiveIdx(0)}>
-          목록목록목록
+          목록
         </Button>
         {isPostPage && (
           <Button size="lg" onClick={() => setActiveIdx(1)}>

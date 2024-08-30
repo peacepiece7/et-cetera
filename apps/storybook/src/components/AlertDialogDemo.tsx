@@ -1,19 +1,18 @@
 import {
   AlertDialog,
-  // https://www.radix-ui.com/primitives/docs/components/alert-dialog#portal
-  AlertDialogPortal,
-  AlertDialogOverlay,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogContentOnly,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogTitle,
-  AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
-  Button,
-} from '@repo/ui-shadcn';
+  AlertDialogContent,
+  AlertDialogContentOnly,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogPortal,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@repo/ui-shadcn/ui/alertDialog';
+import { Button } from '@repo/ui-shadcn/ui/button';
 
 export function AlertDialogDemo() {
   return (

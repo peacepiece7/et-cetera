@@ -1,5 +1,4 @@
-import { Separator } from '@repo/ui-shadcn';
-
+import { Separator } from '@repo/ui-shadcn/ui/separator';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import CustomDocument from '../../../components/CustomDocument';

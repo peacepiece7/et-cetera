@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Alert, AlertTitle, AlertDescription } from '@repo/ui-shadcn';
+import { Alert, AlertTitle, AlertDescription } from '@repo/ui-shadcn/ui/alert';
 import { RocketIcon } from '@radix-ui/react-icons';
 import { Story } from '@storybook/blocks';
 import { withActions } from '@storybook/addon-actions/decorator';

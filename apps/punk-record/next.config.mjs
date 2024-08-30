@@ -1,18 +1,15 @@
 import createMDX from "@next/mdx"
+import withBundleAnalyzer from "@next/bundle-analyzer"
+import withPlugins from "next-compose-plugins"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   // webpack: (config, { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) => {
-  //   // Important: return the modified config
-  //   // 특정 패키지의 변경을 감지하지 않도록 watchOptions 설정
-
   //   config.watchOptions = {
   //     ...config.watchOptions,
   //     ignored: /^((?:[^/]*(?:\/|$))*)(\.(git|next)|node_modules|packages\/ui-shadcn)(\/((?:[^/]*(?:\/|$))*)(?:$|\/))?/,
   //   }
-
-  //   console.log("config.watchOptions", config.watchOptions)
   //   return config
   // },
 }
@@ -20,8 +17,13 @@ const nextConfig = {
 const withMDX = createMDX({
   // 여기에 마크다운 플러그인 추가
 })
+const withBundleAnalyzerConfig = withBundleAnalyzer({
+  enabled: false,
+})
 
-export default withMDX(nextConfig)
+export default withPlugins([withMDX, withBundleAnalyzerConfig], nextConfig)
+
+// withBundleConfig(withMDX(nextConfig))
 
 // ────────│ ✓ Compiled / in 120.4s (7687 modules)
 // @app/punk-record#»│ ○ Compiling /api/table-of-contents ...

@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import CustomDocument from '../../../components/CustomDocument';
-import { Button, Label, Textarea } from '@repo/ui-shadcn';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { Label } from '@repo/ui-shadcn/ui/label';
+import { Textarea } from '@repo/ui-shadcn/ui/textarea';
 import { TextareaFormDemo } from '../../../components/TextareaDemo';
 
 const meta = {

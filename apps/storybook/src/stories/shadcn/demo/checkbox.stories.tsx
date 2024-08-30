@@ -7,7 +7,7 @@ import {
   TableWithCheckbox,
   CheckboxWithText,
 } from '../../../components/CheckboxDemo';
-import { Toaster } from '@repo/ui-shadcn';
+import { Toaster } from '@repo/ui-shadcn/ui/toaster';
 
 const meta = {
   title: 'shadcn/demo/checkbox',

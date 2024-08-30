@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Calendar } from '@repo/ui-shadcn';
+import { Calendar } from '@repo/ui-shadcn/ui/calendar';
 
 export const CalendarSingleDateDemo = ({ ...args }: any) => {
   const [selectedDate, setSelectedDate] = React.useState<Date>();

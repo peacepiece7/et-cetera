@@ -1,11 +1,5 @@
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@repo/ui-shadcn/ui/form';
 import {
-  Button,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
   Select,
   SelectContent,
   SelectGroup,
@@ -13,11 +7,12 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-  toast,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { toast } from '@repo/ui-shadcn/hooks/use-toast';
+import { Button } from '@repo/ui-shadcn/ui/button';
 
 export function SelectDemo() {
   return (

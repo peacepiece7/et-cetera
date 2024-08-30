@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@repo/ui-shadcn';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@repo/ui-shadcn/ui/accordion';
 import { Story } from '@storybook/blocks';
 import { withActions } from '@storybook/addon-actions/decorator';
 import CustomDocument from '../../../components/CustomDocument';

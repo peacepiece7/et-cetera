@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import CustomDocument from '../../../components/CustomDocument';
-import { Slider } from '@repo/ui-shadcn';
+import { Slider } from '@repo/ui-shadcn/ui/slider';
 
 const meta = {
   title: 'shadcn/demo/slider',

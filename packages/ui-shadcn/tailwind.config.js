@@ -1,5 +1,10 @@
+// 실제로 프로젝트를 돌리는 곳에 있는 tailwind.config.js 파일이 사용됩니다.
+
+const plugin = require('tailwindcss/plugin');
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [`../../apps/**/*.{ts,tsx,html,stories.tsx}`, '../../packages/**/*.{ts,tsx,html,stories.tsx}'],
+  content: ['./src/**/*.{ts,tsx}', '../../packages/ui-shadcn/src/**/*.{ts,tsx}'],
   darkMode: ['class'],
   theme: {
     screens: {
@@ -10,18 +15,18 @@ module.exports = {
       xl: '1280px',
     },
     fontSize: {
-      tiny: '.65rem',
-      xs: '.75rem',
-      sm: '.80rem',
-      base: '1rem',
-      lg: '1.125rem',
-      xl: '1.25rem',
-      '2xl': '1.5rem',
-      '3xl': '1.875rem',
-      '4xl': '2.25rem',
-      '5xl': '3rem',
-      '6xl': '4rem',
-      '7xl': '5rem',
+      tiny: '1rem',
+      xs: '1.2rem',
+      sm: '1.4rem',
+      base: '1.6rem',
+      lg: '1.8rem',
+      xl: '2.0rem',
+      '2xl': '2.2rem',
+      '3xl': '2.5rem',
+      '4xl': '2.7rem',
+      '5xl': '3.2rem',
+      '6xl': '3.6rem',
+      '7xl': '4rem',
     },
     container: {
       center: true,
@@ -65,6 +70,7 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        // test
         'ui-test': {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -91,5 +97,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 };

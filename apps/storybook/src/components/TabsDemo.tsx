@@ -1,18 +1,8 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Input,
-  Label,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@repo/ui-shadcn';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@repo/ui-shadcn/ui/card';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { Input } from '@repo/ui-shadcn/ui/input';
+import { Label } from '@repo/ui-shadcn/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui-shadcn/ui/tabs';
 
 export function TabsDemo() {
   return (

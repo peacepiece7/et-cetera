@@ -91,5 +91,27 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+    plugin(function ({ addUtilities, addBase, config }) {
+      addUtilities(UTILITY_STYLES);
+    }),
+  ],
+};
+
+const UTILITY_STYLES = {
+  '.global-layout': {
+    'grid-column-start': '2',
+    'grid-column-end': '5',
+    'grid-row-start': '2',
+    'grid-row-end': '4',
+    'background-color': '#ebf8fc', // bg-slate-50
+    overflow: 'hidden',
+    padding: '3rem',
+    height: '100%',
+  },
+  '.link': {},
+  '.btn-common': {},
+  '.text-clickable': {},
 };

@@ -1,17 +1,10 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Button,
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  Switch,
-  toast,
-} from '@repo/ui-shadcn';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@repo/ui-shadcn/ui/form';
+import { toast } from '@repo/ui-shadcn/hooks/use-toast';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { Switch } from '@repo/ui-shadcn/ui/switch';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 

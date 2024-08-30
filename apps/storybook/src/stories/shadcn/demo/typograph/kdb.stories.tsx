@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Kbd } from '@repo/ui-shadcn';
+import { Kbd } from '@repo/ui-shadcn/ui/typography/kdb';
 import { Story } from '@storybook/blocks';
 import { withActions } from '@storybook/addon-actions/decorator';
 import CustomDocument from '../../../../components/CustomDocument';

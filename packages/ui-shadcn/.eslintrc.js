@@ -21,4 +21,5 @@ module.exports = {
       },
     ],
   },
+  ignorePatterns: ['*.html', '.*.js', '.*.cjs', '*.config.js', '*.config.cjs', 'node_modules/'],
 };

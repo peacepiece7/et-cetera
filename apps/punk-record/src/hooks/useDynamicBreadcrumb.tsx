@@ -9,7 +9,7 @@ export const useDynamicBreadcrumb = <T extends HTMLElement>({ container }: { con
     container.current.onscrollend = handleOnScrollEnd
   }, [container.current])
 
-  const handleOnScrollEnd = useCallback((ev: Event) => {
+  const handleOnScrollEnd = useCallback((_ev: Event) => {
     const tags = ["h1", "h2", "h3", "h4", "h5", "h6"]
     const tempBreadcrumb: Element[] = []
     tags.forEach((tag, index) => {

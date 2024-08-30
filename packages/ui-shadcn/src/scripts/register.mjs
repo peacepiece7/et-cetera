@@ -17,10 +17,8 @@ const uiFiles = fs
   .map((file) => file.replaceAll(path.sep, '/').replace('.tsx', ''));
 
 let data = `// 이 파일은 자동 생성됩니다. 직접 수정하지 마세요.
-import '../styles.css';
 
-${uiFiles.map((file) => `export * from './components/ui/${file}'`).join('\n')}
-`;
+${uiFiles.map((file) => `export * from './components/ui/${file}'`).join('\n')}`;
 
 // hooks 디렉터리를 읽어옵니다.
 const hooksFiles = fs

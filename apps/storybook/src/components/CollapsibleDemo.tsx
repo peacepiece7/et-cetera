@@ -1,5 +1,6 @@
 import { CaretSortIcon } from '@radix-ui/react-icons';
-import { Button, Collapsible, CollapsibleContent, CollapsibleTrigger } from '@repo/ui-shadcn';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@repo/ui-shadcn/ui/collapsible';
 import React from 'react';
 
 export function CollapsibleDemo() {

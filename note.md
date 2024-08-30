@@ -297,3 +297,63 @@ pnpm build --filter @repo/**
 ```yml
 if github
 ```
+
+---
+
+속도 개선 테스트
+
+디자인 시스템의 css는 기본적으로 디자인 시스템을 사용하는 app에서 정의함
+but 미리 rollup 등으로 디자인 시스템을 빌드해서 쓸 경우는 css 파일을 디자인 시스템에서 import 해줘야함
+즉, 디자인 시스템을 사용할 때
+빌드 후 사용 => 디자인 시스템 css파일 import 필수
+빌드 하지 않고 사용 => 사용처에 정의된 css로 디자인 시스템 적용
+
+- 3v부터 jit 모드가 기본적으 탑제됨. 즉 조올라 느린 문제는 이미 jit이 적용 된 것
+
+1
+
+- packages/ui-shadcn를 direct로 import 할 경우
+- Barrel file
+- tailwind.config의 범위가 ./src (디자인 시스템 css 날라감)
+  => HMR 평균 1.5 ~ 2초, Compiled 4000 ~ 7700 modules
+
+2
+
+- packages/ui-shadcn를 direct로 import 할 경우
+- Barrel file
+- tailwind.config 범위가 ./src + ../../packages/ui-shadcn (디자인 적용, 이게 베스트이고 대부분의 문서에서 이렇게 나오는데 HMR 조올라 느려짐)
+  => HMR 평균 3 ~ 4초, Compiled 4000 ~ 7700 modules
+
+3
+
+배럴로 묶지 않고 해보기 (해봤는데 비슷한 결과를 마주함..)
+
+4
+
+- "use client"를 모든 컴포넌트에 붙일 경우
+- Barrel file
+- rollup으로 전체 묶음
+  => 1차: HMR 평군 1.5 ~ 2초, Compiled 4000 ~ 5066 modules
+
+4
+
+- "use client"가 없는 경우 (rollup 에서 지워버림)
+- Barrel file
+- rollup으로 전체 묶음
+  => HMR 평군 0.7 ~ 1.5초, Compiled 1226 ~ 2366 modules
+  but "use client"가 없으니까 특정 페이지에서 에러 발생 ㅠㅠ
+
+5
+
+- "use client"가 없는 경우 (rollup 에서 지워버림)
+- rollup plugin preserve, swc3로 "use client" 추가
+- Barrel file
+- rollup으로 전체 묶음
+- tailwind.config.js에 ../../packages/ui-shadcn 추가
+  => HMR 평군 2~3초, Compiled 4000 ~ 7700 modules
+
+=> 1 ~ 4 번 중 번들링 경로가 잘못된게 있음 다시 첨부터 ㄱㄱ
+
+css는 사용처에서 정의하는거니까 tailwind config는 사용처에서 정의해야하네..!
+그렇다면 빌드의 의미는 크게 없을 듯
+불러오는 파일 용량 감소 + ts 감시자가 줄어드는 정도..!

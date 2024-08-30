@@ -1,4 +1,3 @@
-import './App.css';
 import { ComboboxMultiDemo } from './components/comboboxDemo';
 
 function App() {

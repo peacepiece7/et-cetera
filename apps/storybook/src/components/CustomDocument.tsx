@@ -1,4 +1,4 @@
-import { Button } from '@repo/ui-shadcn';
+import { Button } from '@repo/ui-shadcn/ui/button';
 import { Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
 
 export default function CustomDocument({

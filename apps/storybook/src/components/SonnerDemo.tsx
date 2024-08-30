@@ -1,4 +1,4 @@
-import { Button } from '@repo/ui-shadcn';
+import { Button } from '@repo/ui-shadcn/ui/button';
 import { toast } from 'sonner';
 
 export function SonnerDemo() {

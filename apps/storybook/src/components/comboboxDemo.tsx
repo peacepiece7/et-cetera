@@ -3,17 +3,17 @@
 import * as React from 'react';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import {
-  Button,
-  cn,
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
+} from '@repo/ui-shadcn/ui/command';
+import { cn } from '@repo/ui-shadcn/lib/utils';
+import { toast } from '@repo/ui-shadcn/hooks/use-toast';
+import { useMediaQuery } from '@repo/ui-shadcn/hooks/use-media-query';
+import {
   Form,
   FormControl,
   FormDescription,
@@ -21,12 +21,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  toast,
-  useMediaQuery,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/form';
+import { Drawer, DrawerContent, DrawerTrigger } from '@repo/ui-shadcn/ui/drawer';
+import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui-shadcn/ui/popover';
+import { Button } from '@repo/ui-shadcn/ui/button';
 
 const frameworks = [
   {

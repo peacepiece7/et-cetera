@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  Button,
   Form,
   FormControl,
   FormDescription,
@@ -10,9 +9,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Textarea,
-  toast,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/form';
+import { toast } from '@repo/ui-shadcn/hooks/use-toast';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { Textarea } from '@repo/ui-shadcn/ui/textarea';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 

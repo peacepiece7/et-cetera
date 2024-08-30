@@ -1,17 +1,13 @@
-import {
-  Button,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Label,
-  RadioGroup,
-  RadioGroupItem,
-  toast,
-} from '@repo/ui-shadcn';
+'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from '@repo/ui-shadcn/hooks/use-toast';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@repo/ui-shadcn/ui/form';
+import { Label } from '@repo/ui-shadcn/ui/label';
+import { RadioGroup, RadioGroupItem } from '@repo/ui-shadcn/ui/radio-group';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 export function RadioGroupDemo() {
   return (
     <RadioGroup defaultValue="comfortable">
@@ -30,12 +26,6 @@ export function RadioGroupDemo() {
     </RadioGroup>
   );
 }
-
-('use client');
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 const FormSchema = z.object({
   type: z.enum(['all', 'mentions', 'none'], {
