@@ -2,8 +2,8 @@
 import { useCallback, useEffect, useState } from "react"
 import CloseIcon from "@/components/ui/Icons/CloseIcon"
 import { createPortal } from "react-dom"
-import { Button, WithIcon } from "@repo/ui-shadcn"
-
+import { Button } from "@repo/ui-shadcn/ui/button"
+import { WithIcon } from "@repo/ui-shadcn/ui/Icon/WithIcon"
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false)
 

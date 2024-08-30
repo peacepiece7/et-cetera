@@ -3,14 +3,14 @@ import { usePathname, useRouter } from "next/navigation"
 import React, { useEffect, useRef, useState } from "react"
 import { ContentsLoading } from "@/components/loading/ContentsLoading"
 import { usePostAreaSlideAnimation } from "@/hooks/useSlidePostContentArea"
+import { Button } from "@repo/ui-shadcn/ui/button"
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-  Button,
-} from "@repo/ui-shadcn"
+} from "@repo/ui-shadcn/ui/breadcrumb"
 import { POST_PAGE_LAYOUT_ID } from "@/constants/client"
 import { useDynamicBreadcrumb } from "@/hooks/useDynamicBreadcrumb"
 

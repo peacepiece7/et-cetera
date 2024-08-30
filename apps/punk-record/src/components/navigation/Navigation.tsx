@@ -4,10 +4,7 @@ import { useRef, useState } from "react"
 import { SearchArea } from "./SearchArea"
 import { useNavAnimation } from "@/hooks/useNavAnimation"
 import { useResizeSidebar } from "@/hooks/useResizeSidebar"
-// import { Button } from "@repo/ui-shadcn/ui-no-barrel/button/index.js"
-// import { Breadcrumb, BreadcrumbItem } from "@repo/ui-shadcn/ui-no-barrel/breadcrumb/index.js"
-// import { Button as Button2 } from "@repo/ui-shadcn/ui/button.js"
-import { Button } from "@repo/ui-shadcn"
+import { Button } from "@repo/ui-shadcn/ui/button"
 
 export default function Navigation({
   navChildren,

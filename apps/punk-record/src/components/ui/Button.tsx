@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react"
-import { Button as UiButton } from "@repo/ui-shadcn"
+import { Button as UiButton } from "@repo/ui-shadcn/ui/button"
 
 export function Button({
   children,

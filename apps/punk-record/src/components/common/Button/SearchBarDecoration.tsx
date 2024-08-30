@@ -1,5 +1,7 @@
 import SearchIcon from "@/components/ui/Icons/SearchIcon"
-import { Button, WithIcon, Kbd } from "@repo/ui-shadcn"
+import { Button } from "@repo/ui-shadcn/ui/button"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+import { WithIcon } from "@repo/ui-shadcn/ui/Icon/WithIcon"
 
 export const SearchBarDecoration = ({ onClick }: { onClick?: () => void }) => {
   return (

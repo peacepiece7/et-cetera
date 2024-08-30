@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@repo/ui-shadcn"
+import { Button } from "@repo/ui-shadcn/ui/button"
 
 export function PostPageLayoutLoading({ children }: { children: React.ReactNode }) {
   return (

@@ -1,9 +1,7 @@
 import type { Metadata } from "next"
 import { mainFont, subFont } from "@/utils/shared"
-import "./global.css"
 import "@repo/ui-shadcn/styles"
-// import "@repo/ui-shadcn/styles/j"
-// import "@repo/ui-shadcn/styles/r"
+import "./global.css"
 
 export const metadata: Metadata = {
   title: "블로그",
