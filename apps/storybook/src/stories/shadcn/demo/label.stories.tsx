@@ -3,7 +3,8 @@ import { Story } from '@storybook/blocks';
 import { withActions } from '@storybook/addon-actions/decorator';
 import CustomDocument from '../../../components/CustomDocument';
 import { InputOTPDemo } from '../../../components/InputOTPDemo';
-import { Checkbox, Label } from '@repo/ui-shadcn';
+import { Label } from '@repo/ui-shadcn/ui/label';
+import { Checkbox } from '@repo/ui-shadcn/ui/checkbox';
 
 const meta = {
   title: 'shadcn/demo/label',

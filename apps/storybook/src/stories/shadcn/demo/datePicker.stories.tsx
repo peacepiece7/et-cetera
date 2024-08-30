@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import CustomDocument from '../../../components/CustomDocument';
-import { DatePickerDemo, Toaster } from '@repo/ui-shadcn';
+import { DatePickerDemo } from '@repo/ui-shadcn/ui/datePickerDemo';
+import { Toaster } from '@repo/ui-shadcn/ui/toaster';
+
 import { DatePickerForm, DatePickerWithPresetsDemo, DatePickerWithRangeDemo } from '../../../components/DatePickerDemo';
 
 const meta = {

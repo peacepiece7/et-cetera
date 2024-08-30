@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChevronRightIcon, EnvelopeOpenIcon } from '@radix-ui/react-icons';
-import { Button, WithIcon, MemoWithIcon } from '@repo/ui-shadcn';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { WithIcon, MemoWithIcon } from '@repo/ui-shadcn/ui/Icon/WithIcon';
 import CustomDocument from '../../../components/CustomDocument';
 
 const meta = {

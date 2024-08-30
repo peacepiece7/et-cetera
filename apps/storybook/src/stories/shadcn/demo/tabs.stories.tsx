@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import CustomDocument from '../../../components/CustomDocument';
 import { TabsDemo } from '../../../components/TabsDemo';
-import { Toaster } from '@repo/ui-shadcn';
+import { Toaster } from '@repo/ui-shadcn/ui/toaster';
 
 const meta = {
   title: 'shadcn/demo/tabs',

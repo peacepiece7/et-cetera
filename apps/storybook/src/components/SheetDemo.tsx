@@ -1,7 +1,4 @@
 import {
-  Button,
-  Input,
-  Label,
   Sheet,
   SheetClose,
   SheetContent,
@@ -10,7 +7,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/sheet';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { Input } from '@repo/ui-shadcn/ui/input';
+import { Label } from '@repo/ui-shadcn/ui/label';
 
 export function SheetDemo() {
   return (

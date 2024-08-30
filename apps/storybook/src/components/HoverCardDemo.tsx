@@ -1,13 +1,7 @@
 import { CalendarIcon } from '@radix-ui/react-icons';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  Button,
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@repo/ui-shadcn';
+import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui-shadcn/ui/avatar';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@repo/ui-shadcn/ui/hover-card';
 
 export function HoverCardDemo() {
   return (

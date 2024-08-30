@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import { withActions } from '@storybook/addon-actions/decorator';
 import CustomDocument from '../../../components/CustomDocument';
-import { Input } from '@repo/ui-shadcn';
+import { Input } from '@repo/ui-shadcn/ui/input';
 
 const meta = {
   title: 'shadcn/demo/input',

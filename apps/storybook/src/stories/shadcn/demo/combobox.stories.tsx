@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import CustomDocument from '../../../components/CustomDocument';
-import { Toaster } from '@repo/ui-shadcn';
+import { Toaster } from '@repo/ui-shadcn/ui/toaster';
+
 import {
   ComboboxDemo,
   ComboboxFormDemo,

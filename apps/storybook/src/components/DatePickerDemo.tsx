@@ -3,9 +3,6 @@
 import * as React from 'react';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import {
-  Button,
-  Calendar,
-  cn,
   Form,
   FormControl,
   FormDescription,
@@ -13,18 +10,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  toast,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/form';
+import { cn } from '@repo/ui-shadcn/lib/utils';
+import { toast } from '@repo/ui-shadcn/hooks/use-toast';
+import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui-shadcn/ui/popover';
+import { Button } from '@repo/ui-shadcn/ui/button';
 import { addDays, format } from 'date-fns';
 import { DateRange } from 'react-day-picker';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui-shadcn/ui/select';
+import { Calendar } from '@repo/ui-shadcn/ui/calendar';
 
 export function DatePickerDemo() {
   const [date, setDate] = React.useState<Date>();
@@ -124,10 +121,6 @@ export function DatePickerWithPresetsDemo() {
     </Popover>
   );
 }
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 const FormSchema = z.object({
   dob: z.date({

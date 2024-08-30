@@ -1,9 +1,7 @@
 'use client';
 
 import * as React from 'react';
-
 import {
-  cn,
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -11,7 +9,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/navigation-menu';
+import { cn } from '@repo/ui-shadcn/lib/utils';
 
 const components: { title: string; href: string; description: string }[] = [
   {

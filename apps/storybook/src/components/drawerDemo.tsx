@@ -2,7 +2,6 @@ import * as React from 'react';
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
 import { Bar, BarChart, ResponsiveContainer } from 'recharts';
 import {
-  Button,
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -11,7 +10,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/drawer';
+import { Button } from '@repo/ui-shadcn/ui/button';
 
 const data = [
   {

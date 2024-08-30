@@ -5,13 +5,8 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/chart';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@repo/ui-shadcn/ui/card';
 import { HTMLAttributes } from 'react';
 
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis } from 'recharts';

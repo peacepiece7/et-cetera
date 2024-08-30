@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ButtonLoading } from '@repo/ui-shadcn';
+import { ButtonLoading } from '@repo/ui-shadcn/ui/button/buttonLoading';
 import CustomDocument from '../../../components/CustomDocument';
 
 const meta = {

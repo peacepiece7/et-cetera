@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import { withActions } from '@storybook/addon-actions/decorator';
 import CustomDocument from '../../../components/CustomDocument';
-import { Progress } from '@repo/ui-shadcn';
+import { Progress } from '@repo/ui-shadcn/ui/progress';
 import React from 'react';
 
 const meta = {

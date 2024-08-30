@@ -12,7 +12,7 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/menubar';
 
 export function MenubarDemo() {
   return (

@@ -1,6 +1,5 @@
 import { CopyIcon } from '@radix-ui/react-icons';
 import {
-  Button,
   Dialog,
   DialogClose,
   DialogContent,
@@ -9,9 +8,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Input,
-  Label,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/dialog';
+import { Input } from '@repo/ui-shadcn/ui/input';
+import { Label } from '@repo/ui-shadcn/ui/label';
+import { Button } from '@repo/ui-shadcn/ui/button';
 
 export function DialogDemo() {
   return (

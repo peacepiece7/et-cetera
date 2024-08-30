@@ -1,4 +1,4 @@
-import { Skeleton } from '@repo/ui-shadcn';
+import { Skeleton } from '@repo/ui-shadcn/ui/skeleton';
 
 export function SkeletonDemo() {
   return (

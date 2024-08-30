@@ -1,4 +1,4 @@
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@repo/ui-shadcn';
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@repo/ui-shadcn/ui/input-otp';
 
 export function InputOTPDemo() {
   return (

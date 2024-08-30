@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import CustomDocument from '../../../components/CustomDocument';
-import { Label, Switch } from '@repo/ui-shadcn';
+import { Switch } from '@repo/ui-shadcn/ui/switch';
+import { Label } from '@repo/ui-shadcn/ui/label';
 import { SwitchForm } from '../../../components/SwitchDemo';
 
 const meta = {

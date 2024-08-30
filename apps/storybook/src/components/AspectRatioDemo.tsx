@@ -1,4 +1,4 @@
-import { AspectRatio } from '@repo/ui-shadcn';
+import { AspectRatio } from '@repo/ui-shadcn/ui/aspectRatio';
 
 export function AspectRatioDemo() {
   return (

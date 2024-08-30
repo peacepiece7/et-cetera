@@ -1,4 +1,5 @@
-import { ScrollArea, ScrollBar, Separator } from '@repo/ui-shadcn';
+import { ScrollArea, ScrollBar } from '@repo/ui-shadcn/ui/scroll-area';
+import { Separator } from '@repo/ui-shadcn/ui/separator';
 
 const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 

@@ -2,9 +2,8 @@
 
 import * as React from 'react';
 import { CaretSortIcon, ChevronDownIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@repo/ui-shadcn/ui/table';
 import {
-  Button,
-  Checkbox,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -12,14 +11,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  Input,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@repo/ui-shadcn';
+} from '@repo/ui-shadcn/ui/dropdown-menu';
+
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -32,6 +25,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { Checkbox } from '@repo/ui-shadcn/ui/checkbox';
+import { Button } from '@repo/ui-shadcn/ui/button';
+import { Input } from '@repo/ui-shadcn/ui/input';
 
 const data: Payment[] = [
   {

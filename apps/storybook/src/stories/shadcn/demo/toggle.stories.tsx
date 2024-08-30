@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Story } from '@storybook/blocks';
 import CustomDocument from '../../../components/CustomDocument';
-import { Toggle } from '@repo/ui-shadcn';
+import { Toggle } from '@repo/ui-shadcn/ui/toggle';
 import { FontBoldIcon, FontItalicIcon } from '@radix-ui/react-icons';
 
 const meta = {
