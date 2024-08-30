@@ -1,10 +1,10 @@
 {
   // "typescript.tsdk": "node_modules\\typescript\\lib",
   "eslint.workingDirectories": [{ "pattern": "apps/*/" }, { "pattern": "packages/*/" }],
-  // "tailwindCSS.experimental.classRegex": [
-  //   ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-  //   ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-  //   ["className\\s*:\\s*[\"'`]([^\"'`]*)[\"'`]"]
-  // ],
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["className\\s*:\\s*[\"'`]([^\"'`]*)[\"'`]"]
+  ],
   "cSpell.words": ["cmdk", "embla", "SSHPASS", "subcomponents"]
 }

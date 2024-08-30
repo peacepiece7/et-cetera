@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev:verbose": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next dev",
     "types:check": "tsc --noEmit",
     "build": "next build",

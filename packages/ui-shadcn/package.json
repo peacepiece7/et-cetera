@@ -4,11 +4,12 @@
   "description": "",
   "exports": {
     ".": "./dist/__registry.js",
-    "./*": "./dist/components/ui/*",
     "./ui-no-barrel/*": "./dist/components/ui-no-barrel/*",
-    "./hooks": "./dist/src/hooks",
-    "./lib": "./dist/src/lib",
-    "./styles": "./styles.css",
+    "./hooks": "./dist/hooks",
+    "./lib": "./dist/lib",
+    "./styles/r": "./dist/__registry.css",
+    "./styles": "./dist/styles.css",
+    "./styles/j": "./dist/styles.js",
     "./tailwindcss": "./tailwind.config.js",
     "./postcss": "./postcss.config.js"
   },
@@ -87,6 +88,7 @@
     "@rollup/plugin-multi-entry": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@tailwindcss/typography": "^0.5.14",
     "@types/react": "^18.3.3",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
@@ -95,6 +97,9 @@
     "rollup": "^4.21.1",
     "rollup-plugin-multi-input": "^1.5.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-preserve-directives": "^0.4.0"
+    "rollup-plugin-preserve-directives": "^0.4.0",
+    "rollup-plugin-swc3": "^0.11.2",
+    "tailwindcss": "^3.4.8",
+    "tailwindcss-animate": "^1.0.7"
   }
 }

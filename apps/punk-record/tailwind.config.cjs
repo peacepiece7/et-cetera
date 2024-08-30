@@ -1,8 +1,6 @@
-const plugin = require("tailwindcss/plugin")
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{ts,tsx}", "../../packages/ui-shadcn/src/**/*.{ts,tsx}"],
   darkMode: ["class"],
   theme: {
     screens: {
@@ -95,5 +93,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  // plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 }

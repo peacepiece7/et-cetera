@@ -28,7 +28,7 @@ export default function Navigation({
   const isPostPage = pathname.includes("posts")
 
   return (
-    <div className="flex flex-col relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 group z-30 bg-white">
+    <div className="flex flex-col relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 group z-30 bg-white ">
       <SearchArea />
       <div className="flex justify-around mt-4">
         <Button size="lg" onClick={() => setActiveIdx(0)}>

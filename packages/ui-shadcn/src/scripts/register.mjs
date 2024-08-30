@@ -16,7 +16,7 @@ const uiFiles = fs
   .filter((file) => file.endsWith('.tsx'))
   .map((file) => file.replaceAll(path.sep, '/').replace('.tsx', ''));
 
-let data = `// 이 파일은 자동 생성됩니다. 직접 수정하지 마세요.';
+let data = `// 이 파일은 자동 생성됩니다. 직접 수정하지 마세요.
 
 ${uiFiles.map((file) => `export * from './components/ui/${file}'`).join('\n')}`;
 
