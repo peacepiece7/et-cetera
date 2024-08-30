@@ -3,19 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "exports": {
-    ".": "./dist/__registry.js",
-    "./ui-no-barrel/*": "./dist/components/ui-no-barrel/*",
-    "./hooks": "./dist/hooks",
-    "./lib": "./dist/lib",
-    "./styles/r": "./dist/__registry.css",
-    "./styles": "./dist/styles.css",
-    "./styles/j": "./dist/styles.js",
+    "./ui/*": "./src/components/ui/*.tsx",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./lib/*": "./src/lib/*.ts",
+    "./styles": "./styles.css",
     "./tailwindcss": "./tailwind.config.js",
     "./postcss": "./postcss.config.js"
   },
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
-    "prepare": "node ./src/scripts/register.mjs",
     "lint": "eslint . --max-warnings 0",
     "test": "echo \"UI : no test specified\"",
     "types:check": "tsc --noEmit"
