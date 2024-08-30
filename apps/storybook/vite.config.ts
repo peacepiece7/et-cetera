@@ -9,6 +9,6 @@ export default defineConfig({
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   },
   css: {
-    postcss: {},
+    postcss: path.resolve(__dirname, 'postcss.config.js'), // 명시적으로 PostCSS 설정 파일 경로 지정
   },
 });

@@ -1,1 +1,7 @@
-module.exports = require('@repo/ui-shadcn/postcss')
+// postcss.config.js
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};

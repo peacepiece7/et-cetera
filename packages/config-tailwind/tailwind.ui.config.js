@@ -1,5 +1,5 @@
 module.exports = {
-  content: [`../../apps/**/*.{ts,tsx,html,stories.tsx}`, '../../packages/**/*.{ts,tsx,html,stories.tsx}'],
+  content: [`../../apps/**/*.{ts,tsx,html}`, '../../packages/**/*.{ts,tsx,html}'],
   darkMode: ['class'],
   theme: {
     screens: {
@@ -91,13 +91,7 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate'),
-    require('@tailwindcss/typography'),
-    plugin(function ({ addUtilities, addBase, config }) {
-      addUtilities(UTILITY_STYLES);
-    }),
-  ],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 };
 
 const UTILITY_STYLES = {

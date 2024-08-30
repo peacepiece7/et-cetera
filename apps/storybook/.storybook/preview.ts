@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react';
 
-import './global.css';
+import '../src/global.css';
+import '@repo/ui-shadcn/styles';
 
 // https://storybook.js.org/docs/essentials/actions#action-event-handlers
 import { withActions } from '@storybook/addon-actions/decorator';

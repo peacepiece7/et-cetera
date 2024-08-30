@@ -4,7 +4,12 @@ const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{ts,tsx}', '../../packages/ui-shadcn/src/**/*.{ts,tsx}'],
+  content: [
+    './src/**/*.{ts,tsx}',
+    '../../packages/ui-shadcn/src/**/*.{ts,tsx}',
+    '../../apps/storybook/src/**/*.{ts,tsx}',
+    './**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   darkMode: ['class'],
   theme: {
     screens: {
