@@ -1,7 +1,7 @@
 import { headers } from "next/headers"
 import { Heading } from "mdast"
 import { TreeNode } from "@/app/api/navigation/route"
-import { ContentsLayout } from "@/components/layout/Layout"
+import { MainPageLayout, PostPageLayout } from "@/components/layout/Layout"
 import Navigation from "@/components/navigation/Navigation"
 import { X_CUSTOM_URL } from "@/constants/server"
 import { PostAreaSlideProvider } from "@/contexts/usePostAreaContext"
@@ -28,15 +28,15 @@ export default async function PostContentsContainer(
   })
 
   return (
-    <PostAreaSlideProvider>
-      <SearchListProvider value={searchRes.list}>
-        <Navigation
-          activeTab="toc"
-          navChildren={createNavElements(navRes.navTree, [], 0)}
-          tocChildren={createTOCElements(tocRes.tocTree)}
-        />
-        <ContentsLayout key={url}>{props.children}</ContentsLayout>
-      </SearchListProvider>
-    </PostAreaSlideProvider>
+    <SearchListProvider value={searchRes.list}>
+      <Navigation
+        activeTab="toc"
+        navChildren={createNavElements(navRes.navTree, [], 0)}
+        tocChildren={createTOCElements(tocRes.tocTree)}
+      />
+      <MainPageLayout>
+        <PostPageLayout>{props.children}</PostPageLayout>
+      </MainPageLayout>
+    </SearchListProvider>
   )
 }

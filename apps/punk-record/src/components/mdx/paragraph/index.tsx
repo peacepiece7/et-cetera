@@ -1,8 +1,6 @@
-import { Codepen, isCodepenLinkSyntax } from './codepen'
+import { Codepen, isCodepenLinkSyntax } from "./codepen"
 
-export const Paragraph: React.FC<React.HTMLProps<HTMLParagraphElement>> = (
-  props
-) => {
+export const Paragraph: React.FC<React.HTMLProps<HTMLParagraphElement>> = (props) => {
   // console.log('PROPS : ', props.children)
   // case1) !codepen[https://codepen.io/shcrlk12/embed/YzrRgPJ]  타이틀 추가해서 접기 기능 ㄱㄱ ==> leteral string
   // case2) !codepen[https://codepen.io/shcrlk12/embed/YzrRgPJ]  **타이틀 추가해서 접기 기능 ㄱㄱ** ==> array
@@ -13,7 +11,7 @@ export const Paragraph: React.FC<React.HTMLProps<HTMLParagraphElement>> = (
       codepens: (typeof Codepen)[]
       paragraphs: typeof props.children
     }
-    // codepend 링크와 일반 문장을 구분합니다.
+    // codepen 링크와 일반 문장을 구분합니다.
     const { codepens, paragraphs } = props.children.reduce<TReduceReturn>(
       (acc, child, idx) => {
         if (isCodepenLinkSyntax(child)) {
@@ -23,12 +21,12 @@ export const Paragraph: React.FC<React.HTMLProps<HTMLParagraphElement>> = (
         }
         return acc
       },
-      { codepens: [], paragraphs: [] }
+      { codepens: [], paragraphs: [] },
     )
     return (
       <>
         {codepens.map((codepen) => codepen)}
-        {<p className='mt-4'>{...paragraphs}</p>}
+        {<p className="mt-4">{...paragraphs}</p>}
       </>
     )
   }
@@ -36,5 +34,5 @@ export const Paragraph: React.FC<React.HTMLProps<HTMLParagraphElement>> = (
   if (isCodepenLinkSyntax(props.children)) {
     return <Codepen>{props.children}</Codepen>
   }
-  return <p {...props} className='mt-4' />
+  return <p {...props} className="mt-4" />
 }

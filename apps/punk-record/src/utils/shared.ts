@@ -1,8 +1,8 @@
 import { Inter, Roboto_Mono } from "next/font/google"
 import localFont from "next/font/local"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-
+// import { GeistSans } from "geist/font/sans"
+// import { GeistMono } from "geist/font/mono"
+//
 /**
  * @description 서브 폰트입니다.
  */
@@ -16,7 +16,7 @@ export const subFont = Inter({ subsets: ["latin"] })
 /**
  * @description 메인 폰트입니다.
  */
-const _mainFont = localFont({
+export const mainFont = localFont({
   src: [
     {
       path: "../../public/cookie/cookie_regular.otf",
@@ -36,10 +36,10 @@ const _mainFont = localFont({
   ],
 })
 
-export const mainFont = GeistMono || GeistSans
+// export const mainFont = GeistMono || GeistSans
 
 /**
  * @description 코드 블록 폰트입니다.
  */
-const _codeFont = Roboto_Mono({ subsets: ["latin"] })
-export const codeFont = GeistMono || GeistSans
+export const codeFont = Roboto_Mono({ subsets: ["latin"] })
+// export const codeFont = GeistMono || GeistSans

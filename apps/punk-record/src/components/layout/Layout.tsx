@@ -1,6 +1,6 @@
 "use client"
-import { usePathname, useRouter } from "next/navigation"
-import React, { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
+import React, { useRef, useState } from "react"
 import { ContentsLoading } from "@/components/loading/ContentsLoading"
 import { usePostAreaSlideAnimation } from "@/hooks/useSlidePostContentArea"
 import { Button } from "@repo/ui-shadcn/ui/button"
@@ -13,19 +13,6 @@ import {
 } from "@repo/ui-shadcn/ui/breadcrumb"
 import { POST_PAGE_LAYOUT_ID } from "@/constants/client"
 import { useDynamicBreadcrumb } from "@/hooks/useDynamicBreadcrumb"
-
-export function ContentsLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
-  const isPostPage = pathname.includes("posts")
-
-  return isPostPage ? (
-    <MainPageLayout>
-      <PostPageLayout>{children}</PostPageLayout>
-    </MainPageLayout>
-  ) : (
-    <MainPageLayout>{children}</MainPageLayout>
-  )
-}
 
 export function MainPageLayout({ children }: { children: React.ReactNode }) {
   const { contentsRef } = usePostAreaSlideAnimation()
@@ -50,10 +37,6 @@ export function PostPageLayout({ children }: { children: React.ReactNode }) {
     container: containerRef,
   })
 
-  useEffect(() => {
-    console.log("breadcrumb : ", breadcrumb)
-  }, [breadcrumb])
-
   return (
     <>
       <div
@@ -67,10 +50,10 @@ export function PostPageLayout({ children }: { children: React.ReactNode }) {
             <BreadcrumbList>
               {breadcrumb.map((item, idx) => (
                 <React.Fragment key={item.id}>
-                  <BreadcrumbItem className="inline-block">
+                  <BreadcrumbItem className="inline-block whitespace-nowrap">
                     <BreadcrumbLink href={`#${item.id}`}>{item.textContent}</BreadcrumbLink>
                   </BreadcrumbItem>
-                  {idx !== breadcrumb.length - 1 && <BreadcrumbSeparator className="text-lg" />}
+                  {idx !== breadcrumb.length - 1 && <BreadcrumbSeparator className="w-5" />}
                 </React.Fragment>
               ))}
             </BreadcrumbList>

@@ -12,31 +12,31 @@ import NavigationDirButton from "@/components/ui/NavigationParagraph"
  * @description 네비게이션에 사용되는 트리 구조를 생성합니다.
  * @param tree
  * @param list
- * @param deepth
+ * @param depth
  * @returns
  */
-export const createNavElements = (tree: TreeNode[], list: number[], deepth: number): React.JSX.Element[] => {
+export const createNavElements = (tree: TreeNode[], list: number[], depth: number): React.JSX.Element[] => {
   return tree.map((node, idx) => {
     const dataPath = [...list, idx]
     if (node.leafNode && node.link) {
-      const nodelinks = node.link.split("/")
-      nodelinks.pop()
-      nodelinks.push((idx + 1).toString())
-      node.link = nodelinks.join("/")
+      const nodeLinks = node.link.split("/")
+      nodeLinks.pop()
+      nodeLinks.push((idx + 1).toString())
+      node.link = nodeLinks.join("/")
     }
     // children 중 route.path와 같은 것이 있으면 open으로 상태 변경
-    // main/tree/docker/example/architecture 이런 느낌으로 deepth와 path를 비교해서 open 상태로 변경
+    // main/tree/docker/example/architecture 이런 느낌으로 depth와 path를 비교해서 open 상태로 변경
     return (
       <li
         key={node.text}
         data-path={dataPath.join("-")}
-        data-deepth={deepth}
+        data-depth={depth}
         data-leaf={node.leafNode ? 1 : 0}
-        className={`ml-4 overflow-hidden`}
+        className={`ml-2 overflow-hidden`}
       >
         {node.leafNode && node.link ? (
           <NavigationLink href={node.link}>
-            <div className="flex items-center hover:bg-gray-400 hover:bg-opacity-10 mr-4">
+            <div className="flex items-center hover:bg-gray-400 hover:bg-opacity-10 mr-4 my-1">
               <DocumentIcon options={{ tabIndex: -1 }} />
               <p className="truncate">{convertMDXFileNameToReadableText(node.text)}</p>
             </div>
@@ -53,10 +53,10 @@ export const createNavElements = (tree: TreeNode[], list: number[], deepth: numb
             </NavigationDirButton>
 
             <ul
-              // ${deepth === 0 ? 'hidden inactive-tree-node' : ''}
-              className={`hidden ml-4 overflow-hidden`}
+              // ${depth === 0 ? 'hidden inactive-tree-node' : ''}
+              className={`hidden ml-1 overflow-hidden`}
             >
-              {createNavElements(node.children, dataPath, deepth + 1)}
+              {createNavElements(node.children, dataPath, depth + 1)}
             </ul>
           </div>
         )}
@@ -82,7 +82,7 @@ export const createTOCElements = (headings: RootContentMap["heading"][]): React.
       "li",
       {
         key: `li-${index}`,
-        className: "flex items-center ml-4 overflow-hidden mr-4 hover:bg-gray-400 hover:bg-opacity-10",
+        className: "flex items-center ml-2 overflow-hidden mr-2 my-1 hover:bg-gray-400 hover:bg-opacity-10",
         "data-deepth": depth,
       },
       <a href={`#${hashTag}`} className="link">
@@ -100,7 +100,7 @@ export const createTOCElements = (headings: RootContentMap["heading"][]): React.
 
     const newUl = React.createElement("ul", {
       key: `ul-${index}`,
-      className: "ml-4 overflow-hidden",
+      className: "ml-2 overflow-hidden",
     })
     stack.push({ element: newUl, depth, children: [] as React.ReactElement[] })
   })

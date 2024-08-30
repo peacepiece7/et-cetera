@@ -3,5 +3,8 @@
     {
       "path": "../apps/punk-record",
     },
+    {
+      "path": "../apps/storybook",
+    },
   ],
 }

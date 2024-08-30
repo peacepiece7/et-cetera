@@ -43,7 +43,7 @@ where, having 절에 사용한다.
 
 메인 쿼리와의 관계에 따라서 비/연관 서브쿼리로 나눈다.
 
-###### 비연관 서브쿼리
+##### 비연관 서브쿼리
 
 ```sql
 select a.nickname
@@ -57,7 +57,7 @@ where a.ticket_id = ( -- 서브쿼리 내 메인쿼리의 컬럼 없음
 )
 ```
 
-###### 연관 서브쿼리
+##### 연관 서브쿼리
 
 ```sql
 select a.nickname
@@ -71,11 +71,11 @@ where a.ticket_id = ( -- 서브쿼리 내 메인쿼리의 컬럼이 존재함
 
 #### 중첩 서브쿼리 반환 형태에 따른 분류
 
-###### 단일 행
+##### 단일 행
 
 `=, <, >, <=, >=, <>` 등 비교 연산자 사용
 
-###### 다중 행 (SOME, IN, ALL, ANY, EXISTS)
+##### 다중 행 (SOME, IN, ALL, ANY, EXISTS)
 
 ```sql
 -- 가장많이 공연하는 벤드 5개
@@ -192,7 +192,7 @@ except
 select * from actors;
 ```
 
-#### 그룹 함수
+### 그룹 함수
 
 ```sql
 select p.job_code, count(*)
@@ -203,7 +203,7 @@ from person p
 group by rollup(p.job_code, p.gender);
 ```
 
-###### rollup
+#### rollup
 
 소그룹 간의 소계 및 총계를 계산하는데 사용한다.
 
@@ -227,7 +227,7 @@ from starbucks_order so
 group by rollup (so.order_dt);
 ```
 
-###### 총계, 소계를 구해보자
+#### 총계, 소계를 구해보자
 
 ```sql
 -- 1
@@ -247,13 +247,13 @@ group by rollup((so.order_dt , so.order_item), so.reg_name)
 order by so.order_dt;
 ```
 
-###### cube
+#### cube
 
 rollup은 일방향, cube는 모든 그룹에 대한 소계를 집계한다. 사용방법은 rollup과 동일하다.
 
 (A, B, C)일 경우 (A,B,C), (A,B), (A,C), (B,C), (A), (B), (C)
 
-###### grouping sets
+#### grouping sets
 
 특정 항목에 대한 소계를 계산한다. rollup, cube를 인자로도 받는다.
 
@@ -272,7 +272,7 @@ from person p
 group by grouping sets((p.job_code, p.gender), (p.job_code, p.name));
 ```
 
-###### grouping
+#### grouping
 
 총합에 이름 붙이는데 쓴다.
 

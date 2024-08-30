@@ -15,18 +15,19 @@ const LANGUAGES_MAP: Record<string, string> = {
   "language-c": "c",
   "language-go": "go",
   "language-rust": "rust",
+  "language-sql": "sql",
+  "language-bash": "bash",
+  "language-sh": "bash",
+  "language-shell": "bash",
+  "language-zsh": "bash",
+  "language-cmd": "bash",
 }
 
 export const Code = (props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>) => {
   const { children, ...restProps } = props
 
   if (!props.className && typeof props.children === "string" && !props.children.includes("\n")) {
-    return (
-      <code
-        className={`text-rose-500 font-bold bg-slate-200 p-1 rounded-md text-base not-italic ${codeFont.className}`}
-        {...props}
-      />
-    )
+    return <code className={`text-rose-500 bg-slate-200 px-1 mx-1 rounded-sm text-base`} {...props} />
   }
 
   const text = typeof props.children === "string" ? props.children : ""
@@ -35,7 +36,7 @@ export const Code = (props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLE
   }).value
 
   return (
-    <div className={`bg-slate-300 p-2 my-2 rounded-lg overflow-y-auto text-sm`}>
+    <div className={`bg-slate-300 p-4 my-2 rounded-sm overflow-y-auto`}>
       <code {...restProps} dangerouslySetInnerHTML={{ __html: value }} className={`not-italic ${codeFont.className}`} />
     </div>
   )

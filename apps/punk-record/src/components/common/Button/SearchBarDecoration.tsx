@@ -5,11 +5,11 @@ import { WithIcon } from "@repo/ui-shadcn/ui/Icon/WithIcon"
 
 export const SearchBarDecoration = ({ onClick }: { onClick?: () => void }) => {
   return (
-    <Button variant="outline" className="py-6 m-2" onClick={onClick}>
+    <Button variant="outline" className="py-6 px-4 m-2" onClick={onClick}>
       <WithIcon className="mr-1">
         <SearchIcon />
       </WithIcon>
-      <p className="mr-4">검색하기</p>
+      <p className="mr-4 w-full text-start">Quick Search</p>
       <Kbd keyboards={["ctrl", "+", "k"]} className="shadow-none" />
     </Button>
   )

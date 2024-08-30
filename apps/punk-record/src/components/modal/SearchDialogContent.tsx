@@ -1,5 +1,4 @@
 "use client"
-import "./SearchBar.css"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { choseongIncludes } from "es-hangul"
@@ -11,8 +10,11 @@ import Autosuggest, {
 } from "react-autosuggest"
 import { useSearchListValue } from "@/contexts/useSearchListContext"
 import { SearchItem } from "@/app/api/search/route"
+import { DialogClose, DialogFooter } from "@repo/ui-shadcn/ui/dialog"
+import { Button } from "@repo/ui-shadcn/ui/button"
+import "./SearchDialogContent.css"
 
-export const SearchBar = () => {
+export const SearchDialogContent = () => {
   const router = useRouter()
   const searchList = useSearchListValue()
   const [inputValue, setInputValue] = useState("")
@@ -21,9 +23,7 @@ export const SearchBar = () => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
+    if (inputRef.current) inputRef.current.focus()
   }, [])
 
   /**
@@ -42,7 +42,7 @@ export const SearchBar = () => {
     }
 
     return (
-      <div className="p-4">
+      <div className="p-2 overflow-y-scroll">
         {parts.map((part, index) => {
           if (parts.length === 1)
             return (
@@ -50,7 +50,6 @@ export const SearchBar = () => {
                 {part}
               </span>
             )
-
           return (
             <span
               key={index + part}
@@ -83,7 +82,7 @@ export const SearchBar = () => {
     },
     placeholder: "Search...",
     value: inputValue,
-    className: "btn-common w-full border-0 focus:ring-2 bg-transparent py-4 pl-4",
+    className: "btn-common w-full border-0 focus:ring-2 bg-transparent py-4 m-0",
     ref: inputRef,
   }
   const containerProps: ContainerProps = {
@@ -99,7 +98,7 @@ export const SearchBar = () => {
 
   return (
     <>
-      <form className="w-full h-full px-4 overflow-hidden">
+      <form className="w-full h-full overflow-hidden flex-1">
         <Autosuggest
           suggestions={list}
           inputProps={inputProps}
@@ -118,6 +117,11 @@ export const SearchBar = () => {
           }}
         />
       </form>
+      <DialogFooter>
+        <DialogClose>
+          <Button>닫기</Button>
+        </DialogClose>
+      </DialogFooter>
     </>
   )
 }
