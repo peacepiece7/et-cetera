@@ -17,9 +17,9 @@ export async function LeftSideBar() {
   // Table of contents
   const isPostPage = url.includes("posts")
 
-  const tocRes = await fetcher<{ tocTree: Heading[] }>(`/api/table-of-contents?url=${url}`, { cache: "no-cache" })
-  const navRes = await fetcher<{ navTree: TreeNode[] }>(`/api/navigation`, {})
-  const searchRes = await fetcher<{ list: SearchItem[] }>(`/api/search`, {})
+  const tocRes = await fetcher<{ tocTree: Heading[] }>(`/api/table-of-contents?url=${url}`, { cache: "force-cache" })
+  const navRes = await fetcher<{ navTree: TreeNode[] }>(`/api/navigation`, { cache: "force-cache" })
+  const searchRes = await fetcher<{ list: SearchItem[] }>(`/api/search`, { cache: "force-cache" })
 
   return (
     <SearchListProvider value={searchRes.list}>

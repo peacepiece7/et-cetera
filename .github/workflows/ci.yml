@@ -95,12 +95,11 @@ jobs:
           unzip -o build.zip
           echo "Unzip completed"
           echo "Fetch latest changes from git"
-          git checkout main
-          git pull origin main
+          git reset --hard origin/main
           echo "Update dependencies"
+          ls
           nvm use
           pnpm install --frozen-lockfile
-          cd ./apps/punk-record
-          pm2 start ./ecosystem.config.js
+          pm2 start ./apps/punk-record/ecosystem.config.js
           echo "Deployment completed"
           ENDSSH

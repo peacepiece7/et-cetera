@@ -17,9 +17,9 @@ export async function Header() {
   // Table of contents
   const isPostPage = url.includes("posts")
 
-  const tocRes = await fetcher<{ tocTree: Heading[] }>(`/api/table-of-contents?url=${url}`, { cache: "no-cache" })
-  const navRes = await fetcher<{ navTree: TreeNode[] }>(`/api/navigation`, {})
-  const searchRes = await fetcher<{ list: SearchItem[] }>(`/api/search`, {})
+  const tocRes = await fetcher<{ tocTree: Heading[] }>(`/api/table-of-contents?url=${url}`, { cache: "force-cache" })
+  const navRes = await fetcher<{ navTree: TreeNode[] }>(`/api/navigation`, { cache: "force-cache" })
+  const searchRes = await fetcher<{ list: SearchItem[] }>(`/api/search`, { cache: "force-cache" })
 
   return (
     <div className="flex col-start-1 col-end-5 row-start-1 row-end-2 shadow-md border-b-[1px]">
