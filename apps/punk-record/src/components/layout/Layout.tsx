@@ -58,9 +58,7 @@ export function PostPageLayout({ children }: { children: React.ReactNode }) {
               ))}
             </BreadcrumbList>
           </Breadcrumb>
-          <Button size="lg" onClick={router.back}>
-            Close
-          </Button>
+          <Button onClick={router.back}>Close</Button>
         </div>
         <div className="overflow-hidden h-full">
           <div ref={containerRef} className="overflow-y-scroll scroll-smooth h-full p-4">

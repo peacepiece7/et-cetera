@@ -1,7 +1,7 @@
 import { headers } from "next/headers"
 import { Heading } from "mdast"
 import React from "react"
-import Navigation from "./Navigation"
+import LeftSideBarNavigation from "./LeftSIdeBarNavigation"
 import { fetcher } from "@/utils/server"
 import { TreeNode } from "@/app/api/navigation/route"
 import { X_CUSTOM_URL } from "@/constants/server"
@@ -23,7 +23,7 @@ export async function LeftSideBar() {
 
   return (
     <SearchListProvider value={searchRes.list}>
-      <Navigation
+      <LeftSideBarNavigation
         activeTab={isPostPage ? "toc" : "nav"}
         navChildren={createNavElements(navRes.navTree, [], 0)}
         tocChildren={createTOCElements(tocRes.tocTree)}

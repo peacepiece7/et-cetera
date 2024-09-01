@@ -2,9 +2,8 @@ import { headers } from "next/headers"
 import { Heading } from "mdast"
 import { TreeNode } from "@/app/api/navigation/route"
 import { MainPageLayout, PostPageLayout } from "@/components/layout/Layout"
-import Navigation from "@/components/navigation/Navigation"
+import LeftSideBarNavigation from "@/components/navigation/LeftSIdeBarNavigation"
 import { X_CUSTOM_URL } from "@/constants/server"
-import { PostAreaSlideProvider } from "@/contexts/usePostAreaContext"
 import { fetcher } from "@/utils/server"
 import { createNavElements, createTOCElements } from "@/utils/server-components"
 import { SearchItem } from "@/app/api/search/route"
@@ -29,7 +28,7 @@ export default async function PostContentsContainer(
 
   return (
     <SearchListProvider value={searchRes.list}>
-      <Navigation
+      <LeftSideBarNavigation
         activeTab="toc"
         navChildren={createNavElements(navRes.navTree, [], 0)}
         tocChildren={createTOCElements(tocRes.tocTree)}

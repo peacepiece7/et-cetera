@@ -1,12 +1,13 @@
 "use client"
-import { usePathname } from "next/navigation"
-import { useRef, useState } from "react"
-import { SearchArea } from "./SearchArea"
 import { useNavAnimation } from "@/hooks/useNavAnimation"
 import { useResizeSidebar } from "@/hooks/useResizeSidebar"
+import { usePathname } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
+import { useMedia } from "react-use"
+import { SearchArea } from "./SearchArea"
 import { Button } from "@repo/ui-shadcn/ui/button"
 
-export default function Navigation({
+export default function NavigationContentForDesktop({
   navChildren,
   tocChildren,
   activeTab = "nav",
@@ -15,17 +16,26 @@ export default function Navigation({
   tocChildren: React.ReactNode
   activeTab: "nav" | "toc"
 }>) {
-  const pathname = usePathname()
-  const { navTree } = useNavAnimation(navChildren, pathname?.split("/"))
-  const { barRef, sideBarWidth } = useResizeSidebar()
-
   const navRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
+
+  const isWide = useMedia("(min-width: 768px)", true)
+  const [isRender, setIsRender] = useState(false)
   const [activeIdx, setActiveIdx] = useState(activeTab === "nav" ? 0 : 1)
+  const { navTree } = useNavAnimation(navChildren, pathname?.split("/"), [isWide, activeIdx])
+
+  const { barRef, sideBarWidth, isDragging } = useResizeSidebar()
 
   const isPostPage = pathname.includes("posts")
 
+  useEffect(() => {
+    setIsRender(() => true)
+  }, [])
+
   return (
-    <div className="flex flex-col relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 group z-30 bg-white ">
+    <div
+      className={`${isRender ? "flex" : "hidden"} flex-col relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 group z-30 bg-white`}
+    >
       <SearchArea />
       <div className="flex justify-around mt-4">
         <Button size="lg" onClick={() => setActiveIdx(0)}>
@@ -47,10 +57,11 @@ export default function Navigation({
         draggable
         ref={barRef}
         className={`
-        absolute w-4 h-full top-0 bottom-0 right-0 m-auto bg-slate-300 opacity-5
-        transition-all ease-in-out cursor-col-resize
-        group-hover:opacity-100 group-hover:right-[-10px] duration-300 hover:bg-slate-400
-        `}
+          absolute w-4 h-full top-0 bottom-0 right-0 m-auto bg-slate-300 opacity-5 z-0
+          transition-all ease-in-out cursor-col-resize
+          group-hover:opacity-100 group-hover:right-[-16px] duration-300 hover:bg-slate-400
+          ${isDragging ? "right-[-16px] bg-slate-400 opacity-100" : ""}
+    `}
       />
     </div>
   )

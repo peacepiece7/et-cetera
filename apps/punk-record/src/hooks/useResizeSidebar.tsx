@@ -1,8 +1,14 @@
 "use client"
 import { useCallback, useEffect, useRef, useState } from "react"
 
-export const useResizeSidebar = (initWidth: number = 300) => {
-  const [sideBarWidth, setSideBarWidth] = useState(initWidth)
+const DEFAULT_OPTION = {
+  initWidth: 300,
+  maxWidth: 600,
+  minWidth: 300,
+}
+
+export const useResizeSidebar = (option: typeof DEFAULT_OPTION = DEFAULT_OPTION) => {
+  const [sideBarWidth, setSideBarWidth] = useState(option.initWidth)
   const startXRef = useRef<number | null>(null) // 드래그 시작 시 마우스 X 좌표 저장
   const startWidthRef = useRef<number | null>(null) // 드래그 시작 시 사이드바 너비 저장
 
@@ -32,14 +38,16 @@ export const useResizeSidebar = (initWidth: number = 300) => {
       if (isDragging && startXRef.current !== null && startWidthRef.current !== null) {
         const deltaX = e.clientX - startXRef.current
         const newWidth = startWidthRef.current + deltaX
-        if (newWidth > initWidth) {
+        if (newWidth > option.maxWidth) {
+          setSideBarWidth(option.maxWidth)
+        } else if (newWidth > option.minWidth) {
           setSideBarWidth(newWidth)
         } else {
-          setSideBarWidth(initWidth)
+          setSideBarWidth(option.minWidth)
         }
       }
     },
-    [isDragging, initWidth],
+    [isDragging, option.minWidth],
   )
 
   useEffect(() => {
@@ -63,5 +71,6 @@ export const useResizeSidebar = (initWidth: number = 300) => {
   return {
     barRef,
     sideBarWidth,
+    isDragging,
   }
 }

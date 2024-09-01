@@ -11,9 +11,7 @@ export function PostPageLayoutLoading({ children }: { children: React.ReactNode 
     `}
       >
         <div className="text-end py-4">
-          <Button className="m-2" size="lg">
-            Close
-          </Button>
+          <Button className="m-2">Close</Button>
         </div>
         <div className="overflow-hidden h-full ">
           <div className="overflow-y-scroll h-full p-4">{children}</div>

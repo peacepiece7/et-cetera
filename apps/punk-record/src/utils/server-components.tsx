@@ -52,12 +52,7 @@ export const createNavElements = (tree: TreeNode[], list: number[], depth: numbe
               <span className="pl-2">{node.text}</span>
             </NavigationDirButton>
 
-            <ul
-              // ${depth === 0 ? 'hidden inactive-tree-node' : ''}
-              className={`hidden ml-1 overflow-hidden`}
-            >
-              {createNavElements(node.children, dataPath, depth + 1)}
-            </ul>
+            <ul className={`hidden ml-1 overflow-hidden`}>{createNavElements(node.children, dataPath, depth + 1)}</ul>
           </div>
         )}
       </li>

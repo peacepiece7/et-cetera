@@ -68,3 +68,29 @@ details[open] summary ~ * {
     opacity: 1;
   }
 }
+
+/* screen size > 1280px */
+@media (max-width: 1280px) {
+  html {
+    font-size: 100%;
+  }
+}
+/* screen size > 1024px */
+@media (max-width: 1024px) {
+  html {
+    font-size: 90%;
+  }
+  .global-layout {
+    padding: 1rem;
+  }
+}
+/* screen size > 768px */
+@media (max-width: 768px) {
+  html {
+    font-size: 80%;
+  }
+
+  .global-layout {
+    padding: 0.5rem;
+  }
+}

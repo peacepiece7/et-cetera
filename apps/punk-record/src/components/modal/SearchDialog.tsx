@@ -7,7 +7,9 @@ export function SearchDialog() {
     <DialogContent className="flex flex-col sm:max-w-[50%] max-h-[50%] min-h-[50%]">
       <DialogHeader>
         <DialogTitle>Search documentation</DialogTitle>
-        <DialogDescription>일치하는 제목 또는 카테고리를 검색합니다.</DialogDescription>
+        <DialogDescription aria-describedby="일치하는 제목 또는 카테고리를 검색합니다.">
+          일치하는 제목 또는 카테고리를 검색합니다.
+        </DialogDescription>
       </DialogHeader>
       <SearchDialogContent />
     </DialogContent>

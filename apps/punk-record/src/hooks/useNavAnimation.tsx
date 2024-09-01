@@ -8,7 +8,7 @@ import { useAnimate } from "framer-motion"
  * @param urls 매칭되는 url 경로가 있다면 onMount시 open 상태로 변경합니다.
  * @returns
  */
-export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
+export const useNavAnimation = (tree: React.ReactNode, urls: string[] = [], triggers: unknown[] = []) => {
   const [scopeRef, animate] = useAnimate<HTMLUListElement>()
   const navTree = (
     <ul ref={scopeRef} className={`inactive-node-tree visible`}>
@@ -19,10 +19,7 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
   useEffect(
     function openMatchedNode() {
       if (!scopeRef.current) return
-      const navDirElements =
-        scopeRef.current.querySelectorAll<HTMLParagraphElement>(
-          `.${NAV_DIR_CLASS_ID}`
-        )
+      const navDirElements = scopeRef.current.querySelectorAll<HTMLParagraphElement>(`.${NAV_DIR_CLASS_ID}`)
 
       navDirElements.forEach((el) => {
         if (urls.find((url) => url === el.dataset["name"])) {
@@ -30,6 +27,7 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
           const divElement = li.querySelector("div") as HTMLDivElement
           const firstUlChild = divElement.querySelector("ul")
           if (!firstUlChild) return
+          // open 상태로 변경
           if (divElement?.tagName === "DIV") {
             divElement.classList.remove("inactive-tree-node")
             firstUlChild.style.height = "auto"
@@ -38,15 +36,13 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
         }
       })
     },
-    [scopeRef, urls]
+    [scopeRef, urls, ...triggers],
   )
 
   useEffect(
     function highlightActiveNode() {
       const url = urls.join("/")
-      const matchElement = document.querySelector<HTMLAnchorElement>(
-        `a[href="${url}"]`
-      )
+      const matchElement = document.querySelector<HTMLAnchorElement>(`a[href="${url}"]`)
       const parentElement = matchElement?.parentElement
       if (parentElement && parentElement.tagName === "SPAN") {
         parentElement.className =
@@ -54,7 +50,7 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
           " border rounded-md px-1 border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
       }
     },
-    [scopeRef, urls]
+    [scopeRef, urls, ...triggers],
   )
 
   /**
@@ -81,23 +77,15 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
             divElement.classList.remove("inactive-tree-node")
             firstUlChild.style.height = "0"
             firstUlChild.classList.remove("hidden")
-            animate(
-              firstUlChild,
-              { height: "auto" },
-              { ease: "easeInOut", duration: 0.2 }
-            )
+            animate(firstUlChild, { height: "auto" }, { ease: "easeInOut", duration: 0.2 })
           } else {
             divElement.classList.add("inactive-tree-node")
-            animate(
-              firstUlChild,
-              { height: 0 },
-              { ease: "easeInOut", duration: 0.2 }
-            )
+            animate(firstUlChild, { height: 0 }, { ease: "easeInOut", duration: 0.2 })
           }
         }
       }
     },
-    [animate]
+    [animate],
   )
 
   /**
@@ -110,7 +98,7 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
         handleClickNavNode(ev)
       }
     },
-    [handleClickNavNode]
+    [handleClickNavNode],
   )
 
   useEffect(
@@ -129,7 +117,7 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
         currentScopeRef.removeEventListener("keydown", handleKeydown)
       }
     },
-    [animate, scopeRef, handleClickNavNode, handleKeydown]
+    [animate, scopeRef, handleClickNavNode, handleKeydown, ...triggers],
   )
 
   return { scopeRef, navTree }

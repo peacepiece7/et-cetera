@@ -1,10 +1,9 @@
 "use client"
 import useKeyboardJs from "react-use/lib/useKeyboardJs"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { SearchBarDecoration } from "@/components/common/Button/SearchBarDecoration"
 import { SearchDialog } from "@/components/modal/SearchDialog"
 import { Dialog, DialogTrigger } from "@repo/ui-shadcn/ui/dialog"
-import { Button } from "@repo/ui-shadcn/ui/button"
 
 /**
  * 검색 기능을 제공하는 컴포넌트
@@ -25,11 +24,6 @@ export const SearchArea = () => {
 
   return (
     <>
-      {/* <Modal>
-        <ModalLayout open={isOpen} onClose={() => setIsOpen(false)}>
-          {isOpen && <SearchBar />}
-        </ModalLayout>
-      </Modal> */}
       <Dialog>
         <DialogTrigger asChild>
           <button className="visible" ref={dialogRef} />
