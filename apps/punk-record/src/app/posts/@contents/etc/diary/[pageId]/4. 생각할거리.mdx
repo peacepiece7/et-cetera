@@ -1,5 +1,7 @@
 # 생각해볼 것들
 
+> 기능 설명하는 글 아닙니다..! 일기장입니다!
+
 현대적인 개발환경, 나는 편하지만 팀이 편하지 않다면?
 
 협업이나 제품/팀/조직의 상황과 맞지 않는다면?
@@ -9,11 +11,19 @@
 1. 개발자 대우가 좋은곳
 2. 고도화 해나가고 피드백 & 발전
 
+## SOA, MSA 차이
+
+비즈니스 레이어에서의 인터페이스 분리 = SOA
+
+SOA + 서비스 단위로 분리 = MSA
+
+즉, DevOps를 위한 SOA => MSA
+
+## 요구사항 분석
+
 프로덕트: 요구사항 => 구현 => 배포 사이클을 가짐
 
 생산성: 산출 결과물 / (시간 + 인력 + 장비)
-
-## 요구사항 분석
 
 ### 분석이 필요한 경우
 
@@ -33,7 +43,7 @@
 5. 의존성 파악을 통한 수정범위 최소화
 6. 수정 시, 유닛테스트를 통한 사이드 이펙트 검출
 
-### 5ws 1h
+#### 5ws 1h (요구사항 세분화)
 
 - 무엇을 만들어야 하는지 (What?)
 - 왜 하는 것인지 (Why?)
@@ -42,7 +52,7 @@
 - 개발 프로덕트는 어디에 사용되나 (Where?)
 - 어떻게 만들 것인가? (How?)
 
-### 요구사항 분석 기법
+#### 요구사항 분석 기법 (세분화된 모듈 단위 개발)
 
 자료 흐름도 (Data Flow Diagram)
 
@@ -56,10 +66,136 @@
 
 유즈케이스 (Use Case Diagram)
 
-### SOA, MSA 차이
+#### unit test (나머지 3 ~ 6단계)
 
-비즈니스 레이어에서의 인터페이스 분리 = SOA
+유닛 테스트 도입
 
-SOA + 서비스 단위로 분리 = MSA
+TDD 프로세스로 개발
 
-즉, DevOps를 위한 SOA => MSA
+#### 이런 것들을 하는 이유
+
+생산성을 향상 시키기 위해서 상황에 따른 적절한 기술을 선택해야한다.
+
+> 이거 관련 시나리오 자료 있으니까 확인하자..!
+
+## 형상 관리(SCM, Software Configuration Management)
+
+sw 버전관리, 트래킹 및 컨트롤, conflict 해결, 변경 사항 공유등의 목적을 가짐
+
+툴 종류로는 git, Plastic SCM, CVS, SNV, Perforce, Claercase 등이 있음
+
+요즘은 git이 대세 git을 사용한 서비스 프로바이더로 github, gitlab, bitbucket 등이 있음
+
+### git 형상관리 관련 용어
+
+**interactive rebase**
+
+`git rebase -i`로 동적으로 커밋을 수정할 하는 방식
+
+**rebase merge**
+
+메인 브랜치의 줄기 위로 feature 브랜치를 올려서 합치는 방식
+
+로컬에서는
+
+`git rebase --rebase-merges`
+
+`git rebase branch & git merge`
+
+호스팅 서비스에서는 PR을 머지할 때 rebase merge로 가능
+
+머지 시 **컨벤션에 따라서 fast-forward, no-ff 중 하나 선택해야함!**
+
+그 외 일반 merge, squash merge 등 고려하기
+
+**stash**,
+
+커밋 내용 임시 저장
+
+`git stash`, `git stash pop`, `git stash apply`, `git stash drop`
+
+**cherry-pick**
+
+특정 커밋을 가져옴
+
+`git cherry-pick <commit>`
+
+**reset**
+
+히스토리 관리에 쓰임 `git reset --hard, --soft, --mixed`
+
+**revert**
+
+특정 커밋을 취소
+
+`git revert <commit>`
+
+**reflog**
+
+히스토리를 확인하는데 쓰임 `git reflog`
+
+보통 `git reset`으로 복구 하기 위해 사용
+
+### 형상관리 전략
+
+#### git flow 전략
+
+[git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+
+main(prd), release(stg), dev, feature, hotfix 브랜치를 사용
+
+main(prd)은 보통 git tag가 붙어서 커밋됨
+
+release(stg)는 QA가 진행되는 브랜치 예상 버전명이 붙어서 release/x.x.x로 씀 dev 브랜치랑 같이 쓰는 경우도 봤음, stg로 버전 없는 경우도 봤음
+
+dev는 개발된 feature가 머지되는 브랜치로 여기서도 테스트가 진행됨 보통 CI/CD
+
+hot fix는 4대 명검 이슈가 발생했을 때 사용 feature에서는 보통 cherry-pick으로 가져오면 됨
+
+![img](/jjal/sword.png)
+
+```txt
+main(prd) - release(stg)  - dev - feature
+  |
+hot fix
+```
+
+애자일과 맞지 않고, 배포 관리하는 인력 필요
+
+#### github flow 전략
+
+```txt
+main(prd) - feature
+```
+
+rebase merge인데 각 브랜치에서 PR을 만들어서 머지하는 방식
+
+머지되면 바로 배포되기 떄문에 PR에서 feedback과 CI/CD QA가 이루어짐
+
+hot fix로 메인 브랜치가 업데이트 되면 cherry-pick 하거나 다시 메인 브랜치를 rebase 하면 됨
+
+간단하고 충돌이 없지만 배포의 위험성이 있어서 세밀한 형상 관리가 어려움
+
+#### gitlab flow 전략
+
+github, git flow의 중간 쯤 되는 전략
+
+```txt
+prd - pre-prd(opt) - feature
+```
+
+배포 시간을 특정할 수 없을 경우 또는 빠른 배포가 필요하나 배포 관리하는 인력이 없을 경우 사용
+
+#### TBD(Trunk Based Development)
+
+[trunk based development](https://trunkbaseddevelopment.com/)
+
+svn을 사용해봤다면 익숙핳 수도 있는데 주로 monorepo에서 사용하는 전략
+
+간단하게 하려면 엄청 단간하지만 어렵게하려면 또 엄청 복잡하다.
+
+메인 브랜치(trunk)가 항상 배포 가능한 상태로 개발하는 방식 github flow와 동일하다.
+
+release가 어디서에서 되는지 정도의 차이가 있는데 [Modern claimed high-throughput branching models](https://trunkbaseddevelopment.com/alternative-branching-models/#modern-claimed-high-throughput-branching-models)요기 내용을 참고
+
+요약하면 PR을 머지할 떄 release를 붙이면 trunk인데 github flow는 feature에서 pr, release 태그가 붙어서 테스트 되는 반면 trunk는 trunk에 머지하는 시점에 release 태그가 붙는 것으로 보인다.
