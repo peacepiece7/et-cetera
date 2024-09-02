@@ -55,3 +55,13 @@
 `git diff --name-only HEAD~1 HEAD | grep -q <directory>`
 
 `echo $?` => exit code : 0 이면 변경사항 있음, 1 이면 변경사항 없음
+
+### 신입 때 몰랏던 git 실수들
+
+[신입 때 몰랏던 git 실수들](https://www.youtube.com/watch?v=hb4RmDas9is)
+
+`git config core.ignorecase false` => 대소문자 구분
+
+macOS는 기본적으로 대소문자 구분을 하지 않음, 애플 파일 시스템(APFS) 대소문자 구분으로 변경 ㄱㄱ
+
+PR LGTM 적기전에 익스텐션으로 PR 리스트에소 돌려본 후 LGTM (gitlab workflow, github 도 찾아보면 있을 듯)
