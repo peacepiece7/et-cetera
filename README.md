@@ -1,6 +1,6 @@
-# Turborepo 디자인 시스템
+# 이것저것 들어가있는 저장소
 
-turborepo, storybook, shadcn, tailwindcss로 구성된 디자인 시스템 보일러 플레이트입니다.
+turborepo, shadcn, tailwindcss, storybook을 메인으로 사용하는 저장소
 
 ## Installation
 
@@ -17,9 +17,8 @@ pnpm run dev
 ## Packages
 
 ```txt
-`@app/docs`: Next.js app
-`@app/web`: Next.js app
 `@app/storybook`: storybook app
+`@app/punk-record` : nextjs app, blog
 `@repo/ui-shadcn : shadcn UI
 `@repo/config-eslint` : eslint configuration
 `@repo/config-tailwind` : tailwind configuration
@@ -34,7 +33,3 @@ pnpm run dev
 - husky
 - commitlint
 - syncpack
-
-## Customization
-
-`scripts/**/*` 스크립트 파일을 수정합니다.
