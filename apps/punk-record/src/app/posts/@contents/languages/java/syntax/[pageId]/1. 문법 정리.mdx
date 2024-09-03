@@ -1,6 +1,8 @@
-# 원시 타입 (Primitive type)
+# 자바 문법 정리
 
-## char
+## 원시 타입 (Primitive type)
+
+### char
 
 char는 2byte이다.
 
@@ -13,7 +15,7 @@ public static void main() {
 }
 ```
 
-## String
+### String
 
 java.lang에 선언된 외부 패키지이다.
 
@@ -25,7 +27,7 @@ public static void main() {
 }
 ```
 
-## number
+### number
 
 int는 4byte(2^32), long은 8byte(2^64)
 
@@ -58,7 +60,6 @@ public static void main() {
 ## Array
 
 ```java
-
 public static void main() {
     int[] arr = new int[10];
     int[] arr1 = {10, 20, 30};
@@ -146,19 +147,19 @@ public static void main() {
 
 ### DTO(DATA Transfer Object)
 
-데이터를 담는 객체로 위 예제의 PersonDTO가 이에 해당된다.  
-계층 간 데이터 교환을 목적으로 하는 객체이다.  
+데이터를 담는 객체로 위 예제의 PersonDTO가 이에 해당된다.
+계층 간 데이터 교환을 목적으로 하는 객체이다.
 **DB나 비즈니스 로직이 포함되지 않는다.**
 
 ### VO(Value Object)
 
-불변 객체로 값 제를 가지는 개체이다.  
-객체의 상탤흘 표현하는데 사용된다.  
-여기저기서 VO 객체를 사용하더라도 VO 객체의 값은 변하지 않게 설계되어야 한다.  
+불변 객체로 값 제를 가지는 개체이다.
+객체의 상탤흘 표현하는데 사용된다.
+여기저기서 VO 객체를 사용하더라도 VO 객체의 값은 변하지 않게 설계되어야 한다.
 hashCode, equals, toString 메소드를 오버라이딩하여 사용한다.
 
 ### DAO(Data Access Object),
 
 데이터베이스에 접근하는 객체이다.
-DB에 변경사항이 생기면 DAO 객체만 수정하면 된다.  
+DB에 변경사항이 생기면 DAO 객체만 수정하면 된다.
 비즈니스 로직이 포함되지 않는다.

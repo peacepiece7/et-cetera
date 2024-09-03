@@ -1,6 +1,8 @@
 import { Detail } from "@/components/mdx/detail"
 
-# maven, gradle
+# API
+
+## maven, gradle
 
 <Detail title="maven, gradle 요약">
 아직 잘 모르겠지만 mvnrepository.com 에서 (이하 mvnrepo) 라이브러리를 검색하고 사용하면 된다.
@@ -31,11 +33,11 @@ implementation group: 'com.google.code.gson', name: 'gson', version: '2.11.0'
 
 </Detail>
 
-# java.base
+## java.base
 
 [java.base 모듈 요약링크](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/module-summary.html)
 
-## ArrayList
+### ArrayList
 
 ArrayList는 List 인터페이스를 구현한 클래스로, 크기를 변경할 수 있는 배열이다.
 
@@ -54,7 +56,7 @@ public class ArrayListTest {
 
 </Detail>
 
-## String
+### String
 
 `java.lang`의 String 클래스
 
@@ -91,7 +93,7 @@ ArrayList처럼 자주 쓰일 것 같다 기억해두자
 
 https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html
 
-# Warper class
+## Warper class
 
 js의 wrapper object랑 같다.
 
@@ -99,7 +101,7 @@ prototype chaining을 통해 primitive type도 상위 object의 메서드에 접
 
 자바는 primitive type에 없는 메서드를 실행할 떄 자동으로 boxing, unboxing이 일어난다.
 
-# Collection Framework
+## Collection Framework
 
 **List** : 순서가 있는 객체의 모임을 다루는 인터페이스
 
@@ -168,7 +170,7 @@ for(char c : strArr) {
 
 </Detail>
 
-# Generic
+## Generic
 
 js랑 비슷하다 다만 `V extends String | Integer` 이렇게는 안되고 Exception으로 처리해야 한다.
 
@@ -203,13 +205,13 @@ public class GenericPair<K extends String, V> {
 
 </Detail>
 
-# 함수형 인터페이스
+## 함수형 인터페이스
 
 함수형 인터페이스는 하나의 추상 메서드만을 가지고 있는 인터페이스를 말한다.
 
 자바는 인터페이스도 메모리의 공간을 차지하고, 값으로 할당할 수 있다.
 
-## 내부 익명 클래스
+### 내부 익명 클래스
 
 인터페이스로 선언하고, 뒤에 대괄호를 붙여서 내부 익명 클래스를 만든다.
 
@@ -237,7 +239,7 @@ public static void main(String[] args) {
 }
 ```
 
-## Method reference
+### Method reference
 
 {/* 자바에서는 인터페이스도 메모리의 공간을 차지하고, 값으로 할당할 수 있다. */}
 
@@ -320,7 +322,7 @@ System.out.println(example); // 출력: MethodReferenceExample@<hashcode>
 
 </Detail >
 
-# 람다식
+## 람다식
 
 람다식은 java 8에서 도입되었다.
 
