@@ -6,5 +6,5 @@
     ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["className\\s*:\\s*[\"'`]([^\"'`]*)[\"'`]"]
   ],
-  "cSpell.words": ["cmdk", "embla", "SSHPASS", "subcomponents"]
+  "cSpell.words": ["cmdk", "embla", "SSHPASS", "subcomponents", "xtendo"]
 }
