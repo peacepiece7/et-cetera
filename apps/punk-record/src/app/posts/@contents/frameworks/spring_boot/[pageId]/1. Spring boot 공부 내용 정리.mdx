@@ -1,0 +1,325 @@
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+
+# Spring Boot 공부 내용 정리
+
+## 스프링 컨테이너와 스프링 빈
+
+스프링에서는 자바 객체를 관리 해주는 컨테이너를 스프링 컨테이너라고 하고 컨테이너에서 관리하는 객체를 스프링 빈이라고 한다.
+
+데이터에 접근하는 `@Repository`, 서비스 로직을 처리하는 `@Service`, 웹 요청을 처리하는 `@Controller`가 스프링 컨테이너의 관리 대상이고
+
+그 외 스프링 빈에 추가하고 싶다면 `@Component`를 사용하면 된다.
+
+[스프링 컨테이너와 스프링 빈](https://velog.io/@tank3a/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EC%99%80-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B9%88)
+
+## Validation
+
+Spring initializer에서 validation을 추가하면 사용할 수 있다.
+
+jakarta bean validation 3.n 버전이 설치된다.
+
+[jakarta bean validation specification](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#builtinconstraints)
+
+어떤 어노테이션이 있는지는 `8. Built-in Constraint definitions`이쪽에서 구경하자
+
+GPT가 정리해준건데 validation 기억안나면 참고하자
+
+<Detail title="Jakarta 어노테이션 정리">
+
+```txt
+@Null: 값이 반드시 null이어야 함.
+
+@NotNull: null 값이 허용되지 않음.
+
+@AssertTrue: boolean 값이 true여야 함. (별도 로직 적용)
+
+@AssertFalse: boolean 값이 false여야 함. (별도 로직 적용)
+
+@Min: 지정된 최소값 이상이어야 함 (정수형).
+
+@Max: 지정된 최대값 이하이어야 함 (정수형).
+
+@DecimalMin: 지정된 최소값 이상이어야 함 (실수형).
+
+@DecimalMax: 지정된 최대값 이하이어야 함 (실수형).
+
+@Negative: 음수 값이어야 함.
+
+@NegativeOrZero: 음수 또는 0이어야 함.
+
+@Positive: 양수 값이어야 함.
+
+@PositiveOrZero: 양수 또는 0이어야 함.
+
+@Size: "문자열"의 길이 (int 불가)
+
+@Digits: 숫자 자릿수를 제한함. 정수와 소수 자릿수를 명시적으로 설정 가능.
+
+@Past: 과거 날짜여야 함.
+
+@PastOrPresent: 과거 또는 현재 날짜여야 함.
+
+@Future: 미래 날짜여야 함.
+
+@FutureOrPresent: 현재 또는 미래 날짜여야 함.
+
+@Pattern: 지정된 정규식과 일치하는 문자열만 허용됨.
+
+@NotEmpty: null, "" 불가
+
+@NotBlank: null, "", " "(\\s) 불가
+
+@Email: 유효한 이메일 주소 형식이어야 함.
+
+@Valid: 해당 객체의 유효성 검사를 트리거함. 중첩된 객체의 유효성 검사를 수행함.
+```
+
+@Valid는 중요하니까 까먹지 말자..!
+
+</Detail>
+
+## @Data, @AllArgsConstructor, @NoArgsConstructor, @JsonNaming, @Builder
+
+모델을 정의할 떄 사용하는 어노테이션이다.
+
+`@Data`: getter/setter, equals, hashCode, toString을 자동으로 생성해준다.
+
+`@AllArgsConstructor`: 모든 필드 값을 파라미터로 받는 생성자를 만들어준다.
+
+`@NoArgsConstructor`: 파라미터가 없는 기본 생성자를 만들어준다.
+
+`@JsonNaming`: json으로 변환할 때 필드명을 변경할 수 있다.
+
+`@Builder`: 빌더 패턴을 사용할 수 있다. (`build()`, `toBuilder()` 메서드를 제공)
+
+```java
+@Data // getter setter
+@AllArgsConstructor // all 생성자
+@NoArgsConstructor // 기본 생성자
+@Builder // 빌더 패턴
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class UserEntity {
+  // ...
+}
+```
+
+## @RestController, @Mapping
+
+컨트롤러를 정의할 떄 사용하는 어노테이션이다.
+
+@RestController는 JSON, XML같은 데이터를 반환하기위해 사용하는 어노테이션이다. 이걸 붙여줘야 스프링 컨테이너에 등록된다.
+
+@Controller도 있는데 이건 view를 반환할 때 사용한다.
+
+@GetMapper, @PostMapper, @PutMapper, @DeleteMapper를 사용하면 각각 GET, POST, PUT, DELETE 요청을 처리할 수 있다.
+
+아래 예시는 `POST /api/post` 경로에서 User 객체를 받아서 반환하는 컨트롤러이다.
+
+```java
+@RestController
+@RequestMapping("/api")
+public class RestApiController {
+
+    @PostMapper("/post")
+    public String get(@RequestBody User user){
+        return user;
+    }
+}
+```
+
+## @JsonProperty, @JsonIgnore
+
+@JsonProperty: json으로 변환할 때 필드명을 변경할 수 있다.
+
+@JsonIgnore: json으로 변환할 때 해당 필드를 무시한다.
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class User {
+ @JsonProperty("user_email")
+ private String email;
+
+ @JsonIgnore
+ public String getUserName() {
+   return this.userName;
+ }
+}
+```
+
+### 직렬화, 역직렬화
+
+java는 jackson 라이브러리로 json을 역/직렬화한다.
+
+이는 내부적으로 getter/setter, toString을 사용한다. (자스랑 비슷함)
+
+JSON 변환할 때 예외 사항이 있을 경우 @JsonProperty, @JsonIgnore로 충분하지만
+
+경우에 따라서 `@JsonSerialize`, `@JsonDeserialize`이나 getter/setter, toString 등 여러 방법을 고려할 수 있다.
+
+## Exception
+
+### @RestControllerAdvice
+
+인자로 annotation, class, string(path) 등을 지정해줄 수 있다.
+
+```java
+@RestControllerAdvice(basePackages = "com.example.exceptionTest.controller")
+public class RestApiExceptionHandler {}
+```
+
+### @ExceptionHandler
+
+예외 처리할 클래스를 바인딩 해준다.
+
+```java
+@ExceptionHandler(value = {NumberFormatException.class})
+public ResponseEntity<Void> NumberFormatException(
+        NumberFormatException e
+) {
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+}
+```
+
+### @Order (Global Exception)
+
+예외 처리의 우선순위를 결정한다.
+
+> @Order defines the sort order for an annotated component.
+> The value is optional and represents an order value as defined in the Ordered interface. **Lower values have higher priority**
+
+기본값 Integer.MAX_VALUE 이고 값이 적을 수록 우선순위가 높다.
+
+### Validation Exception 처리
+
+[validation exception 처리](https://github.com/peacepiece7/spring-boot-playground/tree/main/rest-and-validation-exercise)
+
+### 정렬 기능 구현
+
+C++ STL의 sort와 유사하다. 대충 알면 넘어가자.
+
+<Detail title="정렬 기능 구현 예제">
+
+```java
+private List<T> list = new ArrayList<>();
+
+public void 간단한_정렬(){
+    list.stream()
+            .sorted((o1, o2) -> o1 >= o2)
+            .collect(Collectors.toList());
+}
+
+// 익명 클래스 또는 람다로 빼기 (셋다 동일함)
+private Comparator<T> sort = new Comparator<T>() {
+    @Override
+    public int compare(T o1, T o2) {
+        return Long.compare(o1.getId(), o2.getId());
+    }
+};
+// 람다
+Comparator<T> sortRamda = (o1, o2) -> Long.compare(o1.getId(), o2.getId());
+// 메서드 참조
+Comparator<T> sortMethodRef = Comparator.comparingLong(Entity::getId);
+
+public void 정렬이_복잡해질_경우() {
+    dataList.stream()
+            .sorted(sort) // return Stream<T>
+            .collect(Collectors.toList()); // return List<T>
+}
+```
+
+</Detail>
+
+### Optional 벗겨내기
+
+타입 가드가 없어서 js랑 조금 다르다
+
+<Detail title="Optional 벗겨내기 예시">
+
+```java
+import java.util.ArrayList;
+
+private Optional<List<T>> dataList = new ArrayList<>();
+
+var prevData = dataList.stream()
+.filter(it -> it.getId().equals(data.getId()))
+.findFirst();
+
+public void failture() {
+if(prevData.isPresent()) {
+// 왠지 dataList 는 List<T> 일 것 같은데 Optional<List<T>> 임
+}
+}
+
+public void ok() {
+prevData.ifPresent((it) -> { // it 은 T
+});
+// 이런식으로 줄여 쓸때 좋은듯..
+prevData.ifPresent(dataList::remove);
+}
+
+```
+
+그외 is(if)Empty 도 있고 로직이 길어지지만 `dataList.get(i)`을 써도 된다.
+
+~~대충 만들언 intellij 가 알아서 추천해줌~~
+
+</Detail>
+
+## @RequiredArgsConstructor
+
+`@NonNull` 이나 `final` 로 선언된 필드의 생성자를 만들어 준다.
+
+요거를
+
+```java
+public class Controller() {
+    private final UserService userService;
+
+    public Controller(UserService userService) {
+        this.userService = userService;
+    }
+}
+```
+
+이렇게 만들어 줌
+
+```java
+@RequiredArgsConstructor
+public class Controller() {
+    private final UserService userService;
+}
+```
+
+## @service
+
+서비스 레이어는 @Service 어노테이션을 적어줘야한다.
+
+```java
+@Service
+public class UserService {
+
+}
+```
+
+Service 계층이 아님에도 스프링 컨테이너에 등록해야 하는 경우는 `@Component`를 붙여주면 되고
+
+외부 라이브러리라면 `@Configuration` -> `@Bean` 어노테이션을 붙이고 인스턴스를 리턴하면 스프링 컨테이너에 등록된다.
+
+```java
+@Configuration
+public class DataBaseConfig {
+
+    @Bean
+    public UserRepository userRepository() {
+        return new UserRepository();
+    }
+}
+```
+
+## 참고
+
+[전체 소스 보기 (각 챕터마다 note.md 있응께 가물가물한 내용있으면 잠고하자)](https://github.com/peacepiece7/spring-boot-playground)

@@ -1,0 +1,98 @@
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+
+# Spring Boot 이슈 정리
+
+## IntelliJ에서 JVM 버전 변경이 안되는 이슈
+
+spring initializer 로 spring 3.2, java 17로 했는데 java 11로 빌드 되어 gradlew 에서 에러가 발생하는 이슈가 있었다.
+
+원인은 다양해서 다음 방법중 상황에 맞게 해결하면 된다.
+
+### 해결 방법 1
+
+<Kbd keyboards={["ctrl", "+", "shift", "+", "alt", "+", "S"]} /> 또는 File -> Project structure에서 JVM 17 버전으로 변경
+
+### 해결 방법 2
+
+1. jdk se 17을 웹에서 설치
+2. java --version 으로 17 설치 확인
+3. gradlew.properties 에 org.gradle.java.home=/path/to/your/java17 추가
+
+JAVA_HOME 환경 변수를 변경
+
+```bash
+export JAVA_HOME=/path/to/your/java17
+```
+
+### 해결 방법 3
+
+<Kbd keyboards={["ctrl", "+", "p"]} /> 후 <Kbd keyboards={["shift", "+", "tab"]} /> 전체 검색으로 build tool -> gradle
+jdk 17로 변경
+
+### 해결 방법 4
+
+\*.java 파일 들어가면 Warring 뜨는데 오른쪽 setUp JDK 변경
+
+### 버전 확인
+
+자바 버전 체크
+
+```bash
+java --version
+```
+
+gradlew로 jvm 버전 뭐 쓰는지 체크
+
+```bash
+gradlew -version
+```
+
+## 한글 깨짐
+
+### 방법 1
+
+UTF-8이 기본인데 ms는 ms949 포멧이라서 한글이 깨짐
+
+UTF-8 3byte, ms949나 euc-kr은 2byte 로 한글을 표현해서 깨짐
+
+ctrl + p -> 전체 -> file encoding 검색
+
+global encoding, project encoding utf-8로 변경
+
+### 방법 2
+
+intelliJ 인코딩을 변경해주기
+
+ctrl + p, shift + tab x2 -> vm option 검색
+
+```txt
+-Dfile.encoding=UTF-8
+-Dconsole.encoding=UTF-8
+```
+
+## 8080 사용중일 경우
+
+```cmd
+netstat -ano | findstr 8080
+taskkill /f /pid <pid>
+
+lsof -i :8080
+kill -9 <pid>
+```
+
+## lombok boolean 매칭 안되는 문제
+
+reference type Boolean 으로 변경해주면 됨
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class UserRequest {
+    private boolean isKorean; // default: false, not matched
+    private Boolean isKorean; // matched
+}
+```
