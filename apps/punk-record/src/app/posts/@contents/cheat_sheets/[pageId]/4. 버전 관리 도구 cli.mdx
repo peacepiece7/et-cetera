@@ -1,0 +1,18 @@
+# 버전 관리 도구 cli 모음
+
+## 동일한 버전에 대해 종속성 유지하기
+
+### Using purpose-built tooling
+
+Tools like syncpack, manypkg, and sherif can be used for this specific purpose.
+
+### Using your package manager
+
+You can use your package manager to update dependency versions in one command
+
+```sh
+yarn upgrade-interactive --latest
+pnpm up --recursive typescript@latest
+```
+
+[reference](https://turbo.build/repo/docs/crafting-your-repository/managing-dependencies#using-your-package-manager)

@@ -1,0 +1,23 @@
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+
+# 자바 퍼시스턴스와 jpa
+
+## 자바 퍼시스턴스란
+
+자바 퍼시스턴스란 자바 애플리케이션에서 자바 객체를 db에 저장하고 불러오는 표준 기술이다.
+
+## 그리고 jpa
+
+jpa는 자바 퍼시스턴스의 구현체이다.
+
+spring boot에서 db와 연동할 때 `JpaRepository`를 확장하는 인터페이스를 정의하면 jpa가 자동으로 구현체를 생성해준다.
+
+이떄 구현체에는 기본적인 CRUD 메소드가 포함되어 있고, 규칙에 맞게 메소드를 작성하면 jpa가 알아서 쿼리를 생성해준다.
+
+```java
+public interface PostRepository  extends JpaRepository<PostEntity, Long> {
+    public Optional<PostEntity> findFirstByIdAndStatusOrderByIdDesc(Long id, String status);
+}
+```
