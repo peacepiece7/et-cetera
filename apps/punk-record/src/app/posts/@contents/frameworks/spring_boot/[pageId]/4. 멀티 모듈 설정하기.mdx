@@ -1,0 +1,85 @@
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+
+# 멀티 모듈 설정
+
+## 프로젝트 생성
+
+alt + f -> alt + n -> alt + j
+![img](/images/multi_module_1.png)
+
+## 새로운 모듈 추가
+
+service dir -> alt + insert -> Module... click
+
+![img](/images/multi_module_2.png)
+
+root settings.gradle 보면 하위 종속성으로 모듈 추가된거 나온다.
+
+![img](/images/multi_module_3.png)
+
+그리고 똑같이 db 모듈도 만들어주자
+
+db 모듈에
+
+이런 클래스 추가
+
+```java
+package org.delivery.db;
+
+public class UserDto {
+}
+```
+
+root build.gradle 파일에 다음 내용 추가
+
+```txt
+// service 하위 모든 저장소는 maven 을 쓰겠다
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+```
+
+api 모듈에 db를 의존성으로 추가
+
+아래사진처럼 compileClasspath project.db 추가 된 것을 확인한다.
+
+![img](/images/multi_module_4.png)
+
+## build.gradle의 boorJar, jar
+
+bootJar:\
+spring boot 실행 파일을 만들어준다.
+```txt
+bootJar {
+    enabled = true // default
+}
+```
+빌드시 build/libs/<>-SNAPSHOT.jar 파일이 생성되는데, `java -jar <>-SNAPSHOT.jar` 로 실행해보면 intelliJ에서 ctrl + shift + f10으로 실행한 것과 동일하게 동작한다.
+
+jar:\
+요것도 true로 하면 jar 파일을 만들어준다.\
+boorJar랑 다른점은 실행 파일은 아니고 클래스를 묶어주는 역할이다.
+```txt
+jar {
+    enabled = true // default
+}
+```
+
+즉 멀티 모듈일 떄, root build.gradle에 bootJar, jar를 false로 설정해주면 root에 대한 jar, bootJar 파일이 생성되지 않는다.
+
+이거 안해주면 main.java 없다고 에러난다.
+
+## 빌드하기
+
+gradle 아이콘을 열면 build 스크립트들이 있다.
+
+![img](/images/multi_module_5.png)
+
+맨 위 스크립트 부터 `gradlew assemble`, `gradlew bootBuildImage` ... 이런식으로 cli를 입력하는 것과 동일하게 동작한다.\
+다만 intelliJ에서 설정한 jdk 버전이 멀티 모듈이나, 로컬에 설치된 jdk와 버전이 다르면 cli로 해당 명령어를 입력하면 에러가 발생할 것이다.
+
+gradlew는 jdk 버전을 %JAVA_HOME% 변수에서 찾는데 gradlew을 수동으로 돌릴 떈 요거를 수정해줘야한다.
