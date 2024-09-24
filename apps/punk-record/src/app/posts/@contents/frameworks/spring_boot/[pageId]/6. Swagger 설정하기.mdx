@@ -1,0 +1,36 @@
+export const METADATA = {
+  title: "blog | 5. Swagger 설정하기"
+  description: "5. Swagger 설정하기",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com"
+}
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+
+# Swagger 설정하기
+
+mavenRepository SpringDoc 검색
+
+1.8v 까지 나왔는데 강의랑 맞추기 위해 1.7 씀
+
+springDoc 패키지를 build.gradle 설정 파일에 추가
+
+```text
+// Swagger(Spring 3.x.x 이상부터 SpringFox 대신, SpringDoc)
+implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+```
+
+## swagger config 설정
+
+```java
+@Configuration
+public class SwaggerConfig {
+
+    // ObjectMapperConfig.java에 정의한 objectMapper 메서드가 실행되면 리턴값이 요기 파라메터(objectMapper)로 주어짐
+    @Bean
+    public ModelResolver modelResolver (ObjectMapper objectMapper) {
+        return new ModelResolver(objectMapper);
+    }
+}
+```

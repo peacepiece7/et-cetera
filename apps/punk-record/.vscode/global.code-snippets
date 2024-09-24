@@ -11,6 +11,7 @@
       "}",
       "import { Detail } from \"@/components/mdx/detail\"",
       "import { MDXImage, MDXFlex } from \"@/components/mdx/image\"",
+      "import { Kbd } from \"@repo/ui-shadcn/ui/typography/kdb\""
       "\n",
       "# ${TM_FILENAME_BASE}",
       "$0"

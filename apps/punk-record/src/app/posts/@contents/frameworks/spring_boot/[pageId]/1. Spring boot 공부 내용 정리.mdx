@@ -109,11 +109,11 @@ public class UserEntity {
 
 컨트롤러를 정의할 떄 사용하는 어노테이션이다.
 
-@RestController는 JSON, XML같은 데이터를 반환하기위해 사용하는 어노테이션이다. 이걸 붙여줘야 스프링 컨테이너에 등록된다.
+`@RestController`는 JSON, XML같은 데이터를 반환하기위해 사용하는 어노테이션이다. 이걸 붙여줘야 스프링 컨테이너에 등록된다.
 
-@Controller도 있는데 이건 view를 반환할 때 사용한다.
+`@Controller`도 있는데 이건 view를 반환할 때 사용한다.
 
-@GetMapper, @PostMapper, @PutMapper, @DeleteMapper를 사용하면 각각 GET, POST, PUT, DELETE 요청을 처리할 수 있다.
+`@GetMapper`, `@PostMapper`, `@PutMapper`, `@DeleteMapper`를 사용하면 각각 GET, POST, PUT, DELETE 요청을 처리할 수 있다.
 
 아래 예시는 `POST /api/post` 경로에서 User 객체를 받아서 반환하는 컨트롤러이다.
 
@@ -131,9 +131,9 @@ public class RestApiController {
 
 ## @JsonProperty, @JsonIgnore
 
-@JsonProperty: json으로 변환할 때 필드명을 변경할 수 있다.
+`@JsonProperty`: json으로 변환할 때 필드명을 변경할 수 있다.
 
-@JsonIgnore: json으로 변환할 때 해당 필드를 무시한다.
+`@JsonIgnore`: json으로 변환할 때 해당 필드를 무시한다.
 
 ```java
 @Data
@@ -152,12 +152,11 @@ public class User {
 
 ### 직렬화, 역직렬화
 
-java는 jackson 라이브러리로 json을 역/직렬화한다.
+java는 jackson 라이브러리로 json을 역/직렬화한다.\
+이는 내부적으로 getter/setter, toString을 사용한다.\
+(자스랑 비슷함)
 
-이는 내부적으로 getter/setter, toString을 사용한다. (자스랑 비슷함)
-
-JSON 변환할 때 예외 사항이 있을 경우 @JsonProperty, @JsonIgnore로 충분하지만
-
+JSON 변환할 때 예외 사항이 있을 경우 @JsonProperty, @JsonIgnore로 충분하지만\
 경우에 따라서 `@JsonSerialize`, `@JsonDeserialize`이나 getter/setter, toString 등 여러 방법을 고려할 수 있다.
 
 ## Exception
@@ -248,7 +247,7 @@ var prevData = dataList.stream()
 .filter(it -> it.getId().equals(data.getId()))
 .findFirst();
 
-public void failture() {
+public void failure() {
 if(prevData.isPresent()) {
 // 왠지 dataList 는 List<T> 일 것 같은데 Optional<List<T>> 임
 }
@@ -263,8 +262,7 @@ prevData.ifPresent(dataList::remove);
 
 ```
 
-그외 is(if)Empty 도 있고 로직이 길어지지만 `dataList.get(i)`을 써도 된다.
-
+그외 is(if)Empty 도 있고 로직이 길어지지만 `dataList.get(i)`을 써도 된다.\
 ~~대충 만들언 intellij 가 알아서 추천해줌~~
 
 </Detail>
@@ -296,7 +294,7 @@ public class Controller() {
 
 ## @service
 
-서비스 레이어는 @Service 어노테이션을 적어줘야한다.
+서비스 레이어는 `@Service` 어노테이션을 적어줘야한다.
 
 ```java
 @Service
@@ -305,8 +303,7 @@ public class UserService {
 }
 ```
 
-Service 계층이 아님에도 스프링 컨테이너에 등록해야 하는 경우는 `@Component`를 붙여주면 되고
-
+Service 계층이 아님에도 스프링 컨테이너에 등록해야 하는 경우는 `@Component`를 붙여주면 되고\
 외부 라이브러리라면 `@Configuration` -> `@Bean` 어노테이션을 붙이고 인스턴스를 리턴하면 스프링 컨테이너에 등록된다.
 
 ```java
@@ -317,6 +314,49 @@ public class DataBaseConfig {
     public UserRepository userRepository() {
         return new UserRepository();
     }
+}
+```
+
+## @MappedSuperclass
+
+직접 테이블에 매핑되지 않지만 해당 필드를 상속받아 쓸수 있다.\
+(createdAt, UpdatedAt, Id 같은 것들에 사용된다.)
+
+```java
+@MappedSuperclass
+public abstract class BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+}
+
+@Entity
+public class User extends BaseEntity {
+    // ...rest attrs
+}
+```
+
+## @SuperBuilder
+
+엔티티를 상속 받을 경우 부모 엔티티의 속성을 쓰고 싶다면 `@SuperBuilder`를 사용해야한다.
+
+```java
+@MappedSuperclass
+@SuperBuilder
+public class BaseEntity {}
+
+@Entity
+@Table(name = "account")
+@SuperBuilder
+public class AccountEntity extends BaseEntity {
+    // ... rest attrs
 }
 ```
 

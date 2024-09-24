@@ -1,8 +1,15 @@
-import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+export const METADATA = {
+  title: "blog | 2. Spring boot 이슈 정리"
+  description: "2. Spring boot 이슈 정리",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com"
+}
 import { Detail } from "@/components/mdx/detail"
 import { MDXImage, MDXFlex } from "@/components/mdx/image"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
 
-# Spring Boot 이슈 정리
+# 2. Spring boot 이슈 정리
 
 ## IntelliJ에서 JVM 버전 변경이 안되는 이슈
 
@@ -53,12 +60,9 @@ gradlew -version
 
 ### 방법 1
 
-UTF-8이 기본인데 ms는 ms949 포멧이라서 한글이 깨짐
-
-UTF-8 3byte, ms949나 euc-kr은 2byte 로 한글을 표현해서 깨짐
-
-ctrl + p -> 전체 -> file encoding 검색
-
+UTF-8이 기본인데 ms는 ms949 포멧이라서 한글이 깨진다\
+UTF-8 3byte, ms949나 euc-kr은 2byte 로 한글을 표현해서 깨진다.\
+ctrl + p -> 전체 -> file encoding 검색\
 global encoding, project encoding utf-8로 변경
 
 ### 방법 2
@@ -96,3 +100,43 @@ public class UserRequest {
     private Boolean isKorean; // matched
 }
 ```
+
+## Using @EqualsAndHashCode for JPA entities is not recommended. It can cause severe performance and memory consumption issues.
+
+`@Data`, `@EqualsAndHashCode` 어노테이션 모두 메모리 소비 이슈로 추천하지 않는 경고가 출력된다.\
+다음 코드처럼 변경하길 권한다.
+
+```java
+@Getter
+@Entity
+@NoArgsConstructor(access = PROTECTED)
+public class Users {
+
+    /// ... 생략
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        Users that = (Users) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+}
+```
+
+추가로
+
+`@EqualsAndHashCode(callSuper = true)` 어노테이션은 Equal, HashCode 오버라이드해준다.\
+callSuper = true 일 경우 부모 클래스의 속성도 포함한다.
+
+[Warnings when using @EqualsAndHashCode for JPA entities](https://youtrack.jetbrains.com/issue/IDEA-279243/Warnings-when-using-EqualsAndHashCode-for-JPA-entities)

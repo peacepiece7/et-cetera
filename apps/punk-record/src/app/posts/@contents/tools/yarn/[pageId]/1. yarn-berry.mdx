@@ -1,4 +1,15 @@
-# yarn
+export const METADATA = {
+  title: "blog | 1. yarn-berry"
+  description: "1. yarn-berry",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com"
+}
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+
+# yarn-berry
 
 다음 명령어로 yarn 설치한다.
 
@@ -18,7 +29,7 @@ yarn init -2
 
 1. vscode extension에서 ZipFs를 설치
 
-PnP 모드시 zip archives에서 타입을 가져와주는 yarn toolchain이다. [ZipFS](https://marketplace.visualstudio.com/items?itemName=arcanis.vscode-zipfs)  
+PnP 모드시 zip archives에서 타입을 가져와주는 yarn toolchain이다. [ZipFS](https://marketplace.visualstudio.com/items?itemName=arcanis.vscode-zipfs)
 (node_modules가 없기 때문에 타입 에러 발생한다. yarn pnp 모드시 필수)
 
 2. `yarn dlx @yarnpkg vscode` 실행

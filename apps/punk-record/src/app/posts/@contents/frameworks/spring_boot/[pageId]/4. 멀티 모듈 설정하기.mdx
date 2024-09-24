@@ -1,10 +1,15 @@
-import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+export const METADATA = {
+  title: "blog | 4. 멀티 모듈 설정하기"
+  description: "4. 멀티 모듈 설정하기",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com"
+}
 import { Detail } from "@/components/mdx/detail"
 import { MDXImage, MDXFlex } from "@/components/mdx/image"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
 
-# 멀티 모듈 설정
-
-## 프로젝트 생성
+# 멀티 모듈 설정하기
 
 alt + f -> alt + n -> alt + j
 ![img](/images/multi_module_1.png)
@@ -45,7 +50,7 @@ allprojects {
 
 api 모듈에 db를 의존성으로 추가
 
-아래사진처럼 compileClasspath project.db 추가 된 것을 확인한다.
+아래사진처럼 compileClassPath project.db 추가 된 것을 확인한다.
 
 ![img](/images/multi_module_4.png)
 
@@ -53,16 +58,19 @@ api 모듈에 db를 의존성으로 추가
 
 bootJar:\
 spring boot 실행 파일을 만들어준다.
+
 ```txt
 bootJar {
     enabled = true // default
 }
 ```
+
 빌드시 build/libs/<>-SNAPSHOT.jar 파일이 생성되는데, `java -jar <>-SNAPSHOT.jar` 로 실행해보면 intelliJ에서 ctrl + shift + f10으로 실행한 것과 동일하게 동작한다.
 
 jar:\
 요것도 true로 하면 jar 파일을 만들어준다.\
 boorJar랑 다른점은 실행 파일은 아니고 클래스를 묶어주는 역할이다.
+
 ```txt
 jar {
     enabled = true // default
@@ -83,3 +91,22 @@ gradle 아이콘을 열면 build 스크립트들이 있다.
 다만 intelliJ에서 설정한 jdk 버전이 멀티 모듈이나, 로컬에 설치된 jdk와 버전이 다르면 cli로 해당 명령어를 입력하면 에러가 발생할 것이다.
 
 gradlew는 jdk 버전을 %JAVA_HOME% 변수에서 찾는데 gradlew을 수동으로 돌릴 떈 요거를 수정해줘야한다.
+
+## 멀티모듈 Bean 등록 문제
+
+Spring Boot 는 `@SpringBootApplication` 이 있는 패키지와 그 하위 패키지를 기본으로 스캔하여 빈으로 등록한다.
+
+`@SpringBootApplication`의 스캔 규칙으로 패키지 명이 동일하면 멀티 모듈에서도 자동으로 스캔되는데\
+그렇기에 org.delivery.db.~.java 파일과 org.delivery.api.~.java 파일은 동일한 컨테이너에 빈으로 등록 할 수 없다.
+
+해결 방법으로 패키지명을 동일하게 바꿔주거나\
+다음과 같이 설정해줄 수 있다.
+
+```java
+@Configuration
+@EntityScan(basePackages = "org.delivery.db")
+@EnableJpaRepositories(basePackages = "org.delivery.db")
+public class JpaConfig {
+
+}
+```

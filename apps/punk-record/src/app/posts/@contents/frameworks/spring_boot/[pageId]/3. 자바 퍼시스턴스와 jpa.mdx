@@ -1,4 +1,10 @@
-import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+export const METADATA = {
+  title: "blog | 3. 자바 퍼시스턴스와 jpa"
+  description: "3. 자바 퍼시스턴스와 jpa",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com"
+}
 import { Detail } from "@/components/mdx/detail"
 import { MDXImage, MDXFlex } from "@/components/mdx/image"
 
@@ -10,10 +16,8 @@ import { MDXImage, MDXFlex } from "@/components/mdx/image"
 
 ## 그리고 jpa
 
-jpa는 자바 퍼시스턴스의 구현체이다.
-
-spring boot에서 db와 연동할 때 `JpaRepository`를 확장하는 인터페이스를 정의하면 jpa가 자동으로 구현체를 생성해준다.
-
+jpa는 자바 퍼시스턴스의 구현체이다.\
+spring boot에서 db와 연동할 때 `JpaRepository`를 확장하는 인터페이스를 정의하면 jpa가 자동으로 구현체를 생성해준다.\
 이떄 구현체에는 기본적인 CRUD 메소드가 포함되어 있고, 규칙에 맞게 메소드를 작성하면 jpa가 알아서 쿼리를 생성해준다.
 
 ```java
