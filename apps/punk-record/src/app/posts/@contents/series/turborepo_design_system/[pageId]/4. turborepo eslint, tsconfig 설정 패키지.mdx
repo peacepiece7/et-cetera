@@ -4,10 +4,8 @@
 
 `terbo gen workspace`
 
-알아서 dependency, typescript, eslint 설정 뭐할건지 물어본다.
-
-[gen workspace 옵션은](https://turbo.build/repo/docs/reference/generate#workspace)은 여기
-
+알아서 dependency, typescript, eslint 설정 뭐할건지 물어본다.\
+[gen workspace 옵션은](https://turbo.build/repo/docs/reference/generate#workspace)은 여기\
 [generating-code 가이드](https://turbo.build/repo/docs/guides/generating-code)는 여기
 
 ## Root Dependency
@@ -25,8 +23,7 @@ cd app/storybook
 pnpm dlx storybook@latest init
 ```
 
-apps/storybook/.eslintrc.cjs에 eslint, tsconfig를 모노레포 packages 안에 있는 걸로 대체하고 싶을 거다.
-
+apps/storybook/.eslintrc.cjs에 eslint, tsconfig를 모노레포 packages 안에 있는 걸로 대체하고 싶을 거다.\
 그러면 이렇게 작성해주면 된다.
 
 ```js
@@ -46,8 +43,7 @@ pnpm install @repo/typescript-config --save-dev --filter=storybook
 
 1. \import 경로를 찾지 못하는 문제
 
-아래처럼 패키지 이름으로 가져오고 싶은데, 이 방식으로는 해당 경로를 찾을 수 없어서 일단 보류해두었다.
-
+아래처럼 패키지 이름으로 가져오고 싶은데, 이 방식으로는 해당 경로를 찾을 수 없어서 일단 보류해두었다.\
 eslint 공식 문서를 정독해보고 직접 eslint plugin도 만들어보고 해봐야겠다.
 
 ```js
@@ -58,8 +54,6 @@ eslint 공식 문서를 정독해보고 직접 eslint plugin도 만들어보고 
 
 2.  eslint, ts 설정은 한 곳에 모아두는게 좋다.
 
-만약 `@repo/eslint-config/storybook.js`이 없다면
-
-`pnpm dlx storybook@latest init`시 생성된 eslint, tsconfig 파일을
-
+만약 `@repo/eslint-config/storybook.js`이 없다면\
+`pnpm dlx storybook@latest init`시 생성된 eslint, tsconfig 파일을\
 `@repo/eslint-config`, `@repo/typescript-config`로 옮겨주자.

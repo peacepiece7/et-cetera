@@ -41,14 +41,16 @@ export default function NavigationContentForMobile({
         setIsOpenDrawer(() => e)
       }}
     >
-      <DrawerTrigger>네비게이션 열기</DrawerTrigger>
+      <DrawerTrigger>
+        <Button size="lg">네비게이션</Button>
+      </DrawerTrigger>
       <DrawerContent className="min-h-[80%] max-h-[100%]">
         <DrawerHeader>
           <DrawerTitle>네비게이션</DrawerTitle>
           <DrawerDescription>목록, 목차를 찾습니다.</DrawerDescription>
         </DrawerHeader>
         <SearchArea />
-        <div className="flex justify-around mt-4">
+        <div className="flex justify-around mt-2">
           <Button size="lg" onClick={() => setActiveIdx(0)}>
             목록
           </Button>
@@ -59,7 +61,7 @@ export default function NavigationContentForMobile({
           )}
         </div>
         <nav className="relative h-full overflow-y-scroll z-10 pt-4">
-          <div className="pt-10 text-sm">
+          <div className="pt-2 text-base">
             <div className={`${activeIdx === 0 ? "visible" : "hidden"}`}>{navTree}</div>
             {isPostPage && <div className={`${activeIdx === 1 ? "visible" : "hidden"}`}>{tocChildren}</div>}
           </div>

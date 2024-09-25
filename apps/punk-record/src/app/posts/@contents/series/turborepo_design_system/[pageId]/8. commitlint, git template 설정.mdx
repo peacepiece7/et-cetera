@@ -38,7 +38,9 @@ npx --no -- commitlint --config commitlint.config.mjs --edit "${1}"
 
 ### 커스텀 플러그인 만들기
 
-`@commitlint/config-conventional`는 한글 지원이 안된다. 한글을 사용하고 싶다면, 플러그인을 직접 만들자. (`@commitlint/config-conventional` 뺴도 된다.)
+`@commitlint/config-conventional`는 한글 지원이 안된다. 한글을 사용하고 싶다면\
+플러그인을 직접 만들자.\
+(`@commitlint/config-conventional` 뺴도 된다.)
 
 ```js
 const Configuration = {
@@ -78,15 +80,12 @@ export default Configuration
 
 ### 대화형으로 구성하기
 
-대화형 구성은 unix 계열에서만 하는게 좋다.
-
-window 환경에서 대화하는 것은 건강에 좋지 않다.
-
+대화형 구성은 unix 계열에서만 하는게 좋다.\
+window 환경에서 대화하는 것은 건강에 좋지 않다.\
 [commitlint prompt](https://commitlint.js.org/reference/prompt.html#prompt)여기를 참고
 
-`cz-customizable`을 사용해서 구성할 계획이면 다음 링크를 참고
-
-[commitlint/issues/2684](https://github.com/conventional-changelog/commitlint/issues/2684)  
+`cz-customizable`을 사용해서 구성할 계획이면 다음 링크를 참고\
+[commitlint/issues/2684](https://github.com/conventional-changelog/commitlint/issues/2684)\
 [blog cz-customizable](https://velog.io/@restarea/cz-customizable)
 
 [pre-commit을 Inquirer로 hooking](https://github.com/SBoudrias/Inquirer.js?tab=readme-ov-file#using-as-pre-commitgit-hooks-or-scripts)하는 방법도 고려해보자.
@@ -111,7 +110,7 @@ window 환경에서 대화하는 것은 건강에 좋지 않다.
 // script.js
 const GIT_COMMIT_TEMPLATE = `
 
-# NOTE: 
+# NOTE:
 # 다음 형태로 커밋 메시지를 작성해주세요.
 # <타입>[적용 범위(선택 사항)]: <설명>
 #
@@ -125,7 +124,7 @@ const GIT_COMMIT_TEMPLATE = `
 #
 # 저녁 매뉴 추천 받습니다.
 # 주말엔 놀고 싶어요.
-# 
+#
 # - nodejs 버전이 올라가면서 사용하지 않는 라이브러리를 제거
 # - newLibararyName으로 통합
 # - libraryName를 사용중인 경우 newLibararyName으로 변경 필요
@@ -145,7 +144,7 @@ ${Object.keys(GIT_COMMIT_CONFIGURATION["type-enum-kor"])
     return `# ${key} : ${GIT_COMMIT_CONFIGURATION["type-enum-kor"][key].description}`
   })
   .join("\n")}
-  
+
 # REMEMBER_ME:
 # HEADER TYPE은 영어로 작성해주세요.
 # 한글을 지향합니다.
@@ -156,7 +155,7 @@ ${Object.keys(GIT_COMMIT_CONFIGURATION["type-enum-kor"])
 fs.writeFileSync("./git_commit_template.txt", GIT_COMMIT_TEMPLATE)
 ```
 
-packge.json에 prepare를 실행할 떄 git commit template이 돌아가도록 설정하자
+package.json에 prepare를 실행할 떄 git commit template이 돌아가도록 설정하자
 
 ```json
 {
@@ -169,7 +168,7 @@ packge.json에 prepare를 실행할 떄 git commit template이 돌아가도록 �
 ## 참고
 
 [🎨 commitlint 공식문서 링크](https://commitlint.js.org/)
-[commitlint/issues/2684](https://github.com/conventional-changelog/commitlint/issues/2684)  
+[commitlint/issues/2684](https://github.com/conventional-changelog/commitlint/issues/2684)
 [blog cz-customizable](https://velog.io/@restarea/cz-customizable)
 [pre-commit을 Inquirer로 hooking](https://github.com/SBoudrias/Inquirer.js?tab=readme-ov-file#using-as-pre-commitgit-hooks-or-scripts)
 [commitlint prompt](https://commitlint.js.org/reference/prompt.html#prompt)

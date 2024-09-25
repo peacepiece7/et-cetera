@@ -48,7 +48,7 @@ export default function NavigationContentForDesktop({
         )}
       </div>
       <nav ref={navRef} className="relative h-full overflow-y-scroll z-10 pt-4" style={{ width: `${sideBarWidth}px` }}>
-        <div className="pt-10 text-sm">
+        <div className="pt-10 text-base">
           <div className={`${activeIdx === 0 ? "visible" : "hidden"}`}>{navTree}</div>
           {isPostPage && <div className={`${activeIdx === 1 ? "visible" : "hidden"}`}>{tocChildren}</div>}
         </div>

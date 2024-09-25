@@ -69,6 +69,7 @@ export const createTOCElements = (headings: RootContentMap["heading"][]): React.
   const rootUl = React.createElement("ul", { key: "root" })
   const stack = [{ element: rootUl, depth: 0, children: [] as React.ReactElement[] }]
 
+  const indents = ["ml-2", "ml-4", "ml-6", "ml-8", "ml-10", "ml-12", "ml-14", "ml-16", "ml-18", "ml-20"]
   headings.forEach((heading, index) => {
     const { depth } = heading
     const text = heading.children.flatMap((node) => ("value" in node ? node.value : "")).join("")
@@ -77,8 +78,8 @@ export const createTOCElements = (headings: RootContentMap["heading"][]): React.
       "li",
       {
         key: `li-${index}`,
-        className: "flex items-center ml-2 overflow-hidden mr-2 my-1 hover:bg-gray-400 hover:bg-opacity-10",
-        "data-deepth": depth,
+        className: `flex items-center overflow-hidden mr-2 my-1 hover:bg-gray-400 hover:bg-opacity-10 ${indents[depth]}`,
+        "data-depth": depth,
       },
       <a href={`#${hashTag}`} className="link">
         {"# " + text}
