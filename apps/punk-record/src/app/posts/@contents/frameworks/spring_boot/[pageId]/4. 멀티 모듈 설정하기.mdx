@@ -1,17 +1,10 @@
-export const METADATA = {
-  title: "blog | 4. 멀티 모듈 설정하기"
-  description: "4. 멀티 모듈 설정하기",
-  date: "",
-  tags: [],
-  authors: "scv7282@gmail.com"
-}
 import { Detail } from "@/components/mdx/detail"
 import { MDXImage, MDXFlex } from "@/components/mdx/image"
 import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
 
 # 멀티 모듈 설정하기
 
-alt + f -> alt + n -> alt + j
+alt + f -> alt + n -> alt + j\
 ![img](/images/multi_module_1.png)
 
 ## 새로운 모듈 추가
@@ -39,7 +32,7 @@ public class UserDto {
 
 root build.gradle 파일에 다음 내용 추가
 
-```txt
+```text
 // service 하위 모든 저장소는 maven 을 쓰겠다
 allprojects {
     repositories {
@@ -65,7 +58,7 @@ bootJar {
 }
 ```
 
-빌드시 build/libs/<>-SNAPSHOT.jar 파일이 생성되는데, `java -jar <>-SNAPSHOT.jar` 로 실행해보면 intelliJ에서 ctrl + shift + f10으로 실행한 것과 동일하게 동작한다.
+빌드시 build/libs/\<name\>-SNAPSHOT.jar 파일이 생성되는데, `java -jar <name>-SNAPSHOT.jar` 로 실행해보면 intelliJ에서 ctrl + shift + f10으로 실행한 것과 동일하게 동작한다.
 
 jar:\
 요것도 true로 하면 jar 파일을 만들어준다.\

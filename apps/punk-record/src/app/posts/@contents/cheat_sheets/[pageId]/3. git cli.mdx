@@ -1,36 +1,37 @@
 # git cli cheat sheet
 
-### 브랜치 이름 변경
+
+#### 브랜치 이름 변경
 
 `git branch -M <target-branch> <new-name>`
 
-### 추적되지 않은(Untracked) 파일, 디렉터리 삭제
+#### 추적되지 않은(Untracked) 파일, 디렉터리 삭제
 
 `git reset --hard origin/dev & git clean -fd` 이런식으로 히스토리 관리가 필요차 않은 파일, 디렉터리 삭제
 
 `git clean -fd`
 
-### fast-forward 없이 병함 하기 & 머지 커밋 메시지 수정
+#### fast-forward 없이 병함 하기 & 머지 커밋 메시지 수정
 
 `git merge <branch> --no-ff --edit`
 
-### git 캐시 삭제
+#### git 캐시 삭제
 
 `git rm -r --cached .`
 
-### 로컬 브랜치 삭제
+#### 로컬 브랜치 삭제
 
 `git branch -D <branch>`
 
-### 원격 브랜치 삭제
+#### 원격 브랜치 삭제
 
 `git push origin -d <branch>`
 
-### 브랜치 이름을 따로 지정하지 않고 푸시하기
+#### 브랜치 이름을 따로 지정하지 않고 푸시하기
 
 `git push origin HEAD`
 
-### push default 설정
+#### push default 설정
 
 1. 현재 프로젝트(.git) 한정 : `git config push.default current`
 
@@ -38,7 +39,7 @@
 
 `git push` => 이렇게하면 알아서 현재 브랜치로 푸시됨
 
-### template 설정 및 취소
+#### template 설정 및 취소
 
 `git config commit.template <file path>`
 
@@ -46,17 +47,17 @@
 
 `git config --unset commit.template`
 
-### git diff 변경사항 체크
+#### git diff 변경사항 체크
 
 `git diff --name-only HEAD^ HEAD`
 
-### 특정 디렉터리에 변경 사항이 있는지 체크
+#### 특정 디렉터리에 변경 사항이 있는지 체크
 
 `git diff --name-only HEAD~1 HEAD | grep -q <directory>`
 
 `echo $?` => exit code : 0 이면 변경사항 있음, 1 이면 변경사항 없음
 
-### 신입 때 몰랏던 git 실수들
+#### 신입 때 몰랏던 git 실수들
 
 [신입 때 몰랏던 git 실수들](https://www.youtube.com/watch?v=hb4RmDas9is)
 
