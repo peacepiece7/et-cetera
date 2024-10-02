@@ -1,6 +1,5 @@
 import PostContentsContainer from "@/components/PostContentsContainer"
 import { getFileNamesSafely, getPostFullPath } from "@/utils/server"
-import { Metadata } from "next"
 
 export default async function PostPage({
   params,
