@@ -92,6 +92,8 @@ jobs:
           echo "START DEPLOY"
           cd ${{ secrets.DEPLOY_PATH }}
           source ~/.bashrc
+          echo "Removing old build"
+          rm -rf ./.next
           echo "Unzipping build.zip"
           unzip -o build.zip
           echo "Unzip completed"
