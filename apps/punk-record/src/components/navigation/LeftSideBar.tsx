@@ -1,6 +1,5 @@
 import { headers } from "next/headers"
 import { Heading } from "mdast"
-import React from "react"
 import LeftSideBarNavigation from "./LeftSIdeBarNavigation"
 import { fetcher } from "@/utils/server"
 import { TreeNode } from "@/app/api/navigation/route"

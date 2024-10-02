@@ -1,3 +1,4 @@
+import React from "react"
 import WithMediaQuery from "../WithMediaQuery"
 import NavigationContentForMobile from "./NavigationContentForMobile"
 

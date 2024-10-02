@@ -1,3 +1,4 @@
+import React from "react"
 import NavigationContentForDesktop from "./NavigationContentForDesktop"
 import WithMediaQuery from "../WithMediaQuery"
 

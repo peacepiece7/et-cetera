@@ -12,6 +12,7 @@ import {
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { SearchArea } from "./SearchArea"
+import { useIsBrowser } from "@/hooks/useIsBrowser"
 
 export default function NavigationContentForMobile({
   navChildren,
@@ -23,7 +24,7 @@ export default function NavigationContentForMobile({
   activeTab: "nav" | "toc"
 }>) {
   const pathname = usePathname()
-
+  const { isBrowser } = useIsBrowser()
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
   const [isRender, setIsRender] = useState(false)
   const [activeIdx, setActiveIdx] = useState(activeTab === "nav" ? 0 : 1)
@@ -34,6 +35,8 @@ export default function NavigationContentForMobile({
     if (isOpenDrawer) return setIsRender(() => true)
     setIsRender(() => false)
   }, [isOpenDrawer])
+
+  if (!isBrowser) return null
 
   return (
     <Drawer

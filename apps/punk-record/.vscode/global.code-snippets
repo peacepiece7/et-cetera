@@ -3,7 +3,7 @@
     "prefix": "create-mdx",
     "body": [
       "export const METADATA = {",
-      "  title: \"blog | ${TM_FILENAME_BASE}\"",
+      "  title: \"blog | ${TM_FILENAME_BASE}\",",
       "  description: \"${TM_FILENAME_BASE}\",",
       "  date: \"\",",
       "  tags: [],",
