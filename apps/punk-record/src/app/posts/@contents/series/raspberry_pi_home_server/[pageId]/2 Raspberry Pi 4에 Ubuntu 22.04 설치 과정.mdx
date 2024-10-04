@@ -59,9 +59,9 @@ window에서 진행했으므로 putty를 사용하여 접속한다.
 
 ![Raspberry_pi3](/images/raspberry_pi3.png)
 
-# 이슈 정리
+## 이슈 정리
 
-## 1. 모니터를 연결하자
+### 1. 모니터를 연결하자
 
 이미지를 설치할 떄 wifi id를 잘못 적어서 wifi 연결이 안되는 문제가 있었고\
 Window에서 어떤 문제로 인해 sd card가 FAT으로 포멧이 안되어 raspberry pi에서 boot가 안되는 문제가 있었다.
@@ -69,19 +69,19 @@ Window에서 어떤 문제로 인해 sd card가 FAT으로 포멧이 안되어 ra
 모니터를 처음부터 연결했다면 에러 메시지를 확인하고 해결할 수 있었을텐데\
 호기롭게 모니터 없이 하려다가 시간을 많이 날려먹었다.
 
-## 2. act led 점등으로 확인하자
+### 2. act led 점등으로 확인하자
 
 빨강/파랑 led가 점등 되면 일단 부트가 된 것이다.\
 부트가 되었는데 wifi에 연결된 ip가 없다면, 아마도 로그인 문제일 것이다.\
 이런경우 화면을 연결해서 에러 메지지를 확인하자.
 
-## 3. 네트워크 관리자 설정
+### 3. 네트워크 관리자 설정
 
 Provider에 따라 다르겠지만, iptime의 경우 198.68.01로 접속한다.\
 초기 id/pw는 admin/admin로 만약 까먹었다면 뾰족한 물건으로 reset 버튼을 5초 정도 눌러주면 초기화 된다.\
 이후 로그인 -> 고급설정 -> 네트워크 관리자에서 raspberry pi의 ip를 확인할 수 있다.
 
-## 4. (raspberry pi)네트워크를 못찾을 경우
+### 4. (raspberry pi)네트워크를 못찾을 경우
 
 Raspberry pi imager에서 ubuntu 22.04를 설치할 때 wifi 설정을 해주었으나 네트워크를 찾기 못하는 문제가 발생했다.
 
@@ -136,7 +136,7 @@ network:
 $ sudo netplan apply
 ```
 
-## 5. (raspberry pi)50-cloud-init.yaml is too open netplat configuration should not be accessible by others
+### 5. (raspberry pi)50-cloud-init.yaml is too open netplat configuration should not be accessible by others
 
 yaml파일을 수정하다가 권한을 잘못 설정하면 이런 에러가 발생한다.\
 이럴 경우 권한을 수정해주어야 한다.
@@ -155,7 +155,7 @@ sudo chown root:root /etc/netplan/50-cloud-init.yaml
 ls -l /etc/netplan/50-cloud-init.yaml
 ```
 
-# 참고 링크
+## 참고 링크
 
 https://nitr0.tistory.com/325
 

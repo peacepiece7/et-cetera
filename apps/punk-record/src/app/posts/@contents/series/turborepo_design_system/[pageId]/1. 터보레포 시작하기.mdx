@@ -1,4 +1,6 @@
-# pnpm 설치
+# 터보레포 시작하기
+
+## pnpm 설치
 
 pnp를 지원하지 않기 떄문에 pnpm을 선택
 
@@ -10,7 +12,7 @@ pnpm dlx create-turbo@latest
 
 설치하는데 생각보다 오래걸림 멈춘건줄 알고 어러번 캔슬했는데, 웹 서핑좀 하고 오니까 설치 진행중이라고 나옴..
 
-## pnpm version
+### pnpm version
 
 ```bash
 corepack enable
@@ -25,7 +27,7 @@ packageManager 속성이 있으면 설치된 버전에 [상관없이 명시되�
 { "packageManager": "pnpm@8.15.6" }
 ```
 
-## node version
+### node version
 
 ```
 mkdir ./nvmrc
@@ -44,18 +46,18 @@ unix 계열은
 nvm use
 ```
 
-# turborepo 개요
+## turborepo 개요
 
 자세한 내용은 터보 레포에 대해서 정리한 포스팅 [crafting terborepo 요약](222.121.79.140/posts/turborepo/2) 참고
 
-# Telemetry
+## Telemetry
 
 익명으로 사용자 데이터를 수집한다고 함. 비활성화 가능\
 제품에서 쓸 계획이라면 비활성화 할 것 같은데 일단 알아만 두자.
 
 `turbo telemetry status`
 
-# cli
+## cli
 
 두 커맨드는 동일하게 동작함
 
@@ -63,7 +65,7 @@ nvm use
 
 `pnpm run dev --filter @repo/math`
 
-# 참고한 곳
+## 참고한 곳
 
 https://github.com/Davicho-Dev/ReactTs-Vite-Jest-Testing_Library-TailwindCSS-Cypress-Storybook
 

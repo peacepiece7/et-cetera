@@ -1,6 +1,19 @@
+export const METADATA = {
+  title: "blog | tailwind playground",
+  description: "tailwind playground",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com",
+}
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+
 # Tailwind Playground
 
-## group-hover
+## tailwindcss
+
+### group-hover
 
 부모 이벤트를 자식에서 전달하고 싶을 때 사용
 
@@ -16,7 +29,7 @@
   <p className="transition-transform group-hover:translate-x-2">bar</p>
 </div>
 
-## apply
+### apply
 
 ```css
 .btn-primary {
@@ -47,9 +60,9 @@ addUtilities는 첫 번째 인자로 `CSSRuleObject` | `CSSRuleObject[]`를 받�
 
 addUtilities안에 들어가는 객체에 style 타입을 정해주고, as unknown as CSSRuleObject 해주는 것도 하나의 방법일 수 있음
 
-# settings.json
+## settings.json
 
-## associations
+### associations
 
 .css 파일에서 tailwindcss suggestion을 받고 싶다면 아래와 같이 설정
 
@@ -59,7 +72,7 @@ addUtilities안에 들어가는 객체에 style 타입을 정해주고, as unkno
   }
 ```
 
-## quick suggestion
+### quick suggestion
 
 className => 문자열이라 suggestion이 잘 안 뜨는 케이스가 있음 이럴때 아래와 같이 설정
 
@@ -69,7 +82,7 @@ className => 문자열이라 suggestion이 잘 안 뜨는 케이스가 있음 �
 }
 ```
 
-# 특정 속성에 vscode tailwindcss intellisense extension 적용되게 하기
+## 특정 속성에 vscode tailwindcss intellisense extension 적용되게 하기
 
 이런 경우
 

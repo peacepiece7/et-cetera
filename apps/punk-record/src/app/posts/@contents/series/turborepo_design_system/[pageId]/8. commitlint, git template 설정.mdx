@@ -1,3 +1,14 @@
+export const METADATA = {
+  title: "blog | commitlint, git template 설정",
+  description: "commitlint, git template 설정",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com",
+}
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+
 # commitlint
 
 이렇게 설치
@@ -36,7 +47,7 @@ npx --no -- commitlint --config commitlint.config.mjs --edit "${1}"
 
 `git add . && git commit`를 실행하면 commitlint가 동작한다.
 
-### 커스텀 플러그인 만들기
+## 커스텀 플러그인 만들기
 
 `@commitlint/config-conventional`는 한글 지원이 안된다. 한글을 사용하고 싶다면\
 플러그인을 직접 만들자.\
@@ -78,7 +89,7 @@ function typeEmptyWithKor(value) {
 export default Configuration
 ```
 
-### 대화형으로 구성하기
+## 대화형으로 구성하기
 
 대화형 구성은 unix 계열에서만 하는게 좋다.\
 window 환경에서 대화하는 것은 건강에 좋지 않다.\

@@ -1,4 +1,17 @@
-# shadcn
+export const METADATA = {
+  title: "blog | storybook, shadcn 설정",
+  description: "storybook, shadcn 설정",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com",
+}
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+
+# storybook, shadcn 설정
+
+## shadcn
 
 shadcn은 설치가 필요 없는 디자인 시스탬이다.\
 복사해서 가져오기만 하면 된다.\
@@ -7,7 +20,7 @@ shadcn은 설치가 필요 없는 디자인 시스탬이다.\
 Radix UI 기반으로 웹표준, 접근성을 준수하고, MUI, ANTD 등의 CSS 프레임워크보다 열려있다.\
 [shadcn, radix에 대해서는 여기서](https://velog.io/@ckstn0777/shadcnui-%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EA%B3%B5%EC%9C%A0-UI-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%82%AC%EC%9A%A9-%EA%B2%BD%ED%97%98)읽어보자
 
-## 설치
+### 설치
 
 tsconfig, tailwindcss 설정이 있는 패키지에서 시작한다.
 
@@ -29,7 +42,7 @@ tailwind.config.js는 shadcn 설치 설정에 따라 변경된다.\
         └── button.ts
 ```
 
-## storybook 연동하기
+### storybook 연동하기
 
 .storybook/main.js 설정을 이런식으로 패키지를 넘나드는 방식으로 하거나
 

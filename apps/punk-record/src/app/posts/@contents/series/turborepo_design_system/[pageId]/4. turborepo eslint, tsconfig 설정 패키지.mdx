@@ -1,6 +1,21 @@
-# eslint, tsconfig 설정 패키기 사용하기
+export const METADATA = {
+  title: "blog | turborepo eslint, tsconfig 설정 패키지",
+  description: "turborepo eslint, tsconfig 설정 패키지",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com",
+}
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
 
-## 패키지 생성
+# turborepo eslint, tsconfig 설정 패키지
+
+# turborepo eslint, tsconfig 설정 패키지 사용하기
+
+## eslint, tsconfig 설정 패키기 사용하기
+
+### 패키지 생성
 
 `terbo gen workspace`
 
@@ -8,11 +23,11 @@
 [gen workspace 옵션은](https://turbo.build/repo/docs/reference/generate#workspace)은 여기\
 [generating-code 가이드](https://turbo.build/repo/docs/guides/generating-code)는 여기
 
-## Root Dependency
+### Root Dependency
 
 turbo, husky, lint-staged 같이 **저장소를 관리하는 도구**만 루트 디펜던시로 남겨둔다.
 
-## 새로 만든 패키지에 eslint, tsconfig 적용하기
+### 새로 만든 패키지에 eslint, tsconfig 적용하기
 
 스토리북으로 사용할 패키지를 새로 생성했다고 쳐보자
 
@@ -39,7 +54,7 @@ pnpm install @repo/eslint-config --save-dev --filter=storybook
 pnpm install @repo/typescript-config --save-dev --filter=storybook
 ```
 
-## 삽질헸던 내용
+### 삽질헸던 내용
 
 1. \import 경로를 찾지 못하는 문제
 
