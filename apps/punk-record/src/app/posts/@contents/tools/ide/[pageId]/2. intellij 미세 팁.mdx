@@ -11,11 +11,33 @@ import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
 
 # intellij 미세 팁
 
-힙 메모리 최소 최대값 설정
+## 힙 메모리 최소, 최대값 설정
 
 ctrl + p -> 전체 검색 -> vm options -> edit custom vm options
 
 ```txt
 -Xms2048m
 -Xmx4096m
+```
+
+## 터미널 한글 깨짐
+
+`UTF-8`이 기본인데 ms는 `ms949` 포멧이라서 한글이 깨짐
+
+`UTF-8` 3byte, `ms949`나 `euc-kr`은 2byte 로 한글을 표현해서 깨짐
+
+<Kbd keyboards={["ctrl", "+", "p"]} /> -> 전체 -> file encoding 검색
+
+global encoding, project encoding `utf-8`로 변경
+
+terminal 도 `utf-8`로 찾아서 바꿔주기!
+
+## Post api 핸글 꺠짐
+
+help -> vm option 또는
+
+<Kbd keyboards={["ctrl", "+", "p"]} />, <Kbd keyboards={["shift", "+", "tab"]} /> x 2 -> vm option 검색
+
+```txt
+-Dfile.encoding=UTF-8
 ```
