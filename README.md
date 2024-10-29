@@ -33,5 +33,3 @@ pnpm run dev
 - husky
 - commitlint
 - syncpack
-
-rebuild test
