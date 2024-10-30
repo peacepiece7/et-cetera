@@ -1,4 +1,4 @@
-# Playground 입니다!
+# Playground
 
 ## sql 활용
 
@@ -209,7 +209,7 @@ group by rollup(p.job_code, p.gender);
 
 (A, B, C)일 경우 (A,B,C), (A,B), (A), 총합계가 된다.
 
-((A,B,C), D, E) 라면 (A,B,C,D,E), (A,B,C,D), (A,B,C), (D,E), (D), 총합계 가 된다.
+((A,B,C), D, E) 라면 (A,B,C,D,E), (A,B,C,D), (A,B,C), (D,E), (D), 총합계가 된다.
 
 ```sql
 select p.job_code, p.gender, p.name, count(*)
