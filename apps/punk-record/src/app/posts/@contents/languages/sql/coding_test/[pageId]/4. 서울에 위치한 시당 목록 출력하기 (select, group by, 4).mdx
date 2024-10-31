@@ -8,9 +8,15 @@ export const METADATA = {
 import { Detail } from "@/components/mdx/detail"
 import { MDXImage, MDXFlex } from "@/components/mdx/image"
 
-# 서울에 위치한 시당 목록 출력하기
+# 서울에 위치한 식당 목록 출력하기
 
 [링크](https://school.programmers.co.kr/learn/courses/30/lessons/131118)
+
+서울에 위치한 식당 목록을 출력하는 문제\
+출력에 집계함수와 식당 정보를 출력해야한다.\
+일반 정보(?)와 평균을 같이 출력하려면 group by가 들어가거나 서브쿼리로 평균을 구해야한다.\
+group by 전에 where을 걸어서 조회 범위를 줄여주는 방식으로 풀었다.\
+인라인 뷰로 평균을 구하는 방식도 있었다.
 
 ```txt
 문제 설명
