@@ -1,6 +1,4 @@
-# 이것저것 들어가있는 저장소
-
-turborepo, shadcn, tailwindcss, storybook을 메인으로 사용하는 저장소
+# monorepo playground
 
 ## Installation
 
@@ -25,11 +23,11 @@ pnpm run dev
 `@repo/config-ts` : typescript configuration
 ```
 
-## Utilities
+## keywords
 
-- Typescript
-- Tailwindcss
-- Eslint
-- husky
+- turborepo
+- pnpm
+- shadcn
+- design system boilerplate
 - commitlint
 - syncpack
