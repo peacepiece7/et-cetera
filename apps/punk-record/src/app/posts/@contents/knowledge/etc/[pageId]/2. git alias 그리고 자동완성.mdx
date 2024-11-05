@@ -1,0 +1,74 @@
+export const METADATA = {
+  title: "blog | git alias 그리고 자동완성",
+  description: "git alias 그리고 자동완성",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com"
+}
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+
+# git alias 그리고 자동완성
+
+```sh
+cd ~
+vi ./.bashrc
+
+alias gco='git checkout'
+alias gsw='git switch'
+alias gbl='git blame'
+alias gpick='git cherry-pick'
+
+alias grt='git restore'
+alias grts='git restore --staged'
+alias grsta='git restore --staged .'
+
+alias pm='pnpm'
+alias nrs='npm run serve'
+
+alias repo='cd /C/Users/a/repo'
+alias obs='"/C/Program Files/Obsidian/Obsidian.exe"'
+alias cobs='cd /C/Users/a/repo/peacepiece7/obs-repo'
+alias ps='cd /C/Users/a/repo/sports'
+```
+
+.bash_profile 어쩌고 warinning 나오면 .bashrc 로드
+
+`echo 'if [ -f ~/.bashrc ]; then . ~/.bashrc; fi' > ~/.bash_profile`
+
+
+.vscode/settings.json 다음 추가하거나
+
+설정 (ctrl + ,)에서 default terminal 변경 해주면 됨
+
+```json
+{
+    "terminal.integrated.defaultProfile.windows": "Git Bash"
+}
+```
+
+
+### 자동 완성
+
+git che(tab) 이런 자동완성을 하려면
+
+
+[git completion](https://github.com/git/git/tree/master/contrib/completion)
+여기서 git-completion.bash 다운로드 받음
+
+다운로드 받은 파일을 다음 위치에 넣어줌
+```sh
+cd ~
+start .
+```
+
+.bashrc에 다음 코드 추가하고 저장
+
+```sh
+echo "source ~/.git-completion.bash" >> ~/.bashrc
+# gco => git checkout alias 설정이 있어서 이렇게 해줘야함
+echo "__git_complete gco _git_checkout" >> ~/.bashrc
+source ~/.bashrc
+```
+
+
