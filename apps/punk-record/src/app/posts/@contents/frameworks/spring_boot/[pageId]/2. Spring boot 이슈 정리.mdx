@@ -94,7 +94,6 @@ public class UserRequest {
 }
 ```
 
-<<<<<<< Updated upstream
 ## Using @EqualsAndHashCode for JPA entities is not recommended. It can cause severe performance and memory consumption issues.
 
 `@Data`, `@EqualsAndHashCode` 어노테이션 모두 메모리 소비 이슈로 추천하지 않는 경고가 출력된다.\
@@ -134,7 +133,6 @@ public class Users {
 callSuper = true 일 경우 부모 클래스의 속성도 포함한다.
 
 [Warnings when using @EqualsAndHashCode for JPA entities](https://youtrack.jetbrains.com/issue/IDEA-279243/Warnings-when-using-EqualsAndHashCode-for-JPA-entities)
-=======
 ## because "this.userConverter" is null
 
 생성자를 만들어주지 않으면 발생한다.
@@ -146,4 +144,3 @@ callSuper = true 일 경우 부모 클래스의 속성도 포함한다.
 - `@RequiredArgsConstructor`를 사용하고 final 붙여주기
 
 userConverter는 `@Service`가 등록 되어있는지 체크하기..!
->>>>>>> Stashed changes
