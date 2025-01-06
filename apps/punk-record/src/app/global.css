@@ -33,7 +33,6 @@ body {
   grid-column-end: 5;
   grid-row-start: 2;
   grid-row-end: 4;
-  background-color: #ebf8fc;
   overflow: hidden;
   padding: 3rem;
   height: 100%;

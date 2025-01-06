@@ -41,7 +41,7 @@ export function PostPageLayout({ children }: { children: React.ReactNode }) {
     <>
       <div
         id={POST_PAGE_LAYOUT_ID}
-        className={`flex flex-col h-full grow shrink rounded-xl shadow-md bg-white
+        className={`flex flex-col h-full grow shrink rounded-xl shadow-md
         transition-all duration-500 ease-out
         ${fadeOut ? "-translate-x-3/4 opacity-0 invisible" : ""}`}
       >

@@ -1,0 +1,54 @@
+export const METADATA = {
+  title: "blog | 혼자 공부하는 네트워크",
+  description: "혼자 공부하는 네트워크",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com"
+}
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+
+# 혼자 공부하는 네트워크
+
+
+NIC(Network Interface Card): 네트워크 인터페이스 카드, 네트워크 장치
+
+use에 연결이 가능한 NIC, 마더보드에 내장된 NIC 등 다양한 NIC가 존재한다.
+
+
+mac 주소 확인
+```bash
+# cmd, window
+getmac /v
+ipconfig /all
+
+# terminal
+ifconfig
+# ...
+# ethr a1:b2:c3:d4:e5:f6 -> mac 주소
+# ...
+```
+
+
+ARP: 동일 네트워크 내에 있는 호스트의 ip 주소를 통해서 MAC 주소를 알아내는 프로토콜
+```bash
+arp -a
+```
+01111111 => 0 + 64 + 32 + 16 + 8 + 4 + 2 + 1 => 1 ~ 127 (A 클래스)
+10111111 => 128 + 0 + 32 + 16 + 8 + 4 + 2 + 1 => 128 ~ 191(B 클래스)
+11011111 => 128 + 64 + 0 + 16 + 8 + 4 + 2 + 1 => 192 ~ 223(C 클래스)
+
+전부 0 => 해당 네트워크를 위미
+전부 1 => 브로드캐스트 주소를 의미
+
+
+DHCP 만료일 체크하기
+
+```bash
+# cmd
+ipconfig /all
+
+# terminal
+ifconfig
+```
