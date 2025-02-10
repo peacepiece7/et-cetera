@@ -13,6 +13,8 @@ export function useMDXComponents(components?: MDXComponents): MDXComponents {
    * pre > code.language-<name>
    */
 
+  console.log("components : ", components)
+
   return {
     h1: (props) => Heading({ as: "h1", props }),
     h2: (props) => Heading({ as: "h2", props }),
@@ -28,6 +30,9 @@ export function useMDXComponents(components?: MDXComponents): MDXComponents {
     pre: Preview,
     a: Anchor,
     p: Paragraph,
+    // del: (props) => {
+    //   return <del>{props}</del>
+    // },
     ...components,
   }
 }

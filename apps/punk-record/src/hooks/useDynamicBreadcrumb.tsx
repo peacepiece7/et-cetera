@@ -15,7 +15,6 @@ export const useDynamicBreadcrumb = <T extends HTMLElement>({ container }: { con
     const tempBreadcrumb: Element[] = []
     tags.forEach((tag, index) => {
       const hTags = container.current!.querySelectorAll(tag)
-      console.log("hTags: ", hTags)
       hTags.forEach((hTag) => {
         const nextTop = hTag.getBoundingClientRect().top
         if (Math.sign(nextTop) !== -1) return
