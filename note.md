@@ -236,7 +236,7 @@ ${Object.keys(GIT_COMMIT_CONFIGURATION['type-enum-kor'])
 fs.writeFileSync('./git_commit_template', GIT_COMMIT_TEMPLATE);
 ```
 
-package.json에 prepare를 실행할 떄 git commit template이 돌아가도록 설정하자
+package.json에 prepare를 실행할 때 git commit template이 돌아가도록 설정하자
 
 ```json
 {

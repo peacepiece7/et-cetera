@@ -64,7 +64,7 @@ export const SearchDialogContent = () => {
   }
 
   /**
-   * 검색 제안을 패치 요청할 떄 호출
+   * 검색 제안을 패치 요청할 때 호출
    */
   const handleOnSuggestionsFetchRequested = (rqs: SuggestionsFetchRequestedParams) => {
     const text = rqs.value.toLowerCase()

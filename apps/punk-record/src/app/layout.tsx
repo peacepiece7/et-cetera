@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { mainFont, subFont } from "@/utils/shared"
+import { mainFont, subFont, codeFont } from "@/utils/shared"
 import "@repo/ui-shadcn/styles"
 import "./global.css"
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${mainFont?.className} ${subFont?.className} text-base`}>{children}</body>
+      <body className={`${subFont?.className} ${codeFont.className} ${mainFont?.className} text-base`}>{children}</body>
     </html>
   )
 }

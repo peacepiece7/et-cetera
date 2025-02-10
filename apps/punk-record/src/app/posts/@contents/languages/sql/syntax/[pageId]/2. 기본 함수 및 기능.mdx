@@ -166,7 +166,7 @@ select coalesce(bm.band_code, 'is null'), nullif(bm.band_code, 'BC002') from ban
 - `!=`, `^=`, `<>`, `not <column> =` (같지 않음 4종)
 - between A and B (ex where col between 1 and 10)
 - `like '비교 문자열'` (ex1 where col like '방\*소%'), (ex2 where rate like '100/%%' escape /)
-- `-` escape는 %, \*를 검색 조건으로 넣고 싶을 떄 사용, default \임
+- `-` escape는 %, \*를 검색 조건으로 넣고 싶을 때 사용, default \임
 - in (list), is null
 - and, or, not
 

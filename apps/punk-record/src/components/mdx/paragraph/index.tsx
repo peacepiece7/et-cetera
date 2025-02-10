@@ -26,7 +26,7 @@ export const Paragraph: React.FC<React.HTMLProps<HTMLParagraphElement>> = (props
     return (
       <>
         {codepens.map((codepen) => codepen)}
-        {<p className="mt-4">{...paragraphs}</p>}
+        {<p className="mt-4 leading-8">{...paragraphs}</p>}
       </>
     )
   }
@@ -34,5 +34,5 @@ export const Paragraph: React.FC<React.HTMLProps<HTMLParagraphElement>> = (props
   if (isCodepenLinkSyntax(props.children)) {
     return <Codepen>{props.children}</Codepen>
   }
-  return <p {...props} className="mt-4" />
+  return <p {...props} className="mt-4 leading-8" />
 }

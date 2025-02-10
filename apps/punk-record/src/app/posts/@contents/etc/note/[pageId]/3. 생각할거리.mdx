@@ -170,7 +170,7 @@ main(prd) - feature
 
 rebase merge인데 각 브랜치에서 PR을 만들어서 머지하는 방식
 
-머지되면 바로 배포되기 떄문에 PR에서 feedback과 CI/CD QA가 이루어짐
+머지되면 바로 배포되기 때문에 PR에서 feedback과 CI/CD QA가 이루어짐
 
 hot fix로 메인 브랜치가 업데이트 되면 cherry-pick 하거나 다시 메인 브랜치를 rebase 하면 됨
 
@@ -198,4 +198,4 @@ svn을 사용해봤다면 익숙핳 수도 있는데 주로 monorepo에서 사�
 
 release가 어디서에서 되는지 정도의 차이가 있는데 [Modern claimed high-throughput branching models](https://trunkbaseddevelopment.com/alternative-branching-models/#modern-claimed-high-throughput-branching-models)요기 내용을 참고
 
-요약하면 PR을 머지할 떄 release를 붙이면 trunk인데 github flow는 feature에서 pr, release 태그가 붙어서 테스트 되는 반면 trunk는 trunk에 머지하는 시점에 release 태그가 붙는 것으로 보인다.
+요약하면 PR을 머지할 때 release를 붙이면 trunk인데 github flow는 feature에서 pr, release 태그가 붙어서 테스트 되는 반면 trunk는 trunk에 머지하는 시점에 release 태그가 붙는 것으로 보인다.
