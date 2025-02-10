@@ -7,16 +7,22 @@ module.exports = {
   source: ['package.json', 'apps/*/package.json', 'packages/*/package.json'],
   versionGroups: [
     {
-      label: 'Internal config packages should be pinned to "*" (meaning any version is acceptable)',
+      label: 'Internal config packages should be pinned to "*" or "workspace:*"',
       packages: ['**'],
       dependencies: ['@repo/config-eslint', '@repo/config-tailwind', '@repo/config-ts', '@repo/ui-shadcn'],
       dependencyTypes: ['dev', 'prod', 'peer'],
-      pinVersion: '*',
+      pinVersion: ['*', 'workspace:*'],
     },
     {
       label: 'Use next 15 rc version in apps/web and apps/docs',
       packages: ['@app/web', '@app/docs'],
       dependencies: ['react', 'react-dom', 'next'],
+      policy: 'sameRange',
+    },
+    {
+      label: 'Use shadcn/ui version in apps/storybook',
+      packages: ['@app/storybook', '@repo/ui-shadcn'],
+      dependencies: ['tailwindcss'],
       policy: 'sameRange',
     },
   ],

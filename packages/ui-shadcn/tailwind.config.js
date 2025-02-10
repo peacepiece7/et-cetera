@@ -1,17 +1,24 @@
 // 실제로 프로젝트를 돌리는 곳에 있는 tailwind.config.js 파일이 사용됩니다.
 
-const plugin = require('tailwindcss/plugin');
+import typographyPlugin from '@tailwindcss/typography';
+import animatePlugin from 'tailwindcss-animate';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     './src/**/*.{ts,tsx}',
     '../../packages/ui-shadcn/src/**/*.{ts,tsx}',
     '../../apps/storybook/src/**/*.{ts,tsx}',
     './**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  darkMode: ['class'],
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     screens: {
       xs: '475px',
       sm: '650px',
@@ -20,25 +27,18 @@ module.exports = {
       xl: '1280px',
     },
     fontSize: {
-      tiny: '.7rem',
-      xs: '.8rem',
-      sm: '1rem',
-      base: '1.2rem',
-      lg: '1.25rem',
-      xl: '1.35rem',
-      '2xl': '1.5rem',
-      '3xl': '1.875rem',
-      '4xl': '2rem',
-      '5xl': '2.5rem',
-      '6xl': '3rem',
-      '7xl': '3.5rem',
-    },
-    container: {
-      center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
+      tiny: 'calc(var(--font-size-base) * 0.7)',
+      xs: 'calc(var(--font-size-base) * 0.8)',
+      sm: 'calc(var(--font-size-base) * 1.0)',
+      base: 'calc(var(--font-size-base) * 1.2)',
+      lg: 'calc(var(--font-size-base) * 1.25)',
+      xl: 'calc(var(--font-size-base) * 1.35)',
+      '2xl': 'calc(var(--font-size-base) * 1.5)',
+      '3xl': 'calc(var(--font-size-base) * 1.875)',
+      '4xl': 'calc(var(--font-size-base) * 2.0)',
+      '5xl': 'calc(var(--font-size-base) * 2.5)',
+      '6xl': 'calc(var(--font-size-base) * 3.0)',
+      '7xl': 'calc(var(--font-size-base) * 3.5)',
     },
     extend: {
       colors: {
@@ -102,5 +102,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [typographyPlugin, animatePlugin],
 };
