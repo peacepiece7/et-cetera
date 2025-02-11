@@ -6,7 +6,7 @@ on:
 
 env:
   NODE_VERSION: '20.12.1'
-  PNPM_VERSION: '8.15.6'
+  PNPM_VERSION: '9.15.4'
 
 jobs:
   build_packages:
