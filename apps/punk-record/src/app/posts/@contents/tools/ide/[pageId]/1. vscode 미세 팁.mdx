@@ -11,15 +11,6 @@ import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
 
 # vscode 미세 팁
 
-## 심볼 검색
-
-ctrl(cmd) + p => @ 로 현재 폴더에서 symbol 검색 가능
-
-<MDXFlex>
-  <MDXImage src="/images/vscode_tip_1.png" width={450} className="m-2" />
-  <MDXImage src="/images/vscode_tip_2.png" width={450} className="m-2" />
-</MDXFlex>
-
 ## 모노레포 특정 폴더 내에서 검색 하기
 
 검색 범위를 줄일 수 있고 추가로 폴더 탐색 시 구조를 이해하기 쉬워짐
@@ -110,3 +101,28 @@ alias code-punk='code .vscode/\<name\>.code-workspace'
 # cmd
 doskey code-punk=code .vscode/\<name\>.code-workspace
 ```
+
+## shortcuts
+
+### 파일 이름으로 검색 (Go to  File)
+<Kbd keyboards={["ctrl", "p"]} />
+
+### 설정 검색
+<Kbd keyboards={["ctrl", "p"]} /> => `>` 타이핑 후 검색\
+example) `> format document with`, `> Enable cursor tab`
+
+### 심볼 검색 네비게이션
+<Kbd keyboards={["ctrl", "p"]} /> => `@` 타이핑 후 검색\
+example) `@ handleSubmit`, `@ useEffect`, `@ onMounted`
+
+<MDXFlex>
+  <MDXImage src="/images/vscode_tip_1.png" width={450} className="m-2" />
+  <MDXImage src="/images/vscode_tip_2.png" width={450} className="m-2" />
+</MDXFlex>
+
+### 심볼 검색 드롭다운(Go To Symbol in Accessible View)
+<Kbd keyboards={["ctrl", "shift", "."]} 방향키로 전환\
+개인적으로 이게 "심볼 검색 네비게이션 방식"보다 피로도가 더 적엇음
+
+
+
