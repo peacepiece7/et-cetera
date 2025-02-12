@@ -22,11 +22,16 @@ export interface LeafNode {
 }
 
 export async function GET() {
-  const postPath = ["src", "app", "posts", "@contents"]
-  const directoryPath = path.join(process.cwd(), ...postPath)
-  const paths = getAllFilePaths(directoryPath)
-  const list = buildSearchList(paths, directoryPath)
-  return NextResponse.json({ list })
+  try {
+    const postPath = ["src", "app", "posts", "@contents"]
+    const directoryPath = path.join(process.cwd(), ...postPath)
+    const paths = getAllFilePaths(directoryPath)
+    const list = buildSearchList(paths, directoryPath)
+    return NextResponse.json({ list })
+  } catch (error) {
+    console.error("Search API Error:", error)
+    return NextResponse.json({ error: "검색 중 오류가 발생했습니다." }, { status: 500 })
+  }
 }
 
 // 지정된 디렉터리 내의 모든 파일 경로를 재귀적으로 수집합니다.

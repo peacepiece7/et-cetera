@@ -9,6 +9,10 @@ export async function middleware(req: NextRequest) {
   const match = req.url.match(urlPathRegExp)
   const path = match ? match[1] : "/"
 
+  console.log("middleware works pull path!")
+  console.log("PROCESS.ENV", process.env)
+  console.log("REQUEST: ", req)
+
   req.headers.set(X_CUSTOM_URL, path || "")
 
   return NextResponse.next({
@@ -19,5 +23,5 @@ export async function middleware(req: NextRequest) {
 }
 // 로그인을 해야하는 경우만 미들웨어 사용
 export const config = {
-  matcher: ["/posts/:path*"],
+  matcher: ["/posts/:path*", "/"],
 }

@@ -21,11 +21,16 @@ export interface LeafNode {
 }
 
 export async function GET() {
-  const postPath = ["src", "app", "posts", "@contents"]
-  const directoryPath = path.join(process.cwd(), ...postPath)
-  const paths = getAllFilePaths(directoryPath)
-  const navTree = buildTree(paths, directoryPath)
-  return NextResponse.json({ navTree })
+  try {
+    const postPath = ["src", "app", "posts", "@contents"]
+    const directoryPath = path.join(process.cwd(), ...postPath)
+    const paths = getAllFilePaths(directoryPath)
+    const navTree = buildTree(paths, directoryPath)
+    return NextResponse.json({ navTree })
+  } catch (error) {
+    console.error("get navigation", error)
+    return NextResponse.json({ error: "Failed to fetch navigation data" }, { status: 500 })
+  }
 }
 
 // 지정된 디렉터리 내의 모든 파일 경로를 재귀적으로 수집합니다.
@@ -50,9 +55,7 @@ function buildTree(paths: string[], baseDir: string): TreeNode[] {
 
   paths.forEach((filePath) => {
     const relativePath = path.relative(baseDir, filePath)
-    const parts = relativePath
-      .split(path.sep)
-      .filter((part) => part !== "[pageId]")
+    const parts = relativePath.split(path.sep).filter((part) => part !== "[pageId]")
     const fileName = parts.pop() as string
     let current = tree
 
@@ -73,11 +76,7 @@ function buildTree(paths: string[], baseDir: string): TreeNode[] {
     }
   })
 
-  function convertToTreeFormat(
-    node: IntermediateNode | LeafNode,
-    nodeName: string,
-    currentPath: string[]
-  ): TreeNode {
+  function convertToTreeFormat(node: IntermediateNode | LeafNode, nodeName: string, currentPath: string[]): TreeNode {
     if ("leafNode" in node) {
       return {
         ...node,
@@ -85,7 +84,7 @@ function buildTree(paths: string[], baseDir: string): TreeNode[] {
       }
     }
     const children = Object.entries(node.children).map(([key, child]) =>
-      convertToTreeFormat(child, key, [...currentPath, nodeName])
+      convertToTreeFormat(child, key, [...currentPath, nodeName]),
     )
     return {
       leafNode: false,
@@ -95,7 +94,5 @@ function buildTree(paths: string[], baseDir: string): TreeNode[] {
     }
   }
 
-  return Object.entries(tree.children).map(([key, child]) =>
-    convertToTreeFormat(child, key, [])
-  )
+  return Object.entries(tree.children).map(([key, child]) => convertToTreeFormat(child, key, []))
 }
