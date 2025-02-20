@@ -25,10 +25,13 @@ export async function GET(request: NextRequest) {
 
     const tocTree = await createTableOfContents(getPostFullPath(...rest), parseInt(index!) - 1)
 
+    console.log("TOC TREE: ", tocTree)
+
     return NextResponse.json({
       tocTree: tocTree,
     })
   } catch (err) {
+    console.error(err)
     if (err instanceof Error) {
       return NextResponse.json({ error: err.message }, { status: 500 })
     }
