@@ -29,6 +29,7 @@ export async function GET() {
     console.log("NAV ALL FILE PATH: ", paths)
     const navTree = buildTree(paths, directoryPath)
     console.log("NAV TREE: ", navTree)
+
     return NextResponse.json({ navTree })
   } catch (error) {
     console.error("get navigation", error)
