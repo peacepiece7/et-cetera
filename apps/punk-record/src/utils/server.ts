@@ -13,7 +13,9 @@ import type { RootContentMap } from "mdast"
 export const fetcher = async <T>(path: string, options?: RequestInit) => {
   try {
     const headerList = headers()
-    const host = headerList.get("host")
+    let host = headerList.get("host")
+    // @TODO: 운영 reverse proxy 설정 때문에 포트 추가, 환경 변수로 빼기
+    if (host?.includes("210.95.145.3")) host += ":8080"
     // const scheme = process.env.NODE_ENV === 'development' ? 'http' : 'https'
     const url = `http://${host}${path}`
     return await fetch(url, options).then((res) => res.json() as T)
