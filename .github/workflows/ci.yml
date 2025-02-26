@@ -52,17 +52,13 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install dependencies.
+      - name: Set environment variables
         run: |
-          pwd
           touch .env
           echo BACK_SERVER_BASE_URL=${{ secrets.BACK_SERVER_BASE_URL }} >> .env
           echo FRONT_SERVER_BASE_URL=${{ secrets.FRONT_SERVER_BASE_URL }} >> .env
           echo PORT=${{ secrets.PORT }} >> .env
           cat .env
-
-      - name: Install PNPM
-        run: npm install -g pnpm@${{ env.PNPM_VERSION }}
 
       - name: Install dependencies
         run: pnpm install
@@ -70,7 +66,7 @@ jobs:
       - name: Build Punk Record App
         run: pnpm run build --filter @app/punk-record
 
-      - name: Compress the built code.
+      - name: Compress the built code
         run: zip -r build.zip ./*.json ./*.yaml ./.nvmrc ./apps/punk-record/.next ./apps/punk-record/public ./apps/punk-record/*.json ./apps/punk-record/*.yaml ./apps/punk-record/ecosystem.config.js
 
       - name: Install sshpass
@@ -78,33 +74,20 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y sshpass
 
-      - name: Copy files to the personal server via SCP.
+      - name: Copy files to the personal server via SCP
         env:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
           sshpass -e scp -o StrictHostKeyChecking=no build.zip ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_PATH }}
 
-      - name: Deploy on the server.
+      - name: Deploy on the server
         env:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
           sshpass -e ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} <<'ENDSSH'
           echo "START DEPLOY"
           cd ${{ secrets.DEPLOY_PATH }}
-          source ~/.bashrc
-          echo "Removing old build"
-          rm -rf ./.next
-          echo "Unzipping build.zip"
-          unzip -o build.zip
-          echo "Unzip completed"
-          echo "Fetch latest changes from git"
-          git fetch origin main
+          git fetch origin
           git reset --hard origin/main
-          echo "Using nvm"
-          nvm use
-          echo "Update dependencies"
-          pnpm install --frozen-lockfile
-          echo "Restarting pm2"
-          pm2 start ./apps/punk-record/ecosystem.config.js
-          echo "Deployment completed"
+          ./deploy.sh ${{ secrets.DEPLOY_PATH }}
           ENDSSH

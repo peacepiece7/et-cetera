@@ -1,7 +1,8 @@
 html {
   /* font-size: 62.5%; */
   scroll-behavior: smooth;
-  letter-spacing: -0.004em;
+  letter-spacing: -0.05em;
+  word-spacing: -0.2em;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
