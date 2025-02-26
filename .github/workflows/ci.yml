@@ -60,6 +60,9 @@ jobs:
           echo PORT=${{ secrets.PORT }} >> .env
           cat .env
 
+      - name: Install PNPM
+        run: npm install -g pnpm@${{ env.PNPM_VERSION }}
+
       - name: Install dependencies
         run: pnpm install
 
