@@ -9,10 +9,6 @@ export async function middleware(req: NextRequest) {
   const match = req.url.match(urlPathRegExp)
   const path = match ? match[1] : "/"
 
-  console.log("middleware works pull path!")
-  console.log("PROCESS.ENV", process.env)
-  console.log("REQUEST: ", req)
-
   req.headers.set(X_CUSTOM_URL, path || "")
 
   return NextResponse.next({

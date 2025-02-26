@@ -25,8 +25,6 @@ export async function GET(request: NextRequest) {
 
     const tocTree = await createTableOfContents(getPostFullPath(...rest), parseInt(index!) - 1)
 
-    console.log("TOC TREE: ", tocTree)
-
     return NextResponse.json({
       tocTree: tocTree,
     })

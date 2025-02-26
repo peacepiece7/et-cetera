@@ -115,8 +115,6 @@ export function ComboboxMultiDemo() {
                   key={framework.value}
                   value={framework.value}
                   onSelect={(currentValue) => {
-                    console.log('currentValue', currentValue);
-                    console.log('values', values);
                     setValues((prev) => {
                       if (prev.includes(currentValue)) {
                         return prev.filter((value) => value !== currentValue);

@@ -24,11 +24,8 @@ export async function GET() {
   try {
     const postPath = ["src", "app", "posts", "@contents"]
     const directoryPath = path.join(process.cwd(), ...postPath)
-    console.log("NAV DIRECTORY PATH: ", directoryPath)
     const paths = getAllFilePaths(directoryPath)
-    console.log("NAV ALL FILE PATH: ", paths)
     const navTree = buildTree(paths, directoryPath)
-    console.log("NAV TREE: ", navTree)
 
     return NextResponse.json({ navTree })
   } catch (error) {

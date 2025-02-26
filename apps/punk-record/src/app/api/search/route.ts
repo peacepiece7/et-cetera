@@ -26,10 +26,8 @@ export async function GET() {
     const postPath = ["src", "app", "posts", "@contents"]
     const directoryPath = path.join(process.cwd(), ...postPath)
 
-    console.log("SEARCH DIRECTORY PATH: ", directoryPath)
     const paths = getAllFilePaths(directoryPath)
     const list = buildSearchList(paths, directoryPath)
-    console.log("SEARCH LIST: ", list)
     return NextResponse.json({ list })
   } catch (error) {
     console.error("Search API Error:", error)
