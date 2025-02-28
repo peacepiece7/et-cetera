@@ -1,0 +1,33 @@
+export const METADATA = {
+  title: "blog | 타입스크립트 cheat sheet",
+  description: "타입스크립트 cheat sheet",
+  date: "",
+  tags: [],
+  authors: "scv7282@gmail.com",
+}
+import { Detail } from "@/components/mdx/detail"
+import { MDXImage, MDXFlex } from "@/components/mdx/image"
+import { Kbd } from "@repo/ui-shadcn/ui/typography/kdb"
+
+# 타입스크립트 cheat sheet
+
+
+## 원시 자료형 브랜딩
+
+```ts
+type Brand<T, B extends string> = T & { __brand: B }
+let korCurrency = 100 as Brand<number, "WON">
+let usdCurrency = 100 as Brand<number, "USD">
+const usdToWon = (usd: Brand<number, "USD">) => {
+  return (usd * 1000) as Brand<number, "WON">
+}
+const won = usdToWon(usdCurrency)
+```
+
+## EXAMPLE
+
+<Kbd keyboards={["ctrl", "p"]} />
+<MDXFlex>
+  <MDXImage src="" alt="" />
+</MDXFlex>
+<Detail title="title">contents</Detail>
