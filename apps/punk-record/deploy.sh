@@ -29,7 +29,7 @@ which pm2 || { echo "pm2 not found in PATH"; exit 1; }
 
 # 노드 버전 변경
 echo "Changing the version of the node"
-nvm use || { echo "Failed to change the version of the node"; exit 1; }
+nvm use 18.18.0 || { echo "Failed to change the version of the node"; exit 1; }
 
 # 의존성 설치
 echo "Installing dependencies using pnpm"
