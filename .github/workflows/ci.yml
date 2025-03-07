@@ -92,5 +92,6 @@ jobs:
           cd ${{ secrets.DEPLOY_PATH }}
           git fetch origin
           git reset --hard origin/main
+          chmod +x ./apps/punk-record/deploy.sh
           ./apps/punk-record/deploy.sh ${{ secrets.DEPLOY_PATH }}
           ENDSSH
