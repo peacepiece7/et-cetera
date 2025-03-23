@@ -1,11 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
+  "ui": "stream", // tui 쓰면 캐시 관련 오류 ( cache miss .. =>  can not find path .. ) 터미널 종료 버그
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", "storybook-static/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "storybook-static/**"],
+      "cache": true,
+      "persistent": false
     },
     "dev": {
       "cache": false,

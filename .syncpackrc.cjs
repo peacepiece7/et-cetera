@@ -11,7 +11,7 @@ module.exports = {
       packages: ['**'],
       dependencies: ['@repo/config-eslint', '@repo/config-tailwind', '@repo/config-ts', '@repo/ui-shadcn'],
       dependencyTypes: ['dev', 'prod', 'peer'],
-      pinVersion: '*',
+      pinVersion: 'workspace:*',
     },
     {
       label: 'Use next 15 rc version in apps/web and apps/docs',
