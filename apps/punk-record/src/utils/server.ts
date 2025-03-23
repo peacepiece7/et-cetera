@@ -5,8 +5,6 @@ import path from "path"
 import { unified } from "unified"
 import markdown from "remark-parse"
 
-
-
 import type { RootContentMap } from "mdast"
 
 /**
@@ -19,7 +17,6 @@ export const fetcher = async <T>(path: string, options?: RequestInit) => {
     let host = headerList.get("host")
     // @TODO: 운영 reverse proxy 설정 때문에 포트 추가, 환경 변수로 빼기
     if (host?.includes("210.95.145.3")) host += ":8080"
-    // const scheme = process.env.NODE_ENV === 'development' ? 'http' : 'https'
     const url = `http://${host}${path}`
     return await fetch(url, options).then((res) => res.json() as T)
   } catch (error) {
@@ -27,7 +24,6 @@ export const fetcher = async <T>(path: string, options?: RequestInit) => {
     throw new Error("FETCHER ERROR : " + error)
   }
 }
-
 
 /**
  * @description 파일 이름 목록을 안전하게 가져옵니다.
